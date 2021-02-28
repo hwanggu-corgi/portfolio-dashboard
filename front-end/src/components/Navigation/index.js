@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const colorNavyBlue = '#1A1E43';
@@ -6,15 +6,26 @@ const colorWhite = '#FFFFFF';
 
 const PrimaryNavMenuStyle = {
     Nav: styled.nav`
-        max-width: 21em;
-        border-radius: 1.25em;
+        max-width: 15rem;
+        border-radius: 0.94rem;
         background-color: ${colorNavyBlue};
         color: ${colorWhite};
+        height: 100%;
 
-        & ul {
+        h2 {
+            padding: 2.30rem 2.0rem;
+            margin: 0;
+        }
+
+        ul {
             margin: 0;
             padding: 0;
             list-style-type: none;
+        }
+
+        li {
+            padding: 1.03rem 2.0rem;
+            Cursor: pointer;
         }
     `
 };
