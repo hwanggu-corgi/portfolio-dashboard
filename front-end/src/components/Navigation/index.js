@@ -61,8 +61,7 @@ function PrimaryNavMenu() {
 
 const UserStyle = {
     Div: styled.div`
-        color: ${colorPurple};
-        background-color: ${colorPurple};
+        border: 2px solid ${colorPurple};
         padding: 0.8em;
         display: inline-block;
         border-radius: 50%;
@@ -74,6 +73,10 @@ const UserStyle = {
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        path {
+            fill: ${colorPurple};
         }
     `
 };
