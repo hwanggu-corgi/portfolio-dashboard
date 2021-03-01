@@ -81,10 +81,27 @@ function InputKeyValue() {
     )
 };
 
+const AddMoreButtonStyle = {
+    Button: styled.button`
+        border: none;
+        background-color: ${constants.colorPurple};
+    `
+};
+
+function AddMoreButton() {
+    return(
+        <AddMoreButtonStyle.Button>
+            <div>
+            +
+            </div>
+        </AddMoreButtonStyle.Button>
+    );
+}
+
 
 function InfoScreen() {
-    let contactsList = [];
-    let socialsList = [];
+    let contactsList = [{}];
+    let socialsList = [{}];
 
     return (
         <InfoScreenStyle.Section>
@@ -100,11 +117,13 @@ function InfoScreen() {
                 </FormGroup>
                 <FormGroup>
                     <label>Contact</label>
-                    {contactsList.map(item => <InputKeyValue {...item}/>)}
+                    {contactsList.map(item => <InputKeyValue data={item}/>)}
+                    <AddMoreButton data={contactsList}/>
                 </FormGroup>
                 <FormGroup>
                     <label>Socials</label>
-                    {socialsList.map(item => <InputKeyValue {...item}/>)}
+                    {socialsList.map(item => <InputKeyValue data={item}/>)}
+                    <AddMoreButton data={contactsList}/>
                 </FormGroup>
             </form>
         </InfoScreenStyle.Section>
