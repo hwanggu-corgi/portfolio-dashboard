@@ -15,11 +15,38 @@ const InfoScreenStyle = {
         color: ${constants.colorNavyBlue};
     `,
     FormGroup: styled.div`
+        * {
+            display: block;
+        }
     `,
     Input: styled.input`
 
     `
 };
+
+const InputWithKeyStyle = {
+    Div: styled.div`
+        display: flex;
+    `,
+    Input: styled.input`
+
+    `,
+    InputKey: styled(InputWithKeyStyle.Input)`
+        max-width: 10.31rem;
+    `,
+    InputValue: styled.input`
+        flex-grow: 1;
+    `
+};
+
+function InputWithKey() {
+    return(
+        <InputWithKeyStyle.Div>
+            <InputWithKeyStyle.InputKey/><InputWithKeyStyle.Input/>
+        </InputWithKeyStyle.Div>
+    )
+}
+
 
 function InfoScreen() {
     return (
@@ -36,11 +63,11 @@ function InfoScreen() {
                 </InfoScreenStyle.FormGroup>
                 <InfoScreenStyle.FormGroup>
                     <label>Contact</label>
-                    <input/><input/>
+                    <InputWithKey/>
                 </InfoScreenStyle.FormGroup>
                 <InfoScreenStyle.FormGroup>
                     <label>Socials</label>
-                    <input/><input/>
+                    <InputWithKey/>
                 </InfoScreenStyle.FormGroup>
             </form>
         </InfoScreenStyle.Section>
