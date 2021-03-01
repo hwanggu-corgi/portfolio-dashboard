@@ -13,6 +13,8 @@ const AppStyle = {
   Main: styled.main`
     margin: 2.39rem 1.5rem;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   `
 };
 

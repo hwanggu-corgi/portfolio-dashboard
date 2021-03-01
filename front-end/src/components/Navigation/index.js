@@ -3,19 +3,14 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-
-const colorNavyBlue = '#1A1E43';
-const colorWhite = '#FFFFFF';
-const colorGrey = '#D7D7D7';
-const colorPurple = '#8A8DCC';
-const borderRadius = "0.94rem";
+import constants from '../../constants';
 
 const PrimaryNavMenuStyle = {
     Nav: styled.nav`
         max-width: 15rem;
         border-radius: 0.94rem;
-        background-color: ${colorNavyBlue};
-        color: ${colorWhite};
+        background-color: ${constants.colorNavyBlue};
+        color: ${constants.colorWhite};
         margin: 2.39rem 1.17rem;
 
         h2 {
@@ -37,7 +32,7 @@ const PrimaryNavMenuStyle = {
     `,
     NavLinkNew : styled(NavLink)`
         text-decoration: none;
-        color: ${colorWhite};
+        color: ${constants.colorWhite};
 
         &.active {
             font-weight: bold;
@@ -61,7 +56,7 @@ function PrimaryNavMenu() {
 
 const UserStyle = {
     Div: styled.div`
-        border: 1px solid ${colorPurple};
+        border: 1px solid ${constants.colorPurple};
         padding: 0.8em;
         display: inline-block;
         border-radius: 50%;
@@ -76,7 +71,7 @@ const UserStyle = {
         }
 
         path {
-            fill: ${colorPurple};
+            fill: ${constants.colorPurple};
         }
     `
 };
@@ -93,25 +88,18 @@ function User() {
 
 const SecondaryNavMenuStyle = {
     Header: styled.nav`
-       border-radius: ${borderRadius};
+       border-radius: ${constants.borderRadius};
        padding: 0.52rem;
        display: flex;
        justify-content: flex-end;
        align-items: center;
-    `,
-    Nav : styled.nav`
-        text-decoration: none;
-        color: ${colorWhite};
-
-        &.active {
-            font-weight: bold;
-        }
+       margin: 0 0 2.06rem 0;
     `,
     Span: styled.span`
         margin-right: 0.75rem;
 
         strong {
-            color: ${colorPurple};
+            color: ${constants.colorPurple};
         }
     `
 };
