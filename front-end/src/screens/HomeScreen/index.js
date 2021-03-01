@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-class HomeScreen extends Component {
-    render() {
-        return (
-           <>
-           </>
-        );
-    }
+function HomeScreen() {
+    return (
+        <>
+        </>
+    );
 }
 
 export default HomeScreen;
