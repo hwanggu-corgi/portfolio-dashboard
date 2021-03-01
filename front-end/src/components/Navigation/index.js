@@ -10,7 +10,7 @@ const PrimaryNavMenuStyle = {
         border-radius: 0.94rem;
         background-color: ${colorNavyBlue};
         color: ${colorWhite};
-        height: 100%;
+        margin: 2.39rem 1.17rem;
 
         h2 {
             padding: 2.30rem 2.0rem;
@@ -26,6 +26,7 @@ const PrimaryNavMenuStyle = {
         li {
             padding: 1.03rem 2.0rem;
             Cursor: pointer;
+            width: calc(15rem - 2.0rem * 2);
         }
     `
 };
