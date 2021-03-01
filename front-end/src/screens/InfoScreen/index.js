@@ -83,6 +83,9 @@ function InputKeyValue() {
 
 
 function InfoScreen() {
+    let contactsList = [];
+    let socialsList = [];
+
     return (
         <InfoScreenStyle.Section>
             <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
@@ -97,11 +100,11 @@ function InfoScreen() {
                 </FormGroup>
                 <FormGroup>
                     <label>Contact</label>
-                    <InputKeyValue/>
+                    {contactsList.map(item => <InputKeyValue {...item}/>)}
                 </FormGroup>
                 <FormGroup>
                     <label>Socials</label>
-                    <InputKeyValue/>
+                    {socialsList.map(item => <InputKeyValue {...item}/>)}
                 </FormGroup>
             </form>
         </InfoScreenStyle.Section>
