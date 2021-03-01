@@ -96,16 +96,22 @@ const AddMoreButtonStyle = {
         display: flex;
         justify-content: center;
         align-items: center;
+    `,
+    Section: styled.section`
+        display: flex;
+        justify-content: center;
     `
 };
 
-function AddMoreButton() {
+function AddMoreButton(props) {
     return(
-        <AddMoreButtonStyle.Button>
-            <AddMoreButtonStyle.Div>
-            <strong>+</strong>
-            </AddMoreButtonStyle.Div>
-        </AddMoreButtonStyle.Button>
+        <AddMoreButtonStyle.Section>
+            <AddMoreButtonStyle.Button onClick={props.onClick}>
+                <AddMoreButtonStyle.Div>
+                <strong>+</strong>
+                </AddMoreButtonStyle.Div>
+            </AddMoreButtonStyle.Button>
+        </AddMoreButtonStyle.Section>
     );
 }
 
@@ -128,13 +134,13 @@ function InfoScreen() {
                 </FormGroup>
                 <FormGroup>
                     <label>Contact</label>
-                    {contactsList.map(item => <InputKeyValue data={item}/>)}
-                    <AddMoreButton data={contactsList}/>
+                    {contactsList.map((item, index) => <InputKeyValue key={index} data={item}/>)}
+                    <AddMoreButton onClick={_ => contactsList.push({})}/>
                 </FormGroup>
                 <FormGroup>
                     <label>Socials</label>
                     {socialsList.map(item => <InputKeyValue data={item}/>)}
-                    <AddMoreButton data={contactsList}/>
+                    <AddMoreButton onClick={_ => socialsList.push({})}/>
                 </FormGroup>
             </form>
         </InfoScreenStyle.Section>
