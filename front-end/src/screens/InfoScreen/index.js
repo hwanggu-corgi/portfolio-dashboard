@@ -28,13 +28,15 @@ const InputWithKeyStyle = {
     Div: styled.div`
         display: flex;
     `,
-    Input: styled.input`
-
-    `,
-    InputKey: styled(InputWithKeyStyle.Input)`
+    InputKey: styled.input`
+        border: 1px solid ${constants.colorGrey};
+        background-color: ${constants.colorLightGrey};
         max-width: 10.31rem;
+        margin: 0 0.23rem 0 0;
     `,
     InputValue: styled.input`
+        border: 1px solid ${constants.colorGrey};
+        background-color: ${constants.colorLightGrey};
         flex-grow: 1;
     `
 };
@@ -42,7 +44,7 @@ const InputWithKeyStyle = {
 function InputWithKey() {
     return(
         <InputWithKeyStyle.Div>
-            <InputWithKeyStyle.InputKey/><InputWithKeyStyle.Input/>
+            <InputWithKeyStyle.InputKey/><InputWithKeyStyle.InputValue/>
         </InputWithKeyStyle.Div>
     )
 }
