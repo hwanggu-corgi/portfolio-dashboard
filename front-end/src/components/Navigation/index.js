@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const colorNavyBlue = '#1A1E43';
 const colorWhite = '#FFFFFF';
@@ -28,6 +29,12 @@ const PrimaryNavMenuStyle = {
             Cursor: pointer;
             width: calc(15rem - 2.0rem * 2);
         }
+    `,
+    NavLinkNew : styled(NavLink)`
+        text-decoration: none;
+        &.nav-item-active {
+            color: red;
+        }
     `
 };
 
@@ -36,10 +43,10 @@ function PrimaryNavMenu() {
         <PrimaryNavMenuStyle.Nav>
             <h2>Menu</h2>
             <ul>
-                <li>Home</li>
-                <li>Info</li>
-                <li>Projects</li>
-                <li>Work Experience</li>
+                <li><PrimaryNavMenu.NavLinkNew to="/admin/">Home</PrimaryNavMenu.NavLinkNew></li>
+                <li><PrimaryNavMenu.NavLinkNew to="/admin/info">Info</PrimaryNavMenu.NavLinkNew></li>
+                <li><PrimaryNavMenu.NavLinkNew to="/admin/projects">Projects</PrimaryNavMenu.NavLinkNew></li>
+                <li><PrimaryNavMenu.NavLinkNew to="/admin/work-experience">Work Experience</PrimaryNavMenu.NavLinkNew></li>
             </ul>
         </PrimaryNavMenuStyle.Nav>
     );
