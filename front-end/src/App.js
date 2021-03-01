@@ -12,6 +12,7 @@ import styled from 'styled-components';
 const AppStyle = {
   Main: styled.main`
     margin: 2.39rem 1.5rem;
+    flex-grow: 1;
   `
 };
 

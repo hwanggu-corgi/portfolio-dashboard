@@ -95,6 +95,9 @@ const SecondaryNavMenuStyle = {
     Header: styled.nav`
        border-radius: ${borderRadius};
        padding: 0.52rem;
+       display: flex;
+       justify-content: flex-end;
+       align-items: center;
     `,
     Nav : styled.nav`
         text-decoration: none;
@@ -103,12 +106,20 @@ const SecondaryNavMenuStyle = {
         &.active {
             font-weight: bold;
         }
+    `,
+    Span: styled.span`
+        margin-right: 0.75rem;
+
+        strong {
+            color: ${colorPurple};
+        }
     `
 };
 
 function SecondaryNavMenu() {
     return (
         <SecondaryNavMenuStyle.Header>
+            <SecondaryNavMenuStyle.Span>Hello, <strong>Admin</strong></SecondaryNavMenuStyle.Span>
             <User/>
         </SecondaryNavMenuStyle.Header>
     );
