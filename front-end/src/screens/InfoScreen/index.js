@@ -13,6 +13,11 @@ const InfoScreenStyle = {
     `,
     H2: styled.h2`
         color: ${constants.colorNavyBlue};
+    `,
+    FormGroup: styled.div`
+    `,
+    Input: styled.input`
+
     `
 };
 
@@ -20,6 +25,12 @@ function InfoScreen() {
     return (
         <InfoScreenStyle.Section>
             <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
+            <form>
+                <InfoScreenStyle.FormGroup>
+                    <label>Name</label>
+                    <input/>
+                </InfoScreenStyle.FormGroup>
+            </form>
         </InfoScreenStyle.Section>
     );
 }
