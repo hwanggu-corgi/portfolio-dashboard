@@ -1,5 +1,5 @@
 import './App.css';
-import { PrimaryNavMenu } from './components/Navigation';
+import { PrimaryNavMenu, SecondaryNavMenu } from './components/Navigation';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <HashRouter>
       <div className="App">
         <PrimaryNavMenu/>
+        <SecondaryNavMenu/>
       </div>
     </HashRouter>
   );

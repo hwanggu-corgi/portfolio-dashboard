@@ -6,6 +6,8 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const colorNavyBlue = '#1A1E43';
 const colorWhite = '#FFFFFF';
+const colorGrey = '#D7D7D7';
+const colorPurple = '#8A8DCC';
 const borderRadius = "0.94rem";
 
 const PrimaryNavMenuStyle = {
@@ -57,15 +59,32 @@ function PrimaryNavMenu() {
     );
 };
 
-const UserIconStyle = {
+const UserStyle = {
+    Div: styled.div`
+        color: ${colorPurple};
+        background-color: ${colorPurple};
+        padding: 0.8em;
+        display: inline-block;
+        border-radius: 50%;
+        margin-right: 1em;
 
+        div {
+            width: 1.25em;
+            height: 1.25em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    `
 };
 
-function userIcon() {
+function User() {
     return (
-        <UserIconStyle.Header>
-
-        </UserIconStyle.Header>
+        <UserStyle.Div>
+            <div>
+                <FontAwesomeIcon icon={faUser}/>
+            </div>
+        </UserStyle.Div>
     );
 };
 
@@ -87,7 +106,7 @@ const SecondaryNavMenuStyle = {
 function SecondaryNavMenu() {
     return (
         <SecondaryNavMenuStyle.Header>
-
+            <User/>
         </SecondaryNavMenuStyle.Header>
     );
 };
