@@ -6,6 +6,7 @@ const colorPurple = '#8A8DCC';
 const borderRadius = "0.94rem";
 
 
+
 module.exports = {
     colorNavyBlue,
     colorWhite,

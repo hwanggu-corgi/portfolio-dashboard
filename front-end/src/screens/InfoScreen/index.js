@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import constants from '../../constants';
 
-const containerPadding = "1.31rem";
+const sectionPadding = "1.31rem";
 
 const InfoScreenStyle = {
     Section: styled.section`
         border: 1px solid ${constants.colorGrey};
         border-radius: ${constants.borderRadius};
-        padding: ${containerPadding};
+        padding: ${sectionPadding};
         flex-grow: 1;
     `,
     H2: styled.h2`
@@ -83,17 +83,28 @@ function InputKeyValue() {
 
 const AddMoreButtonStyle = {
     Button: styled.button`
+        color: ${constants.colorWhite};
         border: none;
         background-color: ${constants.colorPurple};
+        border-radius: 0.14rem;
+        padding: 0.16rem;
+        cursor: pointer;
+    `,
+    Div: styled.div`
+        width: 1.1rem;
+        height: 1.1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     `
 };
 
 function AddMoreButton() {
     return(
         <AddMoreButtonStyle.Button>
-            <div>
-            +
-            </div>
+            <AddMoreButtonStyle.Div>
+            <strong>+</strong>
+            </AddMoreButtonStyle.Div>
         </AddMoreButtonStyle.Button>
     );
 }
