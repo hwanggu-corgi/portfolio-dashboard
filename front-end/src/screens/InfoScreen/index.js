@@ -13,52 +13,73 @@ const InfoScreenStyle = {
     `,
     H2: styled.h2`
         color: ${constants.colorNavyBlue};
-    `,
-    FormGroup: styled.div`
-        margin: 0 0 0.6rem 0;
-
-        * {
-            display: block;
-        }
-
-        label {
-            margin: 0 0 0.6rem 0;
-        }
-    `,
-    Input: styled.input`
-
     `
 };
 
-const Input = styled.input`
-    border: 1px solid ${constants.colorGrey};
-    background-color: ${constants.colorLightGrey};
-    padding: 0.56rem;
-    flex-grow: 1;
-`;
-
-const InputWithKeyStyle = {
+const InputStyle = {
     Div: styled.div`
         display: flex;
     `,
-    InputKey: styled(Input)`
+    Input: styled.input`
+        border: 1px solid ${constants.colorGrey};
+        background-color: ${constants.colorLightGrey};
+        padding: 0.56rem;
+        flex-grow: 1;
+    `
+};
+
+function Input() {
+    return(
+        <InputStyle.Div>
+            <InputStyle.Input/>
+        </InputStyle.Div>
+    )
+};
+
+
+const FormGroup = styled.div`
+    margin: 0 0 0.6rem 0;
+
+    & > label {
+        margin: 0 0 0.6rem 0;
+    }
+
+    & > * {
+        display: block;
+    }
+
+    & > div {
+        display: flex;
+    }
+`;
+
+const InputKeyValueStyle = {
+    InputKey: styled.input`
+        border: 1px solid ${constants.colorGrey};
+        background-color: ${constants.colorLightGrey};
+        padding: 0.56rem;
+
         max-width: 10.31rem;
         margin: 0 0.23rem 0 0;
         flex-grow: initial;
 
     `,
-    InputValue: styled(Input)`
+    InputValue: styled.input`
+        border: 1px solid ${constants.colorGrey};
+        background-color: ${constants.colorLightGrey};
+        padding: 0.56rem;
+
         flex-grow: 1;
     `
 };
 
 function InputKeyValue() {
     return(
-        <InputWithKeyStyle.Div>
-            <InputWithKeyStyle.InputKey/><InputWithKeyStyle.InputValue/>
-        </InputWithKeyStyle.Div>
+        <div>
+            <InputKeyValueStyle.InputKey/><InputKeyValueStyle.InputValue/>
+        </div>
     )
-}
+};
 
 
 function InfoScreen() {
@@ -66,22 +87,22 @@ function InfoScreen() {
         <InfoScreenStyle.Section>
             <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
             <form>
-                <InfoScreenStyle.FormGroup>
+                <FormGroup>
                     <label>Name</label>
                     <Input/>
-                </InfoScreenStyle.FormGroup>
-                <InfoScreenStyle.FormGroup>
+                </FormGroup>
+                <FormGroup>
                     <label>Website</label>
                     <Input/>
-                </InfoScreenStyle.FormGroup>
-                <InfoScreenStyle.FormGroup>
+                </FormGroup>
+                <FormGroup>
                     <label>Contact</label>
                     <InputKeyValue/>
-                </InfoScreenStyle.FormGroup>
-                <InfoScreenStyle.FormGroup>
+                </FormGroup>
+                <FormGroup>
                     <label>Socials</label>
                     <InputKeyValue/>
-                </InfoScreenStyle.FormGroup>
+                </FormGroup>
             </form>
         </InfoScreenStyle.Section>
     );
