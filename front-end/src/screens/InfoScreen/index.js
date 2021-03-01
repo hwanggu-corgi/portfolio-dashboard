@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import constants from '../../constants';
 
@@ -117,8 +117,8 @@ function AddMoreButton(props) {
 
 
 function InfoScreen() {
-    let contactsList = [{}];
-    let socialsList = [{}];
+    let [contactsList, setContactsList] = useState([{}]);
+    let [socialsList, setSocialsList] = useState([{}]);
 
     return (
         <InfoScreenStyle.Section>
@@ -135,12 +135,12 @@ function InfoScreen() {
                 <FormGroup>
                     <label>Contact</label>
                     {contactsList.map((item, index) => <InputKeyValue key={index} data={item}/>)}
-                    <AddMoreButton onClick={_ => contactsList.push({})}/>
+                    <AddMoreButton onClick={_ => setContactsList(oldArray => [...oldArray, {}])}/>
                 </FormGroup>
                 <FormGroup>
                     <label>Socials</label>
                     {socialsList.map(item => <InputKeyValue data={item}/>)}
-                    <AddMoreButton onClick={_ => socialsList.push({})}/>
+                    <AddMoreButton onClick={_ =>  setSocialsList(oldArray => [...oldArray, {}])}/>
                 </FormGroup>
             </form>
         </InfoScreenStyle.Section>
