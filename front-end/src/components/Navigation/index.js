@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const colorNavyBlue = '#1A1E43';
 const colorWhite = '#FFFFFF';
+const borderRadius = "0.94rem";
 
 const PrimaryNavMenuStyle = {
     Nav: styled.nav`
@@ -32,8 +35,10 @@ const PrimaryNavMenuStyle = {
     `,
     NavLinkNew : styled(NavLink)`
         text-decoration: none;
-        &.nav-item-active {
-            color: red;
+        color: ${colorWhite};
+
+        &.active {
+            font-weight: bold;
         }
     `
 };
@@ -43,16 +48,53 @@ function PrimaryNavMenu() {
         <PrimaryNavMenuStyle.Nav>
             <h2>Menu</h2>
             <ul>
-                <li><PrimaryNavMenu.NavLinkNew to="/admin/">Home</PrimaryNavMenu.NavLinkNew></li>
-                <li><PrimaryNavMenu.NavLinkNew to="/admin/info">Info</PrimaryNavMenu.NavLinkNew></li>
-                <li><PrimaryNavMenu.NavLinkNew to="/admin/projects">Projects</PrimaryNavMenu.NavLinkNew></li>
-                <li><PrimaryNavMenu.NavLinkNew to="/admin/work-experience">Work Experience</PrimaryNavMenu.NavLinkNew></li>
+                <li><PrimaryNavMenuStyle.NavLinkNew exact to="/admin">Home</PrimaryNavMenuStyle.NavLinkNew></li>
+                <li><PrimaryNavMenuStyle.NavLinkNew to="/admin/info">Info</PrimaryNavMenuStyle.NavLinkNew></li>
+                <li><PrimaryNavMenuStyle.NavLinkNew to="/admin/projects">Projects</PrimaryNavMenuStyle.NavLinkNew></li>
+                <li><PrimaryNavMenuStyle.NavLinkNew to="/admin/work-experience">Work Experience</PrimaryNavMenuStyle.NavLinkNew></li>
             </ul>
         </PrimaryNavMenuStyle.Nav>
     );
 };
 
+const UserIconStyle = {
+
+};
+
+function userIcon() {
+    return (
+        <UserIconStyle.Header>
+
+        </UserIconStyle.Header>
+    );
+};
+
+const SecondaryNavMenuStyle = {
+    Header: styled.nav`
+       border-radius: ${borderRadius};
+       padding: 0.52rem;
+    `,
+    Nav : styled.nav`
+        text-decoration: none;
+        color: ${colorWhite};
+
+        &.active {
+            font-weight: bold;
+        }
+    `
+};
+
+function SecondaryNavMenu() {
+    return (
+        <SecondaryNavMenuStyle.Header>
+
+        </SecondaryNavMenuStyle.Header>
+    );
+};
+
+
 
 export {
     PrimaryNavMenu,
+    SecondaryNavMenu,
 };
