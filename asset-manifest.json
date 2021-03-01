@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/portfolio-dashboard/static/css/main.c12073b6.chunk.css",
+    "main.js": "/portfolio-dashboard/static/js/main.aa6e9e79.chunk.js",
+    "main.js.map": "/portfolio-dashboard/static/js/main.aa6e9e79.chunk.js.map",
+    "runtime-main.js": "/portfolio-dashboard/static/js/runtime-main.be2a6d49.js",
+    "runtime-main.js.map": "/portfolio-dashboard/static/js/runtime-main.be2a6d49.js.map",
+    "static/js/2.4f0a7f24.chunk.js": "/portfolio-dashboard/static/js/2.4f0a7f24.chunk.js",
+    "static/js/2.4f0a7f24.chunk.js.map": "/portfolio-dashboard/static/js/2.4f0a7f24.chunk.js.map",
+    "static/js/3.84a3948c.chunk.js": "/portfolio-dashboard/static/js/3.84a3948c.chunk.js",
+    "static/js/3.84a3948c.chunk.js.map": "/portfolio-dashboard/static/js/3.84a3948c.chunk.js.map",
+    "index.html": "/portfolio-dashboard/index.html",
+    "static/css/main.c12073b6.chunk.css.map": "/portfolio-dashboard/static/css/main.c12073b6.chunk.css.map",
+    "static/js/2.4f0a7f24.chunk.js.LICENSE.txt": "/portfolio-dashboard/static/js/2.4f0a7f24.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/portfolio-dashboard/static/media/lato-v17-latin-regular.65e877e5.woff2",
+    "static/media/logo.6ce24c58.svg": "/portfolio-dashboard/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.be2a6d49.js",
+    "static/js/2.4f0a7f24.chunk.js",
+    "static/css/main.c12073b6.chunk.css",
+    "static/js/main.aa6e9e79.chunk.js"
+  ]
+}
