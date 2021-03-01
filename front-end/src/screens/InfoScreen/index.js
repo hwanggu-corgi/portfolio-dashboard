@@ -30,6 +30,18 @@ function InfoScreen() {
                     <label>Name</label>
                     <input/>
                 </InfoScreenStyle.FormGroup>
+                <InfoScreenStyle.FormGroup>
+                    <label>Website</label>
+                    <input/>
+                </InfoScreenStyle.FormGroup>
+                <InfoScreenStyle.FormGroup>
+                    <label>Contact</label>
+                    <input/><input/>
+                </InfoScreenStyle.FormGroup>
+                <InfoScreenStyle.FormGroup>
+                    <label>Socials</label>
+                    <input/><input/>
+                </InfoScreenStyle.FormGroup>
             </form>
         </InfoScreenStyle.Section>
     );
