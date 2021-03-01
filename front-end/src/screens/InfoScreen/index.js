@@ -54,6 +54,9 @@ const FormGroup = styled.div`
 `;
 
 const InputKeyValueStyle = {
+    Div: styled.div`
+        margin: 0 0 0.23rem 0;
+    `,
     InputKey: styled.input`
         border: 1px solid ${constants.colorGrey};
         background-color: ${constants.colorLightGrey};
@@ -75,9 +78,9 @@ const InputKeyValueStyle = {
 
 function InputKeyValue() {
     return(
-        <div>
+        <InputKeyValueStyle.Div>
             <InputKeyValueStyle.InputKey/><InputKeyValueStyle.InputValue/>
-        </div>
+        </InputKeyValueStyle.Div>
     )
 };
 
