@@ -11,8 +11,7 @@ const InfoScreenStyle = {
         padding: ${containerPadding};
         flex-grow: 1;
     `,
-    Span: styled.span`
-        font-size: 1.5rem;
+    H2: styled.h2`
         color: ${constants.colorNavyBlue};
     `
 };
@@ -20,7 +19,7 @@ const InfoScreenStyle = {
 function InfoScreen() {
     return (
         <InfoScreenStyle.Section>
-            <h2>Personal Information</h2>
+            <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
         </InfoScreenStyle.Section>
     );
 }
