@@ -10,10 +10,6 @@ const InfoScreenStyle = {
         border-radius: ${constants.borderRadius};
         padding: ${containerPadding};
         flex-grow: 1;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
     `,
     Span: styled.span`
         font-size: 1.5rem;
@@ -24,7 +20,7 @@ const InfoScreenStyle = {
 function InfoScreen() {
     return (
         <InfoScreenStyle.Section>
-            <InfoScreenStyle.Span>Welcome to our Portfolio Site Dashboard</InfoScreenStyle.Span>
+            <h2>Personal Information</h2>
         </InfoScreenStyle.Section>
     );
 }
