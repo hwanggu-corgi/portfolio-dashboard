@@ -36,6 +36,20 @@ function ProjectsScreen() {
                     Add
                 </Button>
             </ProjectsScreenStyle.ButtonSection>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Short Description</th>
+                    <th>Tools Used</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
         </ProjectsScreenStyle.Section>
     );
 }
