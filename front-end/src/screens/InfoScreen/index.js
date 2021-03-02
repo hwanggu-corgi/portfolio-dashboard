@@ -18,6 +18,10 @@ const InfoScreenStyle = {
     ButtonSection: styled.section`
         display: flex;
         justify-content: flex-end;
+
+        &:not(:last-child){
+            margin: 0 0 1.41rem 0;
+        }
     `
 };
 
