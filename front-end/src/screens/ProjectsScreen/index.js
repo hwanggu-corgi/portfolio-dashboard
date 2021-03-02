@@ -38,6 +38,19 @@ const TableStyle = {
         font-weight: normal;
         text-align: left;
         padding: 0.75rem;
+        width: ${props => {
+            if (props.name) {
+                return "22.5%";
+            } else if (props.date) {
+                return "22.5%";
+            } else if (props.short_description) {
+                return "22.5%";
+            } else if (props.tools_used) {
+                return "22.5%";
+            } else if (props.icon) {
+                return "5%";
+            }
+        }}
     `,
     Td: styled.td`
         padding: 0.75rem;
