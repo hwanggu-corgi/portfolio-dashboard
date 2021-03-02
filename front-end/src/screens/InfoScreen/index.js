@@ -56,6 +56,10 @@ const FormGroup = styled.div`
 const InputKeyValueStyle = {
     Div: styled.div`
         margin: 0 0 0.23rem 0;
+
+        &:last-child input {
+            margin: 0;
+        }
     `,
     InputKey: styled.input`
         border: 1px solid ${constants.colorGrey};
@@ -65,7 +69,6 @@ const InputKeyValueStyle = {
         max-width: 10.31rem;
         margin: 0 0.23rem 0 0;
         flex-grow: initial;
-
     `,
     InputValue: styled.input`
         border: 1px solid ${constants.colorGrey};
