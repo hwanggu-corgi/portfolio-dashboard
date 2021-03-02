@@ -7,7 +7,7 @@ const borderRadius = "0.94rem";
 
 
 
-module.exports = {
+export default {
     colorNavyBlue,
     colorWhite,
     colorGrey,
