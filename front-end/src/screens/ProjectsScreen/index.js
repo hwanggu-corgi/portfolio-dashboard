@@ -24,6 +24,20 @@ const ProjectsScreenStyle = {
     `
 };
 
+const TableStyle = {
+    Table: styled.table`
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid black;
+        margin: 0;
+    `,
+    Th: styled.th`
+        background-color: ${constants.colorLightGrey};
+        font-weight: normal;
+        text-align: left;
+    `
+}
+
 function ProjectsScreen() {
     let [contactsList, setContactsList] = useState([{}]);
     let [socialsList, setSocialsList] = useState([{}]);
@@ -36,20 +50,24 @@ function ProjectsScreen() {
                     Add
                 </Button>
             </ProjectsScreenStyle.ButtonSection>
-            <table>
+            <TableStyle.Table>
                 <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Short Description</th>
-                    <th>Tools Used</th>
+                    <TableStyle.Th>Name</TableStyle.Th>
+                    <TableStyle.Th>Date</TableStyle.Th>
+                    <TableStyle.Th>Short Description</TableStyle.Th>
+                    <TableStyle.Th>Tools Used</TableStyle.Th>
+                    <TableStyle.Th></TableStyle.Th>
+                    <TableStyle.Th></TableStyle.Th>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            </table>
+            </TableStyle.Table>
         </ProjectsScreenStyle.Section>
     );
 }
