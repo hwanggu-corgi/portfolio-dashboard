@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from '../../components/Form'
 import styled from 'styled-components';
 import constants from '../../constants';
+import Button from '../../components/Button';
 
 const sectionPadding = "1.31rem";
 
@@ -24,6 +25,9 @@ function InfoScreen() {
     return (
         <InfoScreenStyle.Section>
             <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
+            <Button primary>
+                Save
+            </Button>
             <form>
                 <Form.FormGroup>
                     <label>Name</label>
