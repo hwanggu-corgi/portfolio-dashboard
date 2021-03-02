@@ -40,13 +40,13 @@ const TableStyle = {
         padding: 0.75rem;
         width: ${props => {
             if (props.name) {
-                return "22.5%";
+                return "25%";
             } else if (props.date) {
-                return "22.5%";
+                return "15%";
             } else if (props.short_description) {
-                return "22.5%";
+                return "25%";
             } else if (props.tools_used) {
-                return "22.5%";
+                return "25%";
             } else if (props.icon) {
                 return "5%";
             }
@@ -54,6 +54,16 @@ const TableStyle = {
     `,
     Td: styled.td`
         padding: 0.75rem;
+    `,
+    Button: styled.button`
+        background-color: transparent;
+        border: none;
+        padding: 0.16rem;
+
+        div {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
     `
 }
 
@@ -84,10 +94,18 @@ function ProjectsScreen() {
                     <TableStyle.Td>Dashboard housing information for hyungmogu.com</TableStyle.Td>
                     <TableStyle.Td>Node.js, PostgreSQL, ReactJS</TableStyle.Td>
                     <TableStyle.Td>
-                        <FontAwesomeIcon icon={faEdit}/>
+                        <TableStyle.Button>
+                            <div>
+                                <FontAwesomeIcon icon={faEdit}/>
+                            </div>
+                        </TableStyle.Button>
                     </TableStyle.Td>
                     <TableStyle.Td>
-                        <FontAwesomeIcon icon={faTrashAlt}/>
+                        <TableStyle.Button>
+                            <div>
+                                <FontAwesomeIcon icon={faTrashAlt}/>
+                            </div>
+                        </TableStyle.Button>
                     </TableStyle.Td>
                 </tr>
             </TableStyle.Table>
