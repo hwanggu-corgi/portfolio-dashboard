@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Button from '../../components/Button';
 import constants from '../../constants';
 
 const sectionPadding = "1.31rem";
 
-const InfoScreenStyle = {
+const ProjectsScreenStyle = {
     Section: styled.section`
         border: 1px solid ${constants.colorGrey};
         border-radius: ${constants.borderRadius};
@@ -13,6 +14,14 @@ const InfoScreenStyle = {
     H2: styled.h2`
         color: ${constants.colorNavyBlue};
     `,
+    ButtonSection: styled.section`
+        display: flex;
+        justify-content: flex-end;
+
+        &:not(:last-child){
+            margin: 0 0 1.41rem 0;
+        }
+    `
 };
 
 function ProjectsScreen() {
@@ -20,9 +29,14 @@ function ProjectsScreen() {
     let [socialsList, setSocialsList] = useState([{}]);
 
     return (
-        <InfoScreenStyle.Section>
-            <InfoScreenStyle.H2>Projects</InfoScreenStyle.H2>
-        </InfoScreenStyle.Section>
+        <ProjectsScreenStyle.Section>
+            <ProjectsScreenStyle.H2>Projects</ProjectsScreenStyle.H2>
+            <ProjectsScreenStyle.ButtonSection>
+                <Button primary>
+                    Add
+                </Button>
+            </ProjectsScreenStyle.ButtonSection>
+        </ProjectsScreenStyle.Section>
     );
 }
 
