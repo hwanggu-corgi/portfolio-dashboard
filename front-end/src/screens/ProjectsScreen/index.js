@@ -70,7 +70,11 @@ const TableStyle = {
 const PaginationStyle = {
     Button: styled.button`
         border: ${constants.colorGrey};
-        background-color: ${constants.colorLightGrey};
+        background-color: ${props => {
+            if (props.bg_white) {
+                return constants.colorWhite;
+            }
+        }};
         cursor: pointer;
     `
 };
