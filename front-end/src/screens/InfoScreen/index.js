@@ -11,10 +11,13 @@ const InfoScreenStyle = {
         border: 1px solid ${constants.colorGrey};
         border-radius: ${constants.borderRadius};
         padding: ${sectionPadding};
-        flex-grow: 1;
     `,
     H2: styled.h2`
         color: ${constants.colorNavyBlue};
+    `,
+    ButtonSection: styled.section`
+        display: flex;
+        justify-content: flex-end;
     `
 };
 
@@ -25,9 +28,11 @@ function InfoScreen() {
     return (
         <InfoScreenStyle.Section>
             <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
-            <Button primary>
-                Save
-            </Button>
+            <InfoScreenStyle.ButtonSection>
+                <Button primary>
+                    Save
+                </Button>
+            </InfoScreenStyle.ButtonSection>
             <form>
                 <Form.FormGroup>
                     <label>Name</label>
@@ -48,6 +53,11 @@ function InfoScreen() {
                     <Form.AddMoreButton onClick={_ =>  setSocialsList(oldArray => [...oldArray, {}])}/>
                 </Form.FormGroup>
             </form>
+            <InfoScreenStyle.ButtonSection>
+                <Button primary>
+                    Save
+                </Button>
+            </InfoScreenStyle.ButtonSection>
         </InfoScreenStyle.Section>
     );
 }
