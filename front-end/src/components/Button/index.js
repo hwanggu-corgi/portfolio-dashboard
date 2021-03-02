@@ -6,10 +6,15 @@ const ButtonStyle = {
     Button: styled.button`
         border: transparent;
         border-radius: ${constants.borderRadius};
-        background-color: ${constants.colorNavyBlue};
+        background-color: ${props => {
+            if (props.primary) {
+                return constants.colorNavyBlue;
+            }
+        }};
         color: ${constants.colorWhite};
         padding: 0.56rem;
         cursor: pointer;
+
     `,
     Div: styled.div`
         min-width: 6.09rem;
@@ -18,7 +23,7 @@ const ButtonStyle = {
 
 export default function Button(props) {
     return(
-        <ButtonStyle.Button type={props.type}>
+        <ButtonStyle.Button {...props}>
             <ButtonStyle.Div>
                 {props.children}
             </ButtonStyle.Div>
