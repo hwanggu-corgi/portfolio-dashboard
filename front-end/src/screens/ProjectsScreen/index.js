@@ -35,6 +35,10 @@ const TableStyle = {
         background-color: ${constants.colorLightGrey};
         font-weight: normal;
         text-align: left;
+        padding: 0.75rem;
+    `,
+    Td: styled.td`
+        padding: 0.75rem;
     `
 }
 
@@ -60,12 +64,12 @@ function ProjectsScreen() {
                     <TableStyle.Th></TableStyle.Th>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <TableStyle.Td>Portfolio Dashboard</TableStyle.Td>
+                    <TableStyle.Td></TableStyle.Td>
+                    <TableStyle.Td></TableStyle.Td>
+                    <TableStyle.Td></TableStyle.Td>
+                    <TableStyle.Td></TableStyle.Td>
+                    <TableStyle.Td></TableStyle.Td>
                 </tr>
             </TableStyle.Table>
         </ProjectsScreenStyle.Section>
