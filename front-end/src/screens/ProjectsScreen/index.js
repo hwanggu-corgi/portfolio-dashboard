@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import Button from '../../components/Button';
 import constants from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 const sectionPadding = "1.31rem";
 
 const ProjectsScreenStyle = {
-    Section: styled.section`
+    PageSection: styled.section`
         border: 1px solid ${constants.colorGrey};
         border-radius: ${constants.borderRadius};
         padding: ${sectionPadding};
@@ -23,6 +23,10 @@ const ProjectsScreenStyle = {
         &:not(:last-child){
             margin: 0 0 1.41rem 0;
         }
+    `,
+    PaginationSection: styled.section`
+        display: flex;
+        justify-content: flex-end;
     `
 };
 
@@ -66,11 +70,15 @@ const TableStyle = {
 function Pagination() {
     return(
         <div>
-            <button>Prev</button>
-            <a>1</a>
-            <a>2</a>
-            <a>3</a>
-            <button>Next</button>
+            <button>
+                <FontAwesomeIcon icon={faChevronCircleLeft}/>
+            </button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>
+                <FontAwesomeIcon icon={faChevronCircleRight}/>
+            </button>
         </div>
     );
 }
@@ -80,7 +88,7 @@ function ProjectsScreen() {
     let [socialsList, setSocialsList] = useState([{}]);
 
     return (
-        <ProjectsScreenStyle.Section>
+        <ProjectsScreenStyle.PageSection>
             <ProjectsScreenStyle.H2>Projects</ProjectsScreenStyle.H2>
             <ProjectsScreenStyle.ButtonSection>
                 <Button primary>
@@ -117,8 +125,10 @@ function ProjectsScreen() {
                     </TableStyle.Td>
                 </tr>
             </TableStyle.Table>
-            <Pagination/>
-        </ProjectsScreenStyle.Section>
+            <ProjectsScreenStyle.PaginationSection>
+                <Pagination/>
+            </ProjectsScreenStyle.PaginationSection>
+        </ProjectsScreenStyle.PageSection>
     );
 }
 
