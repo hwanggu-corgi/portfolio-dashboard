@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from '../../components/Button';
 import constants from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt, faChevronCircleLeft, faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const sectionPadding = "1.31rem";
 
@@ -70,8 +70,11 @@ const TableStyle = {
 const PaginationStyle = {
     Button: styled.button`
         border: ${constants.colorGrey};
+        padding: 0.28rem;
         background-color: ${props => {
-            if (props.bg_white) {
+            if (props.bg_grey) {
+                return constants.colorGrey;
+            } else {
                 return constants.colorWhite;
             }
         }};
@@ -82,14 +85,14 @@ const PaginationStyle = {
 function Pagination() {
     return(
         <div>
-            <PaginationStyle.Button>
-                <FontAwesomeIcon icon={faChevronCircleLeft}/>
+            <PaginationStyle.Button bg_grey>
+                <FontAwesomeIcon icon={faChevronLeft}/>
             </PaginationStyle.Button>
             <PaginationStyle.Button>1</PaginationStyle.Button>
             <PaginationStyle.Button>2</PaginationStyle.Button>
             <PaginationStyle.Button>3</PaginationStyle.Button>
-            <PaginationStyle.Button>
-                <FontAwesomeIcon icon={faChevronCircleRight}/>
+            <PaginationStyle.Button bg_grey>
+                <FontAwesomeIcon icon={faChevronRight}/>
             </PaginationStyle.Button>
         </div>
     );
