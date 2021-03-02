@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import constants from '../../constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const sectionPadding = "1.31rem";
 
@@ -56,20 +58,24 @@ function ProjectsScreen() {
             </ProjectsScreenStyle.ButtonSection>
             <TableStyle.Table>
                 <tr>
-                    <TableStyle.Th>Name</TableStyle.Th>
-                    <TableStyle.Th>Date</TableStyle.Th>
-                    <TableStyle.Th>Short Description</TableStyle.Th>
-                    <TableStyle.Th>Tools Used</TableStyle.Th>
-                    <TableStyle.Th></TableStyle.Th>
-                    <TableStyle.Th></TableStyle.Th>
+                    <TableStyle.Th name>Name</TableStyle.Th>
+                    <TableStyle.Th date>Date</TableStyle.Th>
+                    <TableStyle.Th short_description>Short Description</TableStyle.Th>
+                    <TableStyle.Th tools_used>Tools Used</TableStyle.Th>
+                    <TableStyle.Th icon></TableStyle.Th>
+                    <TableStyle.Th icon></TableStyle.Th>
                 </tr>
                 <tr>
                     <TableStyle.Td>Portfolio Dashboard</TableStyle.Td>
-                    <TableStyle.Td></TableStyle.Td>
-                    <TableStyle.Td></TableStyle.Td>
-                    <TableStyle.Td></TableStyle.Td>
-                    <TableStyle.Td></TableStyle.Td>
-                    <TableStyle.Td></TableStyle.Td>
+                    <TableStyle.Td>March 1st, 2021</TableStyle.Td>
+                    <TableStyle.Td>Dashboard housing information for hyungmogu.com</TableStyle.Td>
+                    <TableStyle.Td>Node.js, PostgreSQL, ReactJS</TableStyle.Td>
+                    <TableStyle.Td>
+                        <FontAwesomeIcon icon={faEdit}/>
+                    </TableStyle.Td>
+                    <TableStyle.Td>
+                        <FontAwesomeIcon icon={faTrashAlt}/>
+                    </TableStyle.Td>
                 </tr>
             </TableStyle.Table>
         </ProjectsScreenStyle.Section>
