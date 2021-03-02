@@ -30,7 +30,6 @@ const TableStyle = {
     Table: styled.table`
         width: 100%;
         border-collapse: collapse;
-        border: 1px solid black;
         margin: 0;
     `,
     Th: styled.th`
@@ -39,15 +38,11 @@ const TableStyle = {
         text-align: left;
         padding: 0.75rem;
         width: ${props => {
-            if (props.name) {
+            if (props.width_25) {
                 return "25%";
-            } else if (props.date) {
+            } else if (props.width_15) {
                 return "15%";
-            } else if (props.short_description) {
-                return "25%";
-            } else if (props.tools_used) {
-                return "25%";
-            } else if (props.icon) {
+            } else if (props.width_5) {
                 return "5%";
             }
         }}
@@ -59,12 +54,25 @@ const TableStyle = {
         background-color: transparent;
         border: none;
         padding: 0.16rem;
+        cursor: pointer;
 
         div {
             width: 1.1rem;
             height: 1.1rem;
         }
     `
+}
+
+function Pagination() {
+    return(
+        <div>
+            <button>Prev</button>
+            <a>1</a>
+            <a>2</a>
+            <a>3</a>
+            <button>Next</button>
+        </div>
+    );
 }
 
 function ProjectsScreen() {
@@ -81,12 +89,12 @@ function ProjectsScreen() {
             </ProjectsScreenStyle.ButtonSection>
             <TableStyle.Table>
                 <tr>
-                    <TableStyle.Th name>Name</TableStyle.Th>
-                    <TableStyle.Th date>Date</TableStyle.Th>
-                    <TableStyle.Th short_description>Short Description</TableStyle.Th>
-                    <TableStyle.Th tools_used>Tools Used</TableStyle.Th>
-                    <TableStyle.Th icon></TableStyle.Th>
-                    <TableStyle.Th icon></TableStyle.Th>
+                    <TableStyle.Th width_25>Name</TableStyle.Th>
+                    <TableStyle.Th width_15>Date</TableStyle.Th>
+                    <TableStyle.Th width_25>Short Description</TableStyle.Th>
+                    <TableStyle.Th width_25>Tools Used</TableStyle.Th>
+                    <TableStyle.Th width_5></TableStyle.Th>
+                    <TableStyle.Th width_5></TableStyle.Th>
                 </tr>
                 <tr>
                     <TableStyle.Td>Portfolio Dashboard</TableStyle.Td>
@@ -109,6 +117,7 @@ function ProjectsScreen() {
                     </TableStyle.Td>
                 </tr>
             </TableStyle.Table>
+            <Pagination/>
         </ProjectsScreenStyle.Section>
     );
 }
