@@ -67,18 +67,26 @@ const TableStyle = {
     `
 }
 
+const PaginationStyle = {
+    Button: styled.button`
+        border: ${constants.colorGrey};
+        background-color: ${constants.colorLightGrey};
+        cursor: pointer;
+    `
+};
+
 function Pagination() {
     return(
         <div>
-            <button>
+            <PaginationStyle.Button>
                 <FontAwesomeIcon icon={faChevronCircleLeft}/>
-            </button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>
+            </PaginationStyle.Button>
+            <PaginationStyle.Button>1</PaginationStyle.Button>
+            <PaginationStyle.Button>2</PaginationStyle.Button>
+            <PaginationStyle.Button>3</PaginationStyle.Button>
+            <PaginationStyle.Button>
                 <FontAwesomeIcon icon={faChevronCircleRight}/>
-            </button>
+            </PaginationStyle.Button>
         </div>
     );
 }
