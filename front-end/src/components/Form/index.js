@@ -127,6 +127,34 @@ function KeyValueInput() {
     )
 };
 
+
+const KeyValueInputListStyle = {
+    Div: styled(KeyValueInputStyle.Div)`
+        margin: 0 0 0.23rem 0;
+    `,
+    ButtonSection: styled.section`
+        display: flex;
+        justify-content: center;
+    `
+};
+
+function KeyValueInputList(props) {
+    return(
+        <>
+            {props.list.map((item, index) => (
+                <InputListStyle.Div key={index}>
+                    <KeyValueInputStyle.InputKey defaultValue={item[0] ? item[0] : ""}/><KeyValueInputStyle.InputValue/>
+                    <InputStyle.Input defaultValue={item ? item : ""}/>
+                </InputListStyle.Div>
+            ))}
+            <InputListStyle.ButtonSection>
+                <AddMoreButton onClick={props.onAdd}/>
+            </InputListStyle.ButtonSection>
+        </>
+    );
+}
+
+
 export default {
     Input,
     InputList,
