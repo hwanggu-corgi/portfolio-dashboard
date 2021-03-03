@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import constants from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from 'react-router';
 
 const sectionPadding = "1.31rem";
 
@@ -99,6 +100,7 @@ function Pagination() {
 }
 
 function ProjectsScreen() {
+    let history = useHistory();
     let [contactsList, setContactsList] = useState([{}]);
     let [socialsList, setSocialsList] = useState([{}]);
 
@@ -125,7 +127,7 @@ function ProjectsScreen() {
                     <TableStyle.Td>Dashboard housing information for hyungmogu.com</TableStyle.Td>
                     <TableStyle.Td>Node.js, PostgreSQL, ReactJS</TableStyle.Td>
                     <TableStyle.Td>
-                        <TableStyle.Button>
+                        <TableStyle.Button onClick={_ => history.push("/admin/projects/1")}>
                             <div>
                                 <FontAwesomeIcon icon={faEdit}/>
                             </div>
