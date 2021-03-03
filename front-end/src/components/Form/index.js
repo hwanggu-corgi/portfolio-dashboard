@@ -53,8 +53,8 @@ function Input() {
 };
 
 const InputListStyle = {
-    Div: styled.div`
-        margin: 0  0 0.23rem 0;
+    Div: styled.div(InputStyle.Div)`
+        margin: 0 0 0.23rem 0;
     `
 };
 
@@ -62,8 +62,8 @@ function InputList(props) {
     return(
         <>
             {props.list.map((item, index) => (
-                <InputListStyle.Div>
-                    <Input key={index} data={item}/>
+                <InputListStyle.Div key={index}>
+                    <InputStyle.Input value={item ? item : ""}/>
                 </InputListStyle.Div>
             ))}
             <AddMoreButton onClick={props.onAdd}/>
