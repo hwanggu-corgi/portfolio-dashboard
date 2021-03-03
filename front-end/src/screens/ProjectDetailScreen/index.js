@@ -29,21 +29,6 @@ const ProjectDetailScreenStyle = {
     `
 };
 
-const InputListStyle = {
-    Input: styled(Form.Input)`
-        margin: 0 0.23rem 0 0;
-    `
-};
-
-function InputList(props) {
-    return(
-        <>
-            {props.list.map((item, index) => <InputListStyle.Input key={index} data={item}/>)}
-            <Form.AddMoreButton onClick={props.onClick}/>
-        </>
-    );
-}
-
 function ProjectDetailScreen() {
     let [contactsList, setContactsList] = useState([{}]);
     let [socialsList, setSocialsList] = useState([{}]);
@@ -74,8 +59,7 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    {contactsList.map((item, index) => <Form.Input key={index} data={item}/>)}
-                    <Form.AddMoreButton onClick={_ => setContactsList(oldArray => [...oldArray, {}])}/>
+                    <Form.InputList list={contactsList} onAdd={_ => setContactsList(oldArray => [...oldArray, {}])}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Images</label>
