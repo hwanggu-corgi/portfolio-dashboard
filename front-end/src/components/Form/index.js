@@ -37,12 +37,17 @@ function AddMoreButton(props) {
 }
 
 const InputStyle = {
+    Div: styled.div`
+        display: flex;
+    `,
     Input: styled.input`
         border: 1px solid ${constants.colorGrey};
         background-color: ${constants.colorLightGrey};
         padding: 0.56rem;
+        flex-grow: 1;
     `
 };
+
 
 function Input() {
     return(
@@ -53,8 +58,12 @@ function Input() {
 };
 
 const InputListStyle = {
-    Div: styled.div(InputStyle.Div)`
+    Div: styled(InputStyle.Div)`
         margin: 0 0 0.23rem 0;
+    `,
+    ButtonSection: styled.section`
+        display: flex;
+        justify-content: center;
     `
 };
 
@@ -63,10 +72,12 @@ function InputList(props) {
         <>
             {props.list.map((item, index) => (
                 <InputListStyle.Div key={index}>
-                    <InputStyle.Input value={item ? item : ""}/>
+                    <InputStyle.Input defaultValue={item ? item : ""}/>
                 </InputListStyle.Div>
             ))}
-            <AddMoreButton onClick={props.onAdd}/>
+            <InputListStyle.ButtonSection>
+                <AddMoreButton onClick={props.onAdd}/>
+            </InputListStyle.ButtonSection>
         </>
     );
 }
