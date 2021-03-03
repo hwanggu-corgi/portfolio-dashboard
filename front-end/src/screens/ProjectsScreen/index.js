@@ -101,8 +101,6 @@ function Pagination() {
 
 function ProjectsScreen() {
     let history = useHistory();
-    let [contactsList, setContactsList] = useState([{}]);
-    let [socialsList, setSocialsList] = useState([{}]);
 
     return (
         <ProjectsScreenStyle.PageSection>
