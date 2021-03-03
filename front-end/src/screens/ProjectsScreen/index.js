@@ -102,6 +102,10 @@ function Pagination() {
 function ProjectsScreen() {
     let history = useHistory();
 
+    const deleteProject = () => {
+        console.log("This is temporary");
+    }
+
     return (
         <ProjectsScreenStyle.PageSection>
             <ProjectsScreenStyle.H2>Projects</ProjectsScreenStyle.H2>
@@ -135,7 +139,7 @@ function ProjectsScreen() {
                             </TableStyle.Button>
                         </TableStyle.Td>
                         <TableStyle.Td>
-                            <TableStyle.Button>
+                            <TableStyle.Button onClick={_ => deleteProject("1")}>
                                 <div>
                                     <FontAwesomeIcon icon={faTrashAlt}/>
                                 </div>
