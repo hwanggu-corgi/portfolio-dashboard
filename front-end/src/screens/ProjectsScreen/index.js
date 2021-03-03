@@ -113,34 +113,38 @@ function ProjectsScreen() {
                 </Button>
             </ProjectsScreenStyle.ButtonSection>
             <TableStyle.Table>
-                <tr>
-                    <TableStyle.Th width_25>Name</TableStyle.Th>
-                    <TableStyle.Th width_15>Date</TableStyle.Th>
-                    <TableStyle.Th width_25>Short Description</TableStyle.Th>
-                    <TableStyle.Th width_25>Tools Used</TableStyle.Th>
-                    <TableStyle.Th width_5></TableStyle.Th>
-                    <TableStyle.Th width_5></TableStyle.Th>
-                </tr>
-                <tr>
-                    <TableStyle.Td>Portfolio Dashboard</TableStyle.Td>
-                    <TableStyle.Td>March 1st, 2021</TableStyle.Td>
-                    <TableStyle.Td>Dashboard housing information for hyungmogu.com</TableStyle.Td>
-                    <TableStyle.Td>Node.js, PostgreSQL, ReactJS</TableStyle.Td>
-                    <TableStyle.Td>
-                        <TableStyle.Button onClick={_ => history.push("/admin/projects/1")}>
-                            <div>
-                                <FontAwesomeIcon icon={faEdit}/>
-                            </div>
-                        </TableStyle.Button>
-                    </TableStyle.Td>
-                    <TableStyle.Td>
-                        <TableStyle.Button>
-                            <div>
-                                <FontAwesomeIcon icon={faTrashAlt}/>
-                            </div>
-                        </TableStyle.Button>
-                    </TableStyle.Td>
-                </tr>
+                <thead>
+                    <tr>
+                        <TableStyle.Th width_25>Name</TableStyle.Th>
+                        <TableStyle.Th width_15>Date</TableStyle.Th>
+                        <TableStyle.Th width_25>Short Description</TableStyle.Th>
+                        <TableStyle.Th width_25>Tools Used</TableStyle.Th>
+                        <TableStyle.Th width_5></TableStyle.Th>
+                        <TableStyle.Th width_5></TableStyle.Th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <TableStyle.Td>Portfolio Dashboard</TableStyle.Td>
+                        <TableStyle.Td>March 1st, 2021</TableStyle.Td>
+                        <TableStyle.Td>Dashboard housing information for hyungmogu.com</TableStyle.Td>
+                        <TableStyle.Td>Node.js, PostgreSQL, ReactJS</TableStyle.Td>
+                        <TableStyle.Td>
+                            <TableStyle.Button onClick={_ => history.push("/admin/projects/1")}>
+                                <div>
+                                    <FontAwesomeIcon icon={faEdit}/>
+                                </div>
+                            </TableStyle.Button>
+                        </TableStyle.Td>
+                        <TableStyle.Td>
+                            <TableStyle.Button>
+                                <div>
+                                    <FontAwesomeIcon icon={faTrashAlt}/>
+                                </div>
+                            </TableStyle.Button>
+                        </TableStyle.Td>
+                    </tr>
+                </tbody>
             </TableStyle.Table>
             <ProjectsScreenStyle.PaginationSection>
                 <Pagination/>
