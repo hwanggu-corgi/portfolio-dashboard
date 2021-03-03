@@ -31,7 +31,7 @@ function ProjectDetailScreen() {
 
     return (
         <ProjectDetailScreenStyle.Section>
-            <ProjectDetailScreenStyle.H2>Personal Information</ProjectDetailScreenStyle.H2>
+            <ProjectDetailScreenStyle.H2>Portfolio Dashboard</ProjectDetailScreenStyle.H2>
             <ProjectDetailScreenStyle.ButtonSection>
                 <Button primary>
                     Save
