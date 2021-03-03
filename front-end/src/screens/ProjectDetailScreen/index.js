@@ -33,6 +33,9 @@ function ProjectDetailScreen() {
         <ProjectDetailScreenStyle.Section>
             <ProjectDetailScreenStyle.H2>Portfolio Dashboard</ProjectDetailScreenStyle.H2>
             <ProjectDetailScreenStyle.ButtonSection>
+                <Button secondary>
+                    Delete
+                </Button>
                 <Button primary>
                     Save
                 </Button>
