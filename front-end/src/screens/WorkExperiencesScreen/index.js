@@ -101,6 +101,17 @@ function Pagination() {
     );
 }
 
+const sampleData = [
+    {
+        "id": 1,
+        "company": "SiteMax Systems Inc.",
+        "location": "Vancouver, BC, Canada",
+        "position": "Junior Developer",
+        "dateStart": "January 2018",
+        "dateEnd": "December 2019"
+    }
+];
+
 function WorkExperiencesScreen() {
     const history = useHistory();
     const deleteWorkExperience = () => {
@@ -111,41 +122,47 @@ function WorkExperiencesScreen() {
         <WorkExperiencesScreenStyle.PageSection>
             <WorkExperiencesScreenStyle.H2>Work Experiences</WorkExperiencesScreenStyle.H2>
             <WorkExperiencesScreenStyle.ButtonSection>
-                <Button primary>
+                <Button primary onClick={_ => history.push("/admin/work-experiences/new")}>
                     Add
                 </Button>
             </WorkExperiencesScreenStyle.ButtonSection>
             <TableStyle.Table>
-                <tr>
-                    <TableStyle.Th width_25>Name</TableStyle.Th>
-                    <TableStyle.Th width_15>Date Start</TableStyle.Th>
-                    <TableStyle.Th width_15>Date End</TableStyle.Th>
-                    <TableStyle.Th width_15>Position</TableStyle.Th>
-                    <TableStyle.Th width_20>Location</TableStyle.Th>
-                    <TableStyle.Th width_5></TableStyle.Th>
-                    <TableStyle.Th width_5></TableStyle.Th>
-                </tr>
-                <tr>
-                    <TableStyle.Td>SiteMax Systems Inc.</TableStyle.Td>
-                    <TableStyle.Td>January, 2018</TableStyle.Td>
-                    <TableStyle.Td>December, 2019</TableStyle.Td>
-                    <TableStyle.Td>Junior Developer</TableStyle.Td>
-                    <TableStyle.Td>Vancouver, BC, Canada</TableStyle.Td>
-                    <TableStyle.Td>
-                        <TableStyle.Button onClick={_ => history.push("/admin/work-experiences/1")}>
-                            <div>
-                                <FontAwesomeIcon icon={faEdit}/>
-                            </div>
-                        </TableStyle.Button>
-                    </TableStyle.Td>
-                    <TableStyle.Td>
-                        <TableStyle.Button onClick={_ => deleteWorkExperience("1")}>
-                            <div>
-                                <FontAwesomeIcon icon={faTrashAlt}/>
-                            </div>
-                        </TableStyle.Button>
-                    </TableStyle.Td>
-                </tr>
+                <thead>
+                    <tr>
+                        <TableStyle.Th width_25>Company Name</TableStyle.Th>
+                        <TableStyle.Th width_15>Date Start</TableStyle.Th>
+                        <TableStyle.Th width_15>Date End</TableStyle.Th>
+                        <TableStyle.Th width_15>Position</TableStyle.Th>
+                        <TableStyle.Th width_20>Location</TableStyle.Th>
+                        <TableStyle.Th width_5></TableStyle.Th>
+                        <TableStyle.Th width_5></TableStyle.Th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sampleData.map(item => (
+                        <tr>
+                            <TableStyle.Td>{item.company}</TableStyle.Td>
+                            <TableStyle.Td>{item.dateStart}</TableStyle.Td>
+                            <TableStyle.Td>{item.dateEnd}</TableStyle.Td>
+                            <TableStyle.Td>{item.position}</TableStyle.Td>
+                            <TableStyle.Td>{item.location}</TableStyle.Td>
+                            <TableStyle.Td>
+                                <TableStyle.Button onClick={_ => history.push(`/admin/work-experiences/${item.id}`)}>
+                                    <div>
+                                        <FontAwesomeIcon icon={faEdit}/>
+                                    </div>
+                                </TableStyle.Button>
+                            </TableStyle.Td>
+                            <TableStyle.Td>
+                                <TableStyle.Button onClick={_ => deleteWorkExperience(item.id)}>
+                                    <div>
+                                        <FontAwesomeIcon icon={faTrashAlt}/>
+                                    </div>
+                                </TableStyle.Button>
+                            </TableStyle.Td>
+                        </tr>
+                    ))}
+                </tbody>
             </TableStyle.Table>
             <WorkExperiencesScreenStyle.PaginationSection>
                 <Pagination/>

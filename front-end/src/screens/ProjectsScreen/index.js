@@ -120,7 +120,7 @@ function ProjectsScreen() {
         <ProjectsScreenStyle.PageSection>
             <ProjectsScreenStyle.H2>Projects</ProjectsScreenStyle.H2>
             <ProjectsScreenStyle.ButtonSection>
-                <Button primary onClick={_ => history.push("/admin/work-experiences/new")}>
+                <Button primary onClick={_ => history.push("/admin/projects/new")}>
                     Add
                 </Button>
             </ProjectsScreenStyle.ButtonSection>
@@ -144,14 +144,14 @@ function ProjectsScreen() {
                                 <TableStyle.Td>{item.shortDescription}</TableStyle.Td>
                                 <TableStyle.Td>{item.techUsed.join(", ")}</TableStyle.Td>
                                 <TableStyle.Td>
-                                    <TableStyle.Button onClick={_ => history.push("/admin/projects/1")}>
+                                    <TableStyle.Button onClick={_ => history.push(`/admin/projects/${item.id}`)}>
                                         <div>
                                             <FontAwesomeIcon icon={faEdit}/>
                                         </div>
                                     </TableStyle.Button>
                                 </TableStyle.Td>
                                 <TableStyle.Td>
-                                    <TableStyle.Button onClick={_ => deleteProject("1")}>
+                                    <TableStyle.Button onClick={_ => deleteProject(item.id)}>
                                         <div>
                                             <FontAwesomeIcon icon={faTrashAlt}/>
                                         </div>
