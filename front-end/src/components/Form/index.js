@@ -142,14 +142,13 @@ function KeyValueInputList(props) {
     return(
         <>
             {props.list.map((item, index) => (
-                <InputListStyle.Div key={index}>
-                    <KeyValueInputStyle.InputKey defaultValue={item[0] ? item[0] : ""}/><KeyValueInputStyle.InputValue/>
-                    <InputStyle.Input defaultValue={item ? item : ""}/>
-                </InputListStyle.Div>
+                <KeyValueInputListStyle.Div key={index}>
+                    <KeyValueInputStyle.InputKey defaultValue={item[0] ? item[0] : ""}/><KeyValueInputStyle.InputValue defaultValue={item[1] ? item[1] : ""}/>
+                </KeyValueInputListStyle.Div>
             ))}
-            <InputListStyle.ButtonSection>
+            <KeyValueInputListStyle.ButtonSection>
                 <AddMoreButton onClick={props.onAdd}/>
-            </InputListStyle.ButtonSection>
+            </KeyValueInputListStyle.ButtonSection>
         </>
     );
 }
@@ -160,5 +159,6 @@ export default {
     InputList,
     FormGroup,
     KeyValueInput,
+    KeyValueInputList,
     AddMoreButton,
 };

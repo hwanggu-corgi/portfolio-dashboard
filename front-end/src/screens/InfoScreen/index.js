@@ -26,8 +26,8 @@ const InfoScreenStyle = {
 };
 
 function InfoScreen() {
-    let [contactsList, setContactsList] = useState([{}]);
-    let [socialsList, setSocialsList] = useState([{}]);
+    let [contactsList, setContactsList] = useState([["",""]]);
+    let [socialsList, setSocialsList] = useState([["",""]]);
 
     return (
         <InfoScreenStyle.Section>
@@ -48,11 +48,11 @@ function InfoScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Contact</label>
-                    <Form.KeyValueInputList list={contactsList} onAdd={_ => setContactsList(oldArray => [...oldArray, []])}/>
+                    <Form.KeyValueInputList list={contactsList} onAdd={_ => setContactsList(oldArray => [...oldArray, ["",""]])}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Socials</label>
-                    <Form.KeyValueInputList list={socialsList} onAdd={_ => setSocialsList(oldArray => [...oldArray, []])}/>
+                    <Form.KeyValueInputList list={socialsList} onAdd={_ => setSocialsList(oldArray => [...oldArray, ["",""]])}/>
                 </Form.FormGroup>
             </form>
             <InfoScreenStyle.ButtonSection>
