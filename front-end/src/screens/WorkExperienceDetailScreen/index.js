@@ -30,8 +30,7 @@ const WorkExperienceDetailScreenStyle = {
 };
 
 function WorkExperienceDetailScreen() {
-    let [highlightsList, setContactsList] = useState([""]);
-    let [imagesList, setSocialsList] = useState([""]);
+    let [highlightsList, setHighlightsList] = useState([""]);
 
     return (
         <WorkExperienceDetailScreenStyle.Section>
@@ -50,20 +49,28 @@ function WorkExperienceDetailScreen() {
                     <Form.Input/>
                 </Form.FormGroup>
                 <Form.FormGroup>
-                    <label>Header Image</label>
+                    <label>Position</label>
                     <Form.Input/>
                 </Form.FormGroup>
                 <Form.FormGroup>
-                    <label>Tools Used</label>
+                    <label>Location</label>
+                    <Form.Input/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Date Start</label>
+                    <Form.Input/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Date End</label>
+                    <Form.Input/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Tech Stacks</label>
                     <Form.Input/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} onAdd={_ => setContactsList(oldArray => [...oldArray, ""])}/>
-                </Form.FormGroup>
-                <Form.FormGroup>
-                    <label>Images</label>
-                    <Form.InputList list={imagesList} onAdd={_ => setSocialsList(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={highlightsList} onAdd={_ => setHighlightsList(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
             </form>
             <WorkExperienceDetailScreenStyle.ButtonSection>

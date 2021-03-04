@@ -30,8 +30,8 @@ const ProjectDetailScreenStyle = {
 };
 
 function ProjectDetailScreen() {
-    let [highlightsList, setContactsList] = useState([""]);
-    let [imagesList, setSocialsList] = useState([""]);
+    let [highlightsList, setHighlightsList] = useState([""]);
+    let [imagesList, setImagesList] = useState([""]);
 
     return (
         <ProjectDetailScreenStyle.Section>
@@ -59,11 +59,11 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} onAdd={_ => setContactsList(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={highlightsList} onAdd={_ => setHighlightsList(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Images</label>
-                    <Form.InputList list={imagesList} onAdd={_ => setSocialsList(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={imagesList} onAdd={_ => setImagesList(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>

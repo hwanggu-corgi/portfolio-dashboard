@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import constants from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from 'react-router';
 
 const sectionPadding = "1.31rem";
 
@@ -101,6 +102,7 @@ function Pagination() {
 }
 
 function WorkExperiencesScreen() {
+    const history = useHistory();
     const deleteWorkExperience = () => {
         console.log("This is temporary");
     }
@@ -130,7 +132,7 @@ function WorkExperiencesScreen() {
                     <TableStyle.Td>Junior Developer</TableStyle.Td>
                     <TableStyle.Td>Vancouver, BC, Canada</TableStyle.Td>
                     <TableStyle.Td>
-                        <TableStyle.Button onClick={history.push("/admin/work-experiences/1")}>
+                        <TableStyle.Button onClick={_ => history.push("/admin/work-experiences/1")}>
                             <div>
                                 <FontAwesomeIcon icon={faEdit}/>
                             </div>
