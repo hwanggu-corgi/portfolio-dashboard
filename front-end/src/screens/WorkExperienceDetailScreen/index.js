@@ -34,7 +34,7 @@ function WorkExperienceDetailScreen() {
 
     return (
         <WorkExperienceDetailScreenStyle.Section>
-            <WorkExperienceDetailScreenStyle.H2>SiteMax Systems Inc.</WorkExperienceDetailScreenStyle.H2>
+            <WorkExperienceDetailScreenStyle.H2>SiteMax Systems Inc. - Junior Developer</WorkExperienceDetailScreenStyle.H2>
             <WorkExperienceDetailScreenStyle.ButtonSection>
                 <Button secondary>
                     Delete
@@ -45,7 +45,7 @@ function WorkExperienceDetailScreen() {
             </WorkExperienceDetailScreenStyle.ButtonSection>
             <form>
                 <Form.FormGroup>
-                    <label>Title</label>
+                    <label>Company Name</label>
                     <Form.Input/>
                 </Form.FormGroup>
                 <Form.FormGroup>
