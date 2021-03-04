@@ -35,7 +35,7 @@ function WorkExperienceDetailScreen() {
 
     return (
         <WorkExperienceDetailScreenStyle.Section>
-            <WorkExperienceDetailScreenStyle.H2>Portfolio Dashboard</WorkExperienceDetailScreenStyle.H2>
+            <WorkExperienceDetailScreenStyle.H2>SiteMax Systems Inc.</WorkExperienceDetailScreenStyle.H2>
             <WorkExperienceDetailScreenStyle.ButtonSection>
                 <Button secondary>
                     Delete
