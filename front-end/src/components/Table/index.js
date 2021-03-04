@@ -14,6 +14,8 @@ const TableStyle = {
         width: ${props => {
             if (props.width_25) {
                 return "25%";
+            } else if (props.width_20) {
+                return "20  %";
             } else if (props.width_15) {
                 return "15%";
             } else if (props.width_5) {
@@ -35,4 +37,8 @@ const TableStyle = {
             height: 1.1rem;
         }
     `
+}
+
+export default {
+    TableStyle
 }
