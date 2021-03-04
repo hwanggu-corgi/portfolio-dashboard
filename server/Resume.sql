@@ -29,5 +29,10 @@ CREATE TABLE WorkExperience (
 DROP TABLE IF EXISTS User;
 CREATE TABLE User (
     id          SERIAL PRIMARY KEY,
-
+    website     VARCHAR(255),
+    phone       VARCHAR(255),
+    email       VARCHAR(255),
+    linkedIn    VARCHAR(255),
+    facebook    VARCHAR(255),
+    github      VARCHAR(255)
 );
