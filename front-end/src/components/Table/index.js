@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import constants from '../../constants';
 
-const TableStyle = {
+export const TableStyle = {
     Table: styled.table`
         width: 100%;
         border-collapse: collapse;
@@ -37,8 +38,4 @@ const TableStyle = {
             height: 1.1rem;
         }
     `
-}
-
-export default {
-    TableStyle
 }
