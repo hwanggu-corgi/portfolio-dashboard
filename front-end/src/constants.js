@@ -4,7 +4,9 @@ const colorGrey = '#D7D7D7';
 const colorOrange = '#FF7927';
 const colorLightGrey = '#E9E9E9';
 const colorPurple = '#8A8DCC';
+
 const borderRadius = "0.94rem";
+const sectionPadding = "1.31rem";
 
 export default {
     colorNavyBlue,
@@ -13,5 +15,6 @@ export default {
     colorOrange,
     colorPurple,
     colorLightGrey,
-    borderRadius
+    borderRadius,
+    sectionPadding
 };
