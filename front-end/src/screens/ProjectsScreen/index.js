@@ -99,6 +99,16 @@ function Pagination() {
     );
 }
 
+const sampleData = [
+    {
+        "id": 1,
+        "title": "Chat Application",
+        "date": "February 26th, 2021",
+        "shortDescription": "A ReactJS and GraphQL based full-stack web chat application for the demonstrated learning in backend development",
+        "techUsed": ["ReactJS", "Styled Components", "ES6 JavaScript", "Prisma ORM", "Node.js", "Apollo GraphQL"]
+    },
+];
+
 function ProjectsScreen() {
     let history = useHistory();
 
@@ -110,7 +120,7 @@ function ProjectsScreen() {
         <ProjectsScreenStyle.PageSection>
             <ProjectsScreenStyle.H2>Projects</ProjectsScreenStyle.H2>
             <ProjectsScreenStyle.ButtonSection>
-                <Button primary>
+                <Button primary onClick={_ => history.push("/admin/work-experiences/new")}>
                     Add
                 </Button>
             </ProjectsScreenStyle.ButtonSection>
@@ -126,26 +136,30 @@ function ProjectsScreen() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <TableStyle.Td>Portfolio Dashboard</TableStyle.Td>
-                        <TableStyle.Td>March 1st, 2021</TableStyle.Td>
-                        <TableStyle.Td>Dashboard housing information for hyungmogu.com</TableStyle.Td>
-                        <TableStyle.Td>Node.js, PostgreSQL, ReactJS</TableStyle.Td>
-                        <TableStyle.Td>
-                            <TableStyle.Button onClick={_ => history.push("/admin/projects/1")}>
-                                <div>
-                                    <FontAwesomeIcon icon={faEdit}/>
-                                </div>
-                            </TableStyle.Button>
-                        </TableStyle.Td>
-                        <TableStyle.Td>
-                            <TableStyle.Button onClick={_ => deleteProject("1")}>
-                                <div>
-                                    <FontAwesomeIcon icon={faTrashAlt}/>
-                                </div>
-                            </TableStyle.Button>
-                        </TableStyle.Td>
-                    </tr>
+                    {
+                        sampleData.map(item => (
+                            <tr>
+                                <TableStyle.Td>{item.title}</TableStyle.Td>
+                                <TableStyle.Td>{item.date}</TableStyle.Td>
+                                <TableStyle.Td>{item.shortDescription}</TableStyle.Td>
+                                <TableStyle.Td>{item.techUsed.join(", ")}</TableStyle.Td>
+                                <TableStyle.Td>
+                                    <TableStyle.Button onClick={_ => history.push("/admin/projects/1")}>
+                                        <div>
+                                            <FontAwesomeIcon icon={faEdit}/>
+                                        </div>
+                                    </TableStyle.Button>
+                                </TableStyle.Td>
+                                <TableStyle.Td>
+                                    <TableStyle.Button onClick={_ => deleteProject("1")}>
+                                        <div>
+                                            <FontAwesomeIcon icon={faTrashAlt}/>
+                                        </div>
+                                    </TableStyle.Button>
+                                </TableStyle.Td>
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </TableStyle.Table>
             <ProjectsScreenStyle.PaginationSection>
