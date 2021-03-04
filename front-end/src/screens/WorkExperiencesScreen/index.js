@@ -101,8 +101,9 @@ function Pagination() {
 }
 
 function WorkExperiencesScreen() {
-    let [contactsList, setContactsList] = useState([{}]);
-    let [socialsList, setSocialsList] = useState([{}]);
+    const deleteWorkExperience = () => {
+        console.log("This is temporary");
+    }
 
     return (
         <WorkExperiencesScreenStyle.PageSection>
@@ -129,14 +130,14 @@ function WorkExperiencesScreen() {
                     <TableStyle.Td>Junior Developer</TableStyle.Td>
                     <TableStyle.Td>Vancouver, BC, Canada</TableStyle.Td>
                     <TableStyle.Td>
-                        <TableStyle.Button>
+                        <TableStyle.Button onClick={history.push("/admin/work-experiences/1")}>
                             <div>
                                 <FontAwesomeIcon icon={faEdit}/>
                             </div>
                         </TableStyle.Button>
                     </TableStyle.Td>
                     <TableStyle.Td>
-                        <TableStyle.Button>
+                        <TableStyle.Button onClick={_ => deleteWorkExperience("1")}>
                             <div>
                                 <FontAwesomeIcon icon={faTrashAlt}/>
                             </div>
