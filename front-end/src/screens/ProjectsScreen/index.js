@@ -8,13 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router';
 
-const sectionPadding = "1.31rem";
 
 const ProjectsScreenStyle = {
     PageSection: styled.section`
         border: 1px solid ${constants.colorGrey};
         border-radius: ${constants.borderRadius};
-        padding: ${sectionPadding};
+        padding: ${constants.sectionPadding};
     `,
     H2: styled.h2`
         color: ${constants.colorNavyBlue};
