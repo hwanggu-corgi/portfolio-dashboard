@@ -3,6 +3,11 @@ const Query = require('./resolvers/Query');
 const Mutation = require('./resolvers/Mutation');
 const fs = require('fs');
 const path = require('path');
+const { Client } = require('pg')
+
+const client = new Client();
+
+await client.connect();
 
 
 const resolvers = {
@@ -21,6 +26,7 @@ const server = new ApolloServer({
   context: ({ req }) => {
     return {
       ...req,
+      client,
     };
   }
 });
