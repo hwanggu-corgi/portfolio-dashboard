@@ -5,7 +5,14 @@ const fs = require('fs');
 const path = require('path');
 const { Client } = require('pg')
 
-const client = new Client();
+const client = new Client({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'testdb',
+    password: '1234abcd',
+    port: 5432,
+});
+
 
 await client.connect();
 
