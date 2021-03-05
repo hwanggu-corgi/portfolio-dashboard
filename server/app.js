@@ -26,6 +26,12 @@ app.get("/projects", async (req, res) => {
     const text = "SELECT * FROM projects ";
     try {
         const projects = await promiseQuery(text);
+
+        // for each project, query associated highlights and images
+
+        // append result to project
+
+        // return response
         res.send(projects);
     } catch(e) {
         res.status(500).send(e);
