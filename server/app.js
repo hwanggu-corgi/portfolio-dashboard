@@ -79,7 +79,7 @@ app.delete("/work-experiences/:id", (req, res) => {
 
 
 app.get("/info", (req, res) => {
-    const text = "SELECT * FROM user"
+    const text = "SELECT * FROM user";
 
     pool.query(text, (dbErr, dbRes) => {
         if (dbErr) res.status(500).send(dbErr);
@@ -88,7 +88,10 @@ app.get("/info", (req, res) => {
 });
 
 app.post("/info", (req, res) => {
-    const text = "INSERT INTO user()"
+    const text = `
+        INSERT INTO user()
+        VALUES()
+        RETURNING *`;
 
     pool.query(text, (dbErr, dbRes) => {
         if (dbErr) res.status(500).send(dbErr);
