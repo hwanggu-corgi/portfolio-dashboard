@@ -6,7 +6,8 @@ const app = express();
 
 
 app.get("/projects", (req, res) => {
-    pool.query("SELECT * FROM PROJECTS", (dbErr, dbRes) => {
+    const text = "SELECT * FROM Projects";
+    pool.query(text, (dbErr, dbRes) => {
         if (dbErr) res.status(500).send();
         res.send(dbRes);
     });
@@ -14,7 +15,8 @@ app.get("/projects", (req, res) => {
 
 
 app.get("/work-experiences", (req, res) => {
-    pool.query("SELECT * FROM WORK_EXPERIENCES", (dbErr, dbRes) => {
+    const text = "SELECT * FROM WorkExperiences";
+    pool.query(text, (dbErr, dbRes) => {
         if (dbErr) res.status(500).send();
         res.send(dbRes);
     });
@@ -22,13 +24,31 @@ app.get("/work-experiences", (req, res) => {
 
 
 app.put("/work-experiences", (req, res) => {
-    const query = `
-
-    `;
+    const query = "INSERT INTO Projects()"
 
     pool.query("INSERT", (dbErr, dbRes) => {
         if (dbErr) res.status(500).send();
         res.send(dbRes);
     });
 });
+
+
+app.put("/projects", (req, res) => {
+    const query = "INSERT INTO Projects()"
+
+    pool.query("INSERT", (dbErr, dbRes) => {
+        if (dbErr) res.status(500).send();
+        res.send(dbRes);
+    });
+});
+
+app.put("/info", (req, res) => {
+    const query = "INSERT INTO Projects()"
+
+    pool.query("INSERT", (dbErr, dbRes) => {
+        if (dbErr) res.status(500).send();
+        res.send(dbRes);
+    });
+});
+
 
