@@ -27,9 +27,15 @@ app.get("/projects", async (req, res) => {
     try {
         const projects = await promiseQuery(text);
 
-        // for each project, query associated highlights and images
+        for (project of projects) {
+            const textHighlights = "SELECT detail FROM highlights WHERE projectId = $1";
+            const valHighlights = [project.id];
 
-        // append result to project
+            // for each project, query associated highlights and images
+
+
+            // append result to project
+        }
 
         // return response
         res.send(projects);
