@@ -1,6 +1,11 @@
+const pool = require("../../db");
+
 async function projects(parent, args, context) {
     // get projects (with pagination) of user id
-    return
+    pool.query("SELECT * FROM Projects", (err, res) => {
+        if (err) return console.log(err);
+        return res;
+    });
 }
 
 async function workExperiences(parent, args, context) {
