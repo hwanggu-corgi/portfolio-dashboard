@@ -22,17 +22,14 @@ app.listen(PORT, () => {
 const promiseQuery = promisify(pool.query).bind(pool);
 
 
-app.get("/projects", (req, res) => {
-    const text = "SELECT * FROM projects";
+app.get("/projects", async (req, res) => {
+    const text = "SELECT * FROM projects ";
     try {
-        const result = promiseQuery(text);
+        const projects = await promiseQuery(text);
+        res.send(projects);
     } catch(e) {
-
+        res.status(500).send(e);
     }
-    pool.query(text, (dbErr, dbRes) => {
-        if (dbErr) res.status(500).send(dbErr);
-        res.json(dbRes.rows);
-    });
 });
 
 // app.post("/projects", (req, res) => {
