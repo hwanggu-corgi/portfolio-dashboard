@@ -23,18 +23,22 @@ const promiseQuery = promisify(pool.query).bind(pool);
 
 
 app.get("/projects", async (req, res) => {
-    const text = "SELECT * FROM projects ";
+    const text = "SELECT * FROM projects";
     try {
         const projects = await promiseQuery(text);
 
         for (project of projects) {
-            const textHighlights = "SELECT detail FROM highlights WHERE projectId = $1";
+            const textHighlights = "SELECT id, detail FROM highlights WHERE projectId = $1";
             const valHighlights = [project.id];
 
-            // for each project, query associated highlights and images
+            const textImages = "SELECT id, detail FROM images WHERE projectId = $1";
+            const valImages = [project.id];
 
+            const highlights = await promiseQuery(textHighlights, valHighlights);
+            const images = await promiseQuery(textImages, valImages);
 
-            // append result to project
+            project["highlights"] = highlights;
+            project["images"] = images;
         }
 
         // return response

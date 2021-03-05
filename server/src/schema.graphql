@@ -1,5 +1,0 @@
-type Query {
-  workExperiences: [WorkExperience]
-  projects: [Project]
-  user: User
-}
