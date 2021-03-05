@@ -29,6 +29,9 @@ CREATE TABLE WorkExperience (
 DROP TABLE IF EXISTS User;
 CREATE TABLE User (
     id          SERIAL PRIMARY KEY,
+    firstName   VARCHAR(255),
+    lastName    VARCHAR(255),
+    nickName    VARCHAR(255),
     website     VARCHAR(255),
     phone       VARCHAR(255),
     email       VARCHAR(255),
