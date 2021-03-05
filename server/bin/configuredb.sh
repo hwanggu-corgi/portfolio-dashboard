@@ -1,14 +1,14 @@
 #!/bin/bash
 
-export
+export PGPASSWORD="node_password";
 
-database="resumedb";
+database="portfoliodb";
 
-echo "Configuring database: $resumedb";
+echo "Configuring database: $portfoliodb";
 
 dropdb -U node_user portfoliodb;
 createdb -U node_user portfoliodb;
 
-psql -U node_user resumedb < ./bin/sql/resume.sql;
+psql -U node_user portfoliodb < ./bin/sql/resume.sql;
 
-echo "$resumedb configured";
+echo "$portfoliodb configured";

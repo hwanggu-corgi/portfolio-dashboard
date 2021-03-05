@@ -44,8 +44,8 @@ CREATE TABLE techUsed (
 
 
 
-DROP TABLE IF EXISTS User;
-CREATE TABLE User (
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
     id          SERIAL PRIMARY KEY,
     firstName   VARCHAR(255),
     lastName    VARCHAR(255),
@@ -58,7 +58,7 @@ CREATE TABLE contacts (
     name        VARCHAR(100),
     value       VARCHAR(100),
     userId      INT,
-    FOREIGN KEY (userId) REFERENCES User(id)
+    FOREIGN KEY (userId) REFERENCES user(id)
 );
 
 
@@ -68,5 +68,5 @@ CREATE TABLE socials (
     name        VARCHAR(100),
     value       VARCHAR(100),
     userId      INT,
-    FOREIGN KEY (userId) REFERENCES User(id)
+    FOREIGN KEY (userId) REFERENCES user(id)
 );
