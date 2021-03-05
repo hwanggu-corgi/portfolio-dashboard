@@ -44,6 +44,7 @@ app.get("/projects", async (req, res) => {
         // return response
         res.send(projects);
     } catch(e) {
+        console.log(e);
         res.status(500).send(e);
     }
 });
