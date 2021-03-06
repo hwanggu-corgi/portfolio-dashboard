@@ -53,16 +53,17 @@ app.get("/projects", async (req, res) => {
 
 const getValueEntries = (arrLength) => {
     const size = arrLength * 2;
-    let res = [""] * size;
+    let res = new Array(arrLength).fill("");
 
     for (let i = 0; i < size; i ++) {
         res[Math.floor(i/2)] += (i+1) % 2 != 0 ? `($${i+1}` : `,$${i+1})`;
+        console.log(Math.floor(i/2));
     }
-
     return res.join(",");
 }
 
 app.post("/projects", async (req, res) => {
+    let project, highlights, images, techUsed;
     try {
         const textProject = `
             INSERT INTO projects(title, date, shortDescription, demoURL, sourceURL, userId)
@@ -75,7 +76,7 @@ app.post("/projects", async (req, res) => {
             req.body.demoURL, 1
         ];
         const resProject = await promiseQuery(textProject, valueProject);
-        const project = resProject.rows[0];
+        project = resProject.rows[0];
         console.log(project);
 
         if (req.body.highlights.length > 0) {
@@ -91,7 +92,8 @@ app.post("/projects", async (req, res) => {
                 valueHighlights.push(item);
                 valueHighlights.push(project.id);
             };
-            const highlights = await promiseQuery(textHighlights, valueHighlights);
+            const resHighlights = await promiseQuery(textHighlights, valueHighlights);
+            highlights = resHighlights.rows;
         }
 
         if (req.body.techUsed.length > 0) {
@@ -105,7 +107,8 @@ app.post("/projects", async (req, res) => {
                 valueTechUsed.push(item);
                 valueTechUsed.push(project.id);
             };
-            const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
+            const resTechUsed = await promiseQuery(textTechUsed, valueTechUsed);
+            techUsed = resTechUsed.rows;
         }
 
         if (req.body.images.length > 0) {
@@ -119,15 +122,16 @@ app.post("/projects", async (req, res) => {
                 valueImages.push(item);
                 valueImages.push(project.id);
             };
-            const images = await promiseQuery(textImages, valueImages);
+            const resImages = await promiseQuery(textImages, valueImages);
+            images = resImages.rows;
         }
 
-        let res = Object.assign({}, project);
-        res["highlights"] = highlights;
-        res["techUsed"] = techUsed;
-        res["images"] = images;
+        let final = Object.assign({}, project);
+        final["highlights"] = highlights;
+        final["techUsed"] = techUsed;
+        final["images"] = images;
 
-        res.status(201).send(res);
+        res.status(201).send(final);
 
     } catch(e) {
         console.log(e);
