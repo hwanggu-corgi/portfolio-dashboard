@@ -49,66 +49,69 @@ app.get("/projects", async (req, res) => {
 });
 
 app.post("/projects", async (req, res) => {
-    try {
-        const textProject = `
-            INSERT INTO projects(title, date, shortDescription, demoURL, sourceURL, userId)
-            VALUES($1, $2, $3, $4, $5, $6)
-            RETURNING *
-        `;
-        const valueProject = [
-            req.params.title, req.params.date,
-            req.params.shortDescription, req.params.demoURL,
-            req.params.demoURL, 1
-        ];
-        const project = await promiseQuery(textProject, valueProject);
+    console.log(req);
+    // try {
+    //     const textProject = `
+    //         INSERT INTO projects(title, date, shortDescription, demoURL, sourceURL, userId)
+    //         VALUES($1, $2, $3, $4, $5, $6)
+    //         RETURNING *
+    //     `;
+    //     const valueProject = [
+    //         req.params.title, req.params.date,
+    //         req.params.shortDescription, req.params.demoURL,
+    //         req.params.demoURL, 1
+    //     ];
+    //     const project = await promiseQuery(textProject, valueProject);
 
-        const textHighlights = `
-            INSERT INTO highlights(detail, projectId)
-            VALUES ${ req.params.highlights.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
-            RETURNING *
-        `;
-        let valueHighlights = [];
-        for (let item of req.params.highlights) {
-            valueHighlights.push(item);
-            valueHighlights.push(project.id);
-        };
-        const highlights = await promiseQuery(textHighlights, valueHighlights);
+    //     console.log(project);
 
-        const textTechUsed = `
-            INSERT INTO tech_used(name, projectId)
-            VALUES ${ req.params.techUsed.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
-            RETURNING *
-        `;
-        let valueTechUsed = [];
-        for (let item of req.params.techUsed) {
-            valueTechUsed.push(item);
-            valueTechUsed.push(project.id);
-        };
-        const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
+    //     const textHighlights = `
+    //         INSERT INTO highlights(detail, projectId)
+    //         VALUES ${ req.params.highlights.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
+    //         RETURNING *
+    //     `;
+    //     let valueHighlights = [];
+    //     for (let item of req.params.highlights) {
+    //         valueHighlights.push(item);
+    //         valueHighlights.push(project.id);
+    //     };
+    //     const highlights = await promiseQuery(textHighlights, valueHighlights);
 
-        const textImages = `
-            INSERT INTO images(url, projectId)
-            VALUES ${ req.params.images.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
-            RETURNING *
-        `;
-        let valueImages = [];
-        for (let item of req.params.images) {
-            valueImages.push(item);
-            valueImages.push(project.id);
-        };
-        const images = await promiseQuery(textImages, valueImages);
+    //     const textTechUsed = `
+    //         INSERT INTO tech_used(name, projectId)
+    //         VALUES ${ req.params.techUsed.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
+    //         RETURNING *
+    //     `;
+    //     let valueTechUsed = [];
+    //     for (let item of req.params.techUsed) {
+    //         valueTechUsed.push(item);
+    //         valueTechUsed.push(project.id);
+    //     };
+    //     const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
 
-        let res = Object.assign({}, project);
-        res["highlights"] = highlights;
-        res["techUsed"] = techUsed;
-        res["images"] = images;
+    //     const textImages = `
+    //         INSERT INTO images(url, projectId)
+    //         VALUES ${ req.params.images.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
+    //         RETURNING *
+    //     `;
+    //     let valueImages = [];
+    //     for (let item of req.params.images) {
+    //         valueImages.push(item);
+    //         valueImages.push(project.id);
+    //     };
+    //     const images = await promiseQuery(textImages, valueImages);
 
-        res.status(201).send(res);
+    //     let res = Object.assign({}, project);
+    //     res["highlights"] = highlights;
+    //     res["techUsed"] = techUsed;
+    //     res["images"] = images;
 
-    } catch(e) {
-        console.log(e);
-        res.status(500).send(e);
-    }
+    //     res.status(201).send(res);
+
+    // } catch(e) {
+    //     console.log(e);
+    //     res.status(500).send(e);
+    // }
 });
 
 // app.put("/projects", (req, res) => {
