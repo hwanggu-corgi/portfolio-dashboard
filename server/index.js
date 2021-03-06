@@ -61,11 +61,17 @@ app.post("/projects", (req, res) => {
         1
     ];
 
-    const textHighlights = "INSERT INTO projects() VALUES() RETURNING *";
-    const textImages = "INSERT INTO projects() VALUES() RETURNING *";
-
     try {
-        const projects = await promiseQuery(text);
+        const projects = await promiseQuery(textProject, valueProject);
+
+        const textHighlights = `
+            INSERT INTO highlights(detail, projectId)
+            VALUES($1, $2)
+            RETURNING *
+        `;
+        const valueHighlights = [req.params.detail, project.id];
+
+        const textImages = "INSERT INTO projects() VALUES() RETURNING *";
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
