@@ -49,19 +49,18 @@ app.get("/projects", async (req, res) => {
 });
 
 app.post("/projects", (req, res) => {
-    const textProject = `
-        INSERT INTO projects(title, date, shortDesc, demoURL, sourceURL, userId)
-        VALUES($1, $2, $3, $4, $5, $6)
-        RETURNING *
-    `;
-    const valueProject = [
-        req.params.title, req.params.date,
-        req.params.shortDesc, req.params.demoURL,
-        req.params.demoURL, req.params.sourceURL,
-        1
-    ];
-
     try {
+        const textProject = `
+            INSERT INTO projects(title, date, shortDesc, demoURL, sourceURL, userId)
+            VALUES($1, $2, $3, $4, $5, $6)
+            RETURNING *
+        `;
+        const valueProject = [
+            req.params.title, req.params.date,
+            req.params.shortDesc, req.params.demoURL,
+            req.params.demoURL, req.params.sourceURL,
+            1
+        ];
         const projects = await promiseQuery(textProject, valueProject);
 
         const textHighlights = `
@@ -70,6 +69,7 @@ app.post("/projects", (req, res) => {
             RETURNING *
         `;
         const valueHighlights = [req.params.detail, project.id];
+        const highlights = await promiseQuery(textHighlights, valueHighlights);
 
         const textImages = "INSERT INTO projects() VALUES() RETURNING *";
     } catch(e) {
