@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS user;
-CREATE TABLE user (
+DROP TABLE IF EXISTS user_self;
+CREATE TABLE user_self (
     id          SERIAL PRIMARY KEY,
     firstName   VARCHAR(255),
     lastName    VARCHAR(255),
-    nickName    VARCHAR(255),
+    nickName    VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS contacts;
@@ -12,7 +12,7 @@ CREATE TABLE contacts (
     name        VARCHAR(100),
     value       VARCHAR(100),
     userId      INT,
-    FOREIGN KEY (userId) REFERENCES user(id)
+    FOREIGN KEY (userId) REFERENCES user_self(id)
 );
 
 
@@ -22,7 +22,7 @@ CREATE TABLE socials (
     name        VARCHAR(100),
     value       VARCHAR(100),
     userId      INT,
-    FOREIGN KEY (userId) REFERENCES user(id)
+    FOREIGN KEY (userId) REFERENCES user_self(id)
 );
 
 
@@ -35,7 +35,7 @@ CREATE TABLE project (
     demoURL     VARCHAR(255),
     sourceURL   VARCHAR(255),
     userId      INT,
-    FOREIGN KEY (userId) REFERENCES user(id)
+    FOREIGN KEY (userId) REFERENCES user_self(id)
 
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE work_experience (
     dateEnd     DATE,
     location    VARCHAR(255),
     userId      INT,
-    FOREIGN KEY (userId) REFERENCES user(id)
+    FOREIGN KEY (userId) REFERENCES user_self(id)
 );
 
 DROP TABLE IF EXISTS highlights;
