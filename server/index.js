@@ -77,7 +77,6 @@ app.post("/projects", async (req, res) => {
         ];
         const resProject = await promiseQuery(textProject, valueProject);
         project = resProject.rows[0];
-        console.log(project);
 
         if (req.body.highlights.length > 0) {
             const textHighlights = `
