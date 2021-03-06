@@ -72,7 +72,7 @@ app.post("/projects", (req, res) => {
         for (let item of req.params.highlights) {
             valueHighlights.push(item);
             valueHighlights.push(project.id);
-        }
+        };
         const highlights = await promiseQuery(textHighlights, valueHighlights);
 
         const textTechUsed = `
@@ -84,14 +84,28 @@ app.post("/projects", (req, res) => {
         for (let item of req.params.techUsed) {
             valueTechUsed.push(item);
             valueTechUsed.push(project.id);
-        }
+        };
         const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
 
         const textImages = `
-            INSERT INTO images()
-            VALUES()
+            INSERT INTO images(url, projectId)
+            VALUES ${ req.params.images.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
             RETURNING *
         `;
+        let valueImages = [];
+        for (let item of req.params.images) {
+            valueImages.push(item);
+            valueImages.push(project.id);
+        };
+        const images = await promiseQuery(textImages, valueImages);
+
+        let res = Object.assign({}, project);
+        res["highlights"] = highlights;
+        res["techUsed"] = techUsed;
+        res["images"] = images;
+
+        res.status(201).send(res);
+
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
