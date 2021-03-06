@@ -61,7 +61,8 @@ app.post("/projects", (req, res) => {
             req.params.demoURL, req.params.sourceURL,
             1
         ];
-        const projects = await promiseQuery(textProject, valueProject);
+        const project = await promiseQuery(textProject, valueProject);
+
 
         const textHighlights = `
             INSERT INTO highlights(detail, projectId)
@@ -70,6 +71,19 @@ app.post("/projects", (req, res) => {
         `;
         const valueHighlights = [req.params.detail, project.id];
         const highlights = await promiseQuery(textHighlights, valueHighlights);
+
+        const textTechUsed = `
+            INSERT INTO highlights(name, projectId)
+            ${ req.params.techUsed.map((item, index) => `VALUES($${index+1}, $${index+2})`).join(", ")}
+            RETURNING *
+        `;
+
+        let valueTechUsed = [];
+        for (let item of req.params.techUsed) {
+            valueTechUsed.push(item);
+            valueTechUsed.push(project.id);
+        }
+        const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
 
         const textImages = "INSERT INTO projects() VALUES() RETURNING *";
     } catch(e) {
