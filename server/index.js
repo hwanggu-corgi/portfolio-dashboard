@@ -21,7 +21,6 @@ app.listen(PORT, () => {
 
 const promiseQuery = promisify(pool.query).bind(pool);
 
-
 app.get("/projects", async (req, res) => {
     const text = "SELECT * FROM projects";
     try {
