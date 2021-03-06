@@ -48,18 +48,17 @@ app.get("/projects", async (req, res) => {
     }
 });
 
-app.post("/projects", (req, res) => {
+app.post("/projects", async (req, res) => {
     try {
         const textProject = `
-            INSERT INTO projects(title, date, shortDesc, demoURL, sourceURL, userId)
+            INSERT INTO projects(title, date, shortDescription, demoURL, sourceURL, userId)
             VALUES($1, $2, $3, $4, $5, $6)
             RETURNING *
         `;
         const valueProject = [
             req.params.title, req.params.date,
-            req.params.shortDesc, req.params.demoURL,
-            req.params.demoURL, req.params.sourceURL,
-            1
+            req.params.shortDescription, req.params.demoURL,
+            req.params.demoURL, 1
         ];
         const project = await promiseQuery(textProject, valueProject);
 

@@ -17,6 +17,36 @@ CREATE TABLE work_experiences (
     FOREIGN KEY (userId) REFERENCES user_self(id)
 );
 
+DROP TABLE IF EXISTS contacts;
+CREATE TABLE contacts (
+    id          SERIAL PRIMARY KEY,
+    name        VARCHAR(100),
+    value       VARCHAR(100),
+    userId      INT,
+    FOREIGN KEY (userId) REFERENCES user_self(id)
+);
+
+DROP TABLE IF EXISTS socials;
+CREATE TABLE socials (
+    id          SERIAL PRIMARY KEY,
+    name        VARCHAR(100),
+    value       VARCHAR(100),
+    userId      INT,
+    FOREIGN KEY (userId) REFERENCES user_self(id)
+);
+
+DROP TABLE IF EXISTS projects;
+CREATE TABLE projects (
+    id                  SERIAL PRIMARY KEY,
+    title               VARCHAR(100),
+    date                DATE,
+    shortDescription    VARCHAR(255),
+    demoURL             VARCHAR(255),
+    sourceURL           VARCHAR(255),
+    userId              INT,
+    FOREIGN KEY (userId) REFERENCES user_self(id)
+);
+
 DROP TABLE IF EXISTS highlights;
 CREATE TABLE highlights (
     id          SERIAL PRIMARY KEY,
@@ -45,38 +75,5 @@ CREATE TABLE images (
     FOREIGN KEY (projectId) REFERENCES projects(id)
 );
 
-
-DROP TABLE IF EXISTS contacts;
-CREATE TABLE contacts (
-    id          SERIAL PRIMARY KEY,
-    name        VARCHAR(100),
-    value       VARCHAR(100),
-    userId      INT,
-    FOREIGN KEY (userId) REFERENCES user_self(id)
-);
-
-
-DROP TABLE IF EXISTS socials;
-CREATE TABLE socials (
-    id          SERIAL PRIMARY KEY,
-    name        VARCHAR(100),
-    value       VARCHAR(100),
-    userId      INT,
-    FOREIGN KEY (userId) REFERENCES user_self(id)
-);
-
-
-DROP TABLE IF EXISTS projects;
-CREATE TABLE project (
-    id          SERIAL PRIMARY KEY,
-    title       VARCHAR(100),
-    date        DATE,
-    shortDesc   VARCHAR(255),
-    demoURL     VARCHAR(255),
-    sourceURL   VARCHAR(255),
-    userId      INT,
-    FOREIGN KEY (userId) REFERENCES user_self(id)
-
-);
 
 INSERT INTO user_self(firstName, lastName, nickName) VALUES ('Hyungmo', 'Gu', 'Moe');
