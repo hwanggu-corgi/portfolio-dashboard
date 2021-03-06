@@ -27,12 +27,20 @@ CREATE TABLE highlights (
     FOREIGN KEY (projectId) REFERENCES projects(id)
 );
 
-DROP TABLE IF EXISTS techUsed;
-CREATE TABLE techUsed (
+DROP TABLE IF EXISTS tech_used;
+CREATE TABLE tech_used (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(100),
     workExpId   INT,
     FOREIGN KEY (workExpId) REFERENCES work_experiences(id),
+    projectId   INT,
+    FOREIGN KEY (projectId) REFERENCES projects(id)
+);
+
+DROP TABLE IF EXISTS images;
+CREATE TABLE images (
+    id          SERIAL PRIMARY KEY,
+    url         VARCHAR(100),
     projectId   INT,
     FOREIGN KEY (projectId) REFERENCES projects(id)
 );

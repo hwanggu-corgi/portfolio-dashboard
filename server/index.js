@@ -63,21 +63,23 @@ app.post("/projects", (req, res) => {
         ];
         const project = await promiseQuery(textProject, valueProject);
 
-
         const textHighlights = `
             INSERT INTO highlights(detail, projectId)
-            VALUES($1, $2)
+            VALUES ${ req.params.highlights.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
             RETURNING *
         `;
-        const valueHighlights = [req.params.detail, project.id];
+        let valueHighlights = [];
+        for (let item of req.params.highlights) {
+            valueHighlights.push(item);
+            valueHighlights.push(project.id);
+        }
         const highlights = await promiseQuery(textHighlights, valueHighlights);
 
         const textTechUsed = `
-            INSERT INTO highlights(name, projectId)
-            ${ req.params.techUsed.map((item, index) => `VALUES($${index+1}, $${index+2})`).join(", ")}
+            INSERT INTO tech_used(name, projectId)
+            VALUES ${ req.params.techUsed.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
             RETURNING *
         `;
-
         let valueTechUsed = [];
         for (let item of req.params.techUsed) {
             valueTechUsed.push(item);
@@ -85,7 +87,11 @@ app.post("/projects", (req, res) => {
         }
         const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
 
-        const textImages = "INSERT INTO projects() VALUES() RETURNING *";
+        const textImages = `
+            INSERT INTO images()
+            VALUES()
+            RETURNING *
+        `;
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
