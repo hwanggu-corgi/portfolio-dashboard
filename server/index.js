@@ -56,8 +56,10 @@ const getValueEntries = (arrLength) => {
     let res = [""] * size;
 
     for (let i = 0; i < size; i ++) {
-        res[Math.floor(i/2)] += `($${i+1}` ? ((i+1) % 2
+        res[Math.floor(i/2)] += (i+1) % 2 != 0 ? `($${i+1}` : `,$${i+1})`;
     }
+
+    return res.join(",");
 }
 
 app.post("/projects", async (req, res) => {
@@ -76,44 +78,49 @@ app.post("/projects", async (req, res) => {
         const project = resProject.rows[0];
         console.log(project);
 
-        const textHighlights = `
-            INSERT INTO highlights(detail, projectId)
-            VALUES ${getValueEntries(req.body.highlights.length)}
-            RETURNING *
-        `;
+        if (req.body.highlights.length > 0) {
+            const textHighlights = `
+                INSERT INTO highlights(detail, projectId)
+                VALUES ${getValueEntries(req.body.highlights.length)}
+                RETURNING *
+            `;
 
-        console.log(textHighlights);
 
-        let valueHighlights = [];
-        for (let item of req.body.highlights) {
-            valueHighlights.push(item);
-            valueHighlights.push(project.id);
-        };
-        const highlights = await promiseQuery(textHighlights, valueHighlights);
+            let valueHighlights = [];
+            for (let item of req.body.highlights) {
+                valueHighlights.push(item);
+                valueHighlights.push(project.id);
+            };
+            const highlights = await promiseQuery(textHighlights, valueHighlights);
+        }
 
-        const textTechUsed = `
-            INSERT INTO tech_used(name, projectId)
-            VALUES ${ req.body.techUsed.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
-            RETURNING *
-        `;
-        let valueTechUsed = [];
-        for (let item of req.body.techUsed) {
-            valueTechUsed.push(item);
-            valueTechUsed.push(project.id);
-        };
-        const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
+        if (req.body.techUsed.length > 0) {
+            const textTechUsed = `
+                INSERT INTO tech_used(name, projectId)
+                VALUES ${getValueEntries(req.body.techUsed.length)}
+                RETURNING *
+            `;
+            let valueTechUsed = [];
+            for (let item of req.body.techUsed) {
+                valueTechUsed.push(item);
+                valueTechUsed.push(project.id);
+            };
+            const techUsed = await promiseQuery(textTechUsed, valueTechUsed);
+        }
 
-        const textImages = `
-            INSERT INTO images(url, projectId)
-            VALUES ${ req.body.images.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
-            RETURNING *
-        `;
-        let valueImages = [];
-        for (let item of req.body.images) {
-            valueImages.push(item);
-            valueImages.push(project.id);
-        };
-        const images = await promiseQuery(textImages, valueImages);
+        if (req.body.images.length > 0) {
+            const textImages = `
+                INSERT INTO images(url, projectId)
+                VALUES ${getValueEntries(req.body.images.length)}
+                RETURNING *
+            `;
+            let valueImages = [];
+            for (let item of req.body.images) {
+                valueImages.push(item);
+                valueImages.push(project.id);
+            };
+            const images = await promiseQuery(textImages, valueImages);
+        }
 
         let res = Object.assign({}, project);
         res["highlights"] = highlights;
