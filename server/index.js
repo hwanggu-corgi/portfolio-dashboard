@@ -48,13 +48,29 @@ app.get("/projects", async (req, res) => {
     }
 });
 
-// app.post("/projects", (req, res) => {
-//     const text = "INSERT INTO projects() VALUES() RETURNING *";
-//     pool.query(text, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.send(dbRes);
-//     });
-// });
+app.post("/projects", (req, res) => {
+    const textProject = `
+        INSERT INTO projects(title, date, shortDesc, demoURL, sourceURL, userId)
+        VALUES($1, $2, $3, $4, $5, $6)
+        RETURNING *
+    `;
+    const valueProject = [
+        req.params.title, req.params.date,
+        req.params.shortDesc, req.params.demoURL,
+        req.params.demoURL, req.params.sourceURL,
+        1
+    ];
+
+    const textHighlights = "INSERT INTO projects() VALUES() RETURNING *";
+    const textImages = "INSERT INTO projects() VALUES() RETURNING *";
+
+    try {
+        const projects = await promiseQuery(text);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
 
 // app.put("/projects", (req, res) => {
 //     const text = "UPDATE projects SET () = () WHERE id = ___ RETURNING *";
