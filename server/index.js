@@ -51,6 +51,15 @@ app.get("/projects", async (req, res) => {
     }
 });
 
+const getValueEntries = (arrLength) => {
+    const size = arrLength * 2;
+    let res = [""] * size;
+
+    for (let i = 0; i < size; i ++) {
+        res[Math.floor(i/2)] += `($${i+1}` ? ((i+1) % 2
+    }
+}
+
 app.post("/projects", async (req, res) => {
     try {
         const textProject = `
@@ -65,12 +74,16 @@ app.post("/projects", async (req, res) => {
         ];
         const resProject = await promiseQuery(textProject, valueProject);
         const project = resProject.rows[0];
+        console.log(project);
 
         const textHighlights = `
             INSERT INTO highlights(detail, projectId)
-            VALUES ${ req.body.highlights.map((item, index) => `($${index+1}, $${index+2})`).join(", ")}
+            VALUES ${getValueEntries(req.body.highlights.length)}
             RETURNING *
         `;
+
+        console.log(textHighlights);
+
         let valueHighlights = [];
         for (let item of req.body.highlights) {
             valueHighlights.push(item);
