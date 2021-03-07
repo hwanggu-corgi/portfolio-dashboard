@@ -146,7 +146,21 @@ app.post("/admin/projects", async (req, res) => {
 });
 
 app.put("/admin/projects", (req, res) => {
-    const text = "UPDATE projects SET () = () WHERE id = ___ RETURNING *";
+
+    const textProject = `
+        UPDATE projects
+        SET (title, date, shortDescription, demoURL, sourceURL) = ($1, $2, $3, $4, $5)
+        WHERE id = $6 RETURNING *
+    `;
+
+
+    try{
+        await promiseQuery(textProject, valueProject);
+        res.status(204).send();
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
 });
 
 app.delete("/admin/projects/:id", async (req, res) => {
