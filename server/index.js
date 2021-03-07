@@ -145,20 +145,20 @@ app.post("/admin/projects", async (req, res) => {
     }
 });
 
-// app.put("/admin/projects", (req, res) => {
-//     const text = "UPDATE projects SET () = () WHERE id = ___ RETURNING *";
+app.put("/admin/projects", (req, res) => {
+    const text = "UPDATE projects SET () = () WHERE id = ___ RETURNING *";
 
-//     pool.query(text, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.send(dbRes);
-//     });
-// });
+    pool.query(text, (dbErr, dbRes) => {
+        if (dbErr) res.status(500).send(dbErr);
+        res.send(dbRes);
+    });
+});
 
 app.delete("/admin/projects/:id", async (req, res) => {
     const textProject = "DELETE FROM projects WHERE id = $1";
     const valueProject = [req.params.id];
     try{
-        const resProject = await promiseQuery(textProject, valueProject);
+        await promiseQuery(textProject, valueProject);
         res.status(204).send();
     } catch(e) {
         console.log(e);
@@ -266,13 +266,16 @@ app.post("/admin/work-experiences", async (req, res) => {
 //     });
 // });
 
-app.delete("/admin/work-experiences/:id", (req, res) => {
-    const text = "DELETE FROM work_experiences WHERE id === $1";
-
-    pool.query(text, (dbErr, dbRes) => {
-        if (dbErr) res.status(500).send(dbErr);
-        res.send(dbRes);
-    });
+app.delete("/admin/work-experiences/:id", async (req, res) => {
+    const textWorkExperience = "DELETE FROM work_experiences WHERE id = $1";
+    const valueWorkExperience = [req.params.id];
+    try{
+        await promiseQuery(textWorkExperience, valueWorkExperience);
+        res.status(204).send();
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
 });
 
 
