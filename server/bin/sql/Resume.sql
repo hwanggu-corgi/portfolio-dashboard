@@ -52,9 +52,9 @@ CREATE TABLE highlights (
     id          SERIAL PRIMARY KEY,
     detail      VARCHAR(255),
     workExpId   INT,
-    FOREIGN KEY (workExpId) REFERENCES work_experiences(id),
+    FOREIGN KEY (workExpId) REFERENCES work_experiences(id) ON DELETE CASCADE,
     projectId   INT,
-    FOREIGN KEY (projectId) REFERENCES projects(id)
+    FOREIGN KEY (projectId) REFERENCES projects(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS tech_used;
@@ -62,9 +62,9 @@ CREATE TABLE tech_used (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(100),
     workExpId   INT,
-    FOREIGN KEY (workExpId) REFERENCES work_experiences(id),
+    FOREIGN KEY (workExpId) REFERENCES work_experiences(id) ON DELETE CASCADE,
     projectId   INT,
-    FOREIGN KEY (projectId) REFERENCES projects(id)
+    FOREIGN KEY (projectId) REFERENCES projects(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS images;
@@ -72,7 +72,7 @@ CREATE TABLE images (
     id          SERIAL PRIMARY KEY,
     url         VARCHAR(100),
     projectId   INT,
-    FOREIGN KEY (projectId) REFERENCES projects(id)
+    FOREIGN KEY (projectId) REFERENCES projects(id) ON DELETE CASCADE
 );
 
 

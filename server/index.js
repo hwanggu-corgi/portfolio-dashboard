@@ -156,7 +156,7 @@ app.post("/admin/projects", async (req, res) => {
 // });
 
 app.delete("/admin/projects/:id", async (req, res) => {
-    const textProject = "DELETE FROM projects WHERE id === $1";
+    const textProject = "DELETE FROM projects WHERE id = $1";
     const valueProject = [req.params.id];
     try{
         const resProject = await promiseQuery(textProject, valueProject);
