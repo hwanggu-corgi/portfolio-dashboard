@@ -276,33 +276,25 @@ app.post("/admin/work-experiences", async (req, res) => {
 // });
 
 
-app.get("/admin/info", (req, res) => {
-    const text = "SELECT * FROM user";
+app.get("/admin/info", async (req, res) => {
+    const text = "SELECT * FROM user_self";
     try {
         const resUser = await promiseQuery(text);
-        const user = resProjects.rows[0];
+        let user = resUser.rows[0];
 
-        const textContacts = "SELECT id, name, value FROM contacts WHERE user.id = 1";
+        const textContacts = "SELECT id, name, value FROM contacts WHERE userId = 1";
+        const textSocials = "SELECT id, name, value FROM socials WHERE userId = 1";
 
-        const textImages = "SELECT id, url FROM images WHERE projectId = $1";
-        const valImages = [project.id];
+        const resContacts = await promiseQuery(textContacts);
+        const contacts = resContacts.rows;
+        const resSocials = await promiseQuery(textSocials);
+        const socials = resSocials.rows;
 
-        const textTechUsed = "SELECT id, name FROM tech_used WHERE projectId = $1";
-        const valTechUsed = [project.id];
-
-        const resHighlights = await promiseQuery(textHighlights, valHighlights);
-        const highlights = resHighlights.rows;
-        const resImages = await promiseQuery(textImages, valImages);
-        const images = resImages.rows;
-        const resTechUsed = await promiseQuery(textTechUsed, valTechUsed);
-        const techUsed = resTechUsed.rows;
-
-        project["highlights"] = highlights;
-        project["images"] = images;
-        project["techUsed"] = techUsed;
+        user["contacts"] = contacts;
+        user["socials"] = socials;
 
         // return response
-        res.send(projects);
+        res.send(user);
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
