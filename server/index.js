@@ -147,15 +147,20 @@ app.post("/admin/projects", async (req, res) => {
 
 app.put("/admin/projects", (req, res) => {
 
-    const textProject = `
-        UPDATE projects
-        SET (title, date, shortDescription, demoURL, sourceURL) = ($1, $2, $3, $4, $5)
-        WHERE id = $6 RETURNING *
-    `;
-
-
     try{
-        await promiseQuery(textProject, valueProject);
+        const textProject = `
+            UPDATE projects
+            SET (title, date, shortDescription, demoURL, sourceURL) = ($1, $2, $3, $4, $5)
+            WHERE id = $6 RETURNING *
+        `;
+        const valueProject = [
+            req.body.title, req.body.date,
+            req.body.shortDescription, req.body.demoURL,
+            req.body.sourceURL
+        ];
+        const resProject = await promiseQuery(textProject, valueProject);
+        const project = resProject.rows[0];
+
         res.status(204).send();
     } catch(e) {
         console.log(e);
