@@ -57,7 +57,6 @@ const getValueEntries = (arrLength) => {
 
     for (let i = 0; i < size; i ++) {
         res[Math.floor(i/2)] += (i+1) % 2 != 0 ? `($${i+1}` : `,$${i+1})`;
-        console.log(Math.floor(i/2));
     }
     return res.join(",");
 }
@@ -166,7 +165,7 @@ app.post("/projects", async (req, res) => {
 //     });
 // });
 
-app.post("/work-experiences", (req, res) => {
+app.post("/work-experiences", async (req, res) => {
     let workExperience, highlights, techUsed;
     try {
         const textWorkExperience = `
@@ -184,11 +183,10 @@ app.post("/work-experiences", (req, res) => {
 
         if (req.body.highlights.length > 0) {
             const textHighlights = `
-                INSERT INTO highlights(detail, projectId)
+                INSERT INTO highlights(detail, workExpId)
                 VALUES ${getValueEntries(req.body.highlights.length)}
                 RETURNING *
             `;
-
 
             let valueHighlights = [];
             for (let item of req.body.highlights) {
@@ -201,7 +199,7 @@ app.post("/work-experiences", (req, res) => {
 
         if (req.body.techUsed.length > 0) {
             const textTechUsed = `
-                INSERT INTO tech_used(name, projectId)
+                INSERT INTO tech_used(name, workExpId)
                 VALUES ${getValueEntries(req.body.techUsed.length)}
                 RETURNING *
             `;

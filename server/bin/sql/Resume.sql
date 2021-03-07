@@ -50,7 +50,7 @@ CREATE TABLE projects (
 DROP TABLE IF EXISTS highlights;
 CREATE TABLE highlights (
     id          SERIAL PRIMARY KEY,
-    detail      VARCHAR(100),
+    detail      VARCHAR(255),
     workExpId   INT,
     FOREIGN KEY (workExpId) REFERENCES work_experiences(id),
     projectId   INT,
