@@ -155,15 +155,18 @@ app.post("/admin/projects", async (req, res) => {
 //     });
 // });
 
-// app.delete("/admin/projects/:id", (req, res) => {
-//     const text = "DELETE FROM projects WHERE id === $1";
-//     const val = [req.params.id];
-
-//     pool.query(text, val, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.status(204).send();
-//     });
-// });
+app.delete("/admin/projects/:id", async (req, res) => {
+    const textProject = "DELETE FROM projects WHERE id === $1";
+    const valueProject = [req.params.id];
+    try{
+        const resProject = await promiseQuery(textProject, valueProject);
+        console.log(resProject);
+        res.status(204).send();
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
 
 
 app.get("/admin/work-experiences", async (req, res) => {
@@ -293,7 +296,6 @@ app.get("/admin/info", async (req, res) => {
         user["contacts"] = contacts;
         user["socials"] = socials;
 
-        // return response
         res.send(user);
     } catch(e) {
         console.log(e);
