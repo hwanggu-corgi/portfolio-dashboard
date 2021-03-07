@@ -29,13 +29,12 @@ app.get("/admin/projects", async (req, res) => {
     try {
         const resProjects = await promiseQuery(text);
         const projects = resProjects.rows;
-        console.log(resProjects);
 
         for (project of projects) {
             const textHighlights = "SELECT id, detail FROM highlights WHERE projectId = $1";
             const valHighlights = [project.id];
 
-            const textImages = "SELECT id, detail FROM images WHERE projectId = $1";
+            const textImages = "SELECT id, url FROM images WHERE projectId = $1";
             const valImages = [project.id];
 
             const resHighlights = await promiseQuery(textHighlights, valHighlights);
@@ -65,7 +64,7 @@ const getValueEntries = (arrLength) => {
     return res.join(",");
 }
 
-app.post("/projects", async (req, res) => {
+app.post("/admin/projects", async (req, res) => {
     let project, highlights, images, techUsed;
     try {
         const textProject = `
