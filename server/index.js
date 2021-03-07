@@ -165,8 +165,20 @@ app.put("/admin/projects", (req, res) => {
         for (let highlight of req.body.highlights) {
             if (highlight.id) {
                 // update
+
+
             } else {
                 // post
+                const textHighlight = `
+                    INSERT INTO highlights(detail, projectId)
+                    VALUES ($1, $2)
+                    RETURNING *
+                `;
+
+                let valueHighlight = [highlight.detail, req.body.id];
+
+                const resHighlight = await promiseQuery(textHighlight, valueHighlight);
+                highlight = resHighlight.rows[0];
             }
         }
 
@@ -185,7 +197,6 @@ app.put("/admin/projects", (req, res) => {
                 // post
             }
         }
-
 
         project["highlights"] = highlights;
         project["techUsed"] = techUsed;
