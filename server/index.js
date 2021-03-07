@@ -276,11 +276,36 @@ app.post("/admin/work-experiences", async (req, res) => {
 // });
 
 
-// app.get("/admin/info", (req, res) => {
-//     const text = "SELECT * FROM user";
+app.get("/admin/info", (req, res) => {
+    const text = "SELECT * FROM user";
+    try {
+        const resUser = await promiseQuery(text);
+        const user = resProjects.rows[0];
 
-//     pool.query(text, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.send(dbRes);
-//     });
-// });
+        const textHighlights = "SELECT id, detail FROM highlights WHERE projectId = $1";
+        const valHighlights = [project.id];
+
+        const textImages = "SELECT id, url FROM images WHERE projectId = $1";
+        const valImages = [project.id];
+
+        const textTechUsed = "SELECT id, name FROM tech_used WHERE projectId = $1";
+        const valTechUsed = [project.id];
+
+        const resHighlights = await promiseQuery(textHighlights, valHighlights);
+        const highlights = resHighlights.rows;
+        const resImages = await promiseQuery(textImages, valImages);
+        const images = resImages.rows;
+        const resTechUsed = await promiseQuery(textTechUsed, valTechUsed);
+        const techUsed = resTechUsed.rows;
+
+        project["highlights"] = highlights;
+        project["images"] = images;
+        project["techUsed"] = techUsed;
+
+        // return response
+        res.send(projects);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
