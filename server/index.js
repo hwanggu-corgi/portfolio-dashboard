@@ -187,6 +187,16 @@ app.put("/admin/projects", (req, res) => {
                 // update
             } else {
                 // post
+                const textImages = `
+                    INSERT INTO images(url, projectId)
+                    VALUES ($1, $2)
+                    RETURNING *
+                `;
+
+                let valueImages = [image.url, req.body.id];
+
+                const resHighlight = await promiseQuery(textImages, valueImages);
+                image = resImage.rows[0];
             }
         }
 
