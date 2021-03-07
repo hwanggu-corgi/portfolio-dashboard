@@ -282,8 +282,7 @@ app.get("/admin/info", (req, res) => {
         const resUser = await promiseQuery(text);
         const user = resProjects.rows[0];
 
-        const textHighlights = "SELECT id, detail FROM highlights WHERE projectId = $1";
-        const valHighlights = [project.id];
+        const textContacts = "SELECT id, name, value FROM contacts WHERE user.id = 1";
 
         const textImages = "SELECT id, url FROM images WHERE projectId = $1";
         const valImages = [project.id];
