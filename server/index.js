@@ -166,7 +166,7 @@ app.post("/admin/projects", async (req, res) => {
 // });
 
 
-app.get("/admin/work-experiences", (req, res) => {
+app.get("/admin/work-experiences", async (req, res) => {
     const text = "SELECT * FROM work_experiences";
     try {
         const resWorkExperiences = await promiseQuery(text);
@@ -199,6 +199,7 @@ app.get("/admin/work-experiences", (req, res) => {
 app.post("/admin/work-experiences", async (req, res) => {
     let workExperience, highlights, techUsed;
     try {
+        console.log(req.body);
         const textWorkExperience = `
             INSERT INTO work_experiences(company, dateStart, dateEnd, location, userId)
             VALUES($1, $2, $3, $4, $5)
