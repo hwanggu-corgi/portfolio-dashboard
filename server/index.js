@@ -167,12 +167,63 @@ app.post("/projects", async (req, res) => {
 // });
 
 app.post("/work-experiences", (req, res) => {
-    const text = "INSERT INTO work_experiences() VALUES() RETURNING *";
+    let workExperience, highlights, techUsed;
+    try {
+        const textWorkExperience = `
+            INSERT INTO work_experiences(company, dateStart, dateEnd, location, userId)
+            VALUES($1, $2, $3, $4, $5)
+            RETURNING *
+        `;
+        const valueWorkExperience = [
+            req.body.company, req.body.dateStart,
+            req.body.dateEnd, req.body.location,
+            1
+        ];
+        const resWorkExperience = await promiseQuery(textWorkExperience, valueWorkExperience);
+        workExperience = resWorkExperience.rows[0];
 
-    pool.query(text, (dbErr, dbRes) => {
-        if (dbErr) res.status(500).send(dbErr);
-        res.send(dbRes);
-    });
+        if (req.body.highlights.length > 0) {
+            const textHighlights = `
+                INSERT INTO highlights(detail, projectId)
+                VALUES ${getValueEntries(req.body.highlights.length)}
+                RETURNING *
+            `;
+
+
+            let valueHighlights = [];
+            for (let item of req.body.highlights) {
+                valueHighlights.push(item);
+                valueHighlights.push(workExperience.id);
+            };
+            const resHighlights = await promiseQuery(textHighlights, valueHighlights);
+            highlights = resHighlights.rows;
+        }
+
+        if (req.body.techUsed.length > 0) {
+            const textTechUsed = `
+                INSERT INTO tech_used(name, projectId)
+                VALUES ${getValueEntries(req.body.techUsed.length)}
+                RETURNING *
+            `;
+            let valueTechUsed = [];
+            for (let item of req.body.techUsed) {
+                valueTechUsed.push(item);
+                valueTechUsed.push(workExperience.id);
+            };
+            const resTechUsed = await promiseQuery(textTechUsed, valueTechUsed);
+            techUsed = resTechUsed.rows;
+        }
+
+        let final = Object.assign({}, workExperience);
+        final["highlights"] = highlights;
+        final["techUsed"] = techUsed;
+
+        res.status(201).send(final);
+
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
 });
 
 
