@@ -166,14 +166,14 @@ app.post("/projects", async (req, res) => {
 //     });
 // });
 
-// app.post("/work-experiences/:id", (req, res) => {
-//     const text = "INSERT INTO work_experiences() VALUES() RETURNING *";
+app.post("/work-experiences", (req, res) => {
+    const text = "INSERT INTO work_experiences() VALUES() RETURNING *";
 
-//     pool.query(text, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.send(dbRes);
-//     });
-// });
+    pool.query(text, (dbErr, dbRes) => {
+        if (dbErr) res.status(500).send(dbErr);
+        res.send(dbRes);
+    });
+});
 
 
 // app.put("/work-experiences/:id", (req, res) => {
