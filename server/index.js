@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 const promiseQuery = promisify(pool.query).bind(pool);
 
-app.get("/projects", async (req, res) => {
+app.get("/admin/projects", async (req, res) => {
     const text = "SELECT * FROM projects";
     try {
         const projects = await promiseQuery(text);
@@ -137,7 +137,7 @@ app.post("/projects", async (req, res) => {
     }
 });
 
-// app.put("/projects", (req, res) => {
+// app.put("/admin/projects", (req, res) => {
 //     const text = "UPDATE projects SET () = () WHERE id = ___ RETURNING *";
 
 //     pool.query(text, (dbErr, dbRes) => {
@@ -146,7 +146,7 @@ app.post("/projects", async (req, res) => {
 //     });
 // });
 
-// app.delete("/projects/:id", (req, res) => {
+// app.delete("/admin/projects/:id", (req, res) => {
 //     const text = "DELETE FROM projects WHERE id === $1";
 //     const val = [req.params.id];
 
@@ -157,7 +157,7 @@ app.post("/projects", async (req, res) => {
 // });
 
 
-// app.get("/work-experiences", (req, res) => {
+// app.get("/admin/work-experiences", (req, res) => {
 //     const text = "SELECT * FROM work_experiences";
 //     pool.query(text, (dbErr, dbRes) => {
 //         if (dbErr) res.status(500).send(dbErr);
@@ -165,7 +165,7 @@ app.post("/projects", async (req, res) => {
 //     });
 // });
 
-app.post("/work-experiences", async (req, res) => {
+app.post("/admin/work-experiences", async (req, res) => {
     let workExperience, highlights, techUsed;
     try {
         const textWorkExperience = `
@@ -225,7 +225,7 @@ app.post("/work-experiences", async (req, res) => {
 });
 
 
-// app.put("/work-experiences/:id", (req, res) => {
+// app.put("/admin/work-experiences/:id", (req, res) => {
 //     const text = "UPDATE work_experiences SET () = () WHERE id = ___ RETURNING *";
 
 //     pool.query(text, (dbErr, dbRes) => {
@@ -234,7 +234,7 @@ app.post("/work-experiences", async (req, res) => {
 //     });
 // });
 
-// app.delete("/work-experiences/:id", (req, res) => {
+// app.delete("/admin/work-experiences/:id", (req, res) => {
 //     const text = "DELETE FROM work_experiences WHERE id === $1";
 
 //     pool.query(text, (dbErr, dbRes) => {
@@ -244,7 +244,7 @@ app.post("/work-experiences", async (req, res) => {
 // });
 
 
-// app.get("/info", (req, res) => {
+// app.get("/admin/info", (req, res) => {
 //     const text = "SELECT * FROM user";
 
 //     pool.query(text, (dbErr, dbRes) => {
@@ -253,7 +253,7 @@ app.post("/work-experiences", async (req, res) => {
 //     });
 // });
 
-// app.post("/info", (req, res) => {
+// app.post("/admin/info", (req, res) => {
 //     const text = `
 //         INSERT INTO user()
 //         VALUES()
