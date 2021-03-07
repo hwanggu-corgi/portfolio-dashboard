@@ -27,7 +27,9 @@ const promiseQuery = promisify(pool.query).bind(pool);
 app.get("/admin/projects", async (req, res) => {
     const text = "SELECT * FROM projects";
     try {
-        const projects = await promiseQuery(text);
+        const resProjects = await promiseQuery(text);
+        const projects = resProjects.rows;
+        console.log(resProjects);
 
         for (project of projects) {
             const textHighlights = "SELECT id, detail FROM highlights WHERE projectId = $1";
@@ -36,8 +38,10 @@ app.get("/admin/projects", async (req, res) => {
             const textImages = "SELECT id, detail FROM images WHERE projectId = $1";
             const valImages = [project.id];
 
-            const highlights = await promiseQuery(textHighlights, valHighlights);
-            const images = await promiseQuery(textImages, valImages);
+            const resHighlights = await promiseQuery(textHighlights, valHighlights);
+            const highlights = resHighlights.rows;
+            const resImages = await promiseQuery(textImages, valImages);
+            const images = resImages.rows;
 
             project["highlights"] = highlights;
             project["images"] = images;
@@ -246,18 +250,6 @@ app.post("/admin/work-experiences", async (req, res) => {
 
 // app.get("/admin/info", (req, res) => {
 //     const text = "SELECT * FROM user";
-
-//     pool.query(text, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.send(dbRes);
-//     });
-// });
-
-// app.post("/admin/info", (req, res) => {
-//     const text = `
-//         INSERT INTO user()
-//         VALUES()
-//         RETURNING *`;
 
 //     pool.query(text, (dbErr, dbRes) => {
 //         if (dbErr) res.status(500).send(dbErr);
