@@ -176,20 +176,20 @@ app.get("/admin/work-experiences", (req, res) => {
             const textHighlights = "SELECT id, detail FROM highlights WHERE workExpId = $1";
             const valHighlights = [workExperience.id];
 
-            const textHighlights = "SELECT id, detail FROM highlights WHERE workExpId = $1";
-            const valHighlights = [workExperience.id];
+            const textTechUsed = "SELECT id, name FROM tech_used WHERE workExpId = $1";
+            const valTechUsed = [workExperience.id];
 
             const resHighlights = await promiseQuery(textHighlights, valHighlights);
             const highlights = resHighlights.rows;
-            const resImages = await promiseQuery(textImages, valImages);
-            const images = resImages.rows;
+            const resTechUsed = await promiseQuery(textTechUsed, valTechUsed);
+            const techUsed = resTechUsed.rows;
 
-            project["highlights"] = highlights;
-            project["images"] = images;
+            workExperience["highlights"] = highlights;
+            workExperience["techUsed"] = techUsed;
         }
 
         // return response
-        res.send(projects);
+        res.send(workExperiences);
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
