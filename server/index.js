@@ -158,10 +158,40 @@ app.put("/admin/projects", (req, res) => {
             req.body.shortDescription, req.body.demoURL,
             req.body.sourceURL
         ];
-        const resProject = await promiseQuery(textProject, valueProject);
-        const project = resProject.rows[0];
 
-        res.status(204).send();
+        const resProject = await promiseQuery(textProject, valueProject);
+        let project = resProject.rows[0];
+
+        for (let highlight of req.body.highlights) {
+            if (highlight.id) {
+                // update
+            } else {
+                // post
+            }
+        }
+
+        for (let image of req.body.images) {
+            if (image.id) {
+                // update
+            } else {
+                // post
+            }
+        }
+
+        for (let tech of req.body.techUsed) {
+            if (tech.id) {
+                // update
+            } else {
+                // post
+            }
+        }
+
+
+        project["highlights"] = highlights;
+        project["techUsed"] = techUsed;
+        project["images"] = images;
+
+        res.status(200).send(project);
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
