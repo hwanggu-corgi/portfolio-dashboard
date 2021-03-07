@@ -147,11 +147,6 @@ app.post("/admin/projects", async (req, res) => {
 
 app.put("/admin/projects", (req, res) => {
     const text = "UPDATE projects SET () = () WHERE id = ___ RETURNING *";
-
-    pool.query(text, (dbErr, dbRes) => {
-        if (dbErr) res.status(500).send(dbErr);
-        res.send(dbRes);
-    });
 });
 
 app.delete("/admin/projects/:id", async (req, res) => {
