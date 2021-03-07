@@ -52,7 +52,6 @@ app.get("/admin/projects", async (req, res) => {
             project["techUsed"] = techUsed;
         }
 
-        // return response
         res.send(projects);
     } catch(e) {
         console.log(e);
@@ -160,7 +159,6 @@ app.delete("/admin/projects/:id", async (req, res) => {
     const valueProject = [req.params.id];
     try{
         const resProject = await promiseQuery(textProject, valueProject);
-        console.log(resProject);
         res.status(204).send();
     } catch(e) {
         console.log(e);
@@ -191,7 +189,6 @@ app.get("/admin/work-experiences", async (req, res) => {
             workExperience["techUsed"] = techUsed;
         }
 
-        // return response
         res.send(workExperiences);
     } catch(e) {
         console.log(e);
@@ -269,14 +266,14 @@ app.post("/admin/work-experiences", async (req, res) => {
 //     });
 // });
 
-// app.delete("/admin/work-experiences/:id", (req, res) => {
-//     const text = "DELETE FROM work_experiences WHERE id === $1";
+app.delete("/admin/work-experiences/:id", (req, res) => {
+    const text = "DELETE FROM work_experiences WHERE id === $1";
 
-//     pool.query(text, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.send(dbRes);
-//     });
-// });
+    pool.query(text, (dbErr, dbRes) => {
+        if (dbErr) res.status(500).send(dbErr);
+        res.send(dbRes);
+    });
+});
 
 
 app.get("/admin/info", async (req, res) => {
