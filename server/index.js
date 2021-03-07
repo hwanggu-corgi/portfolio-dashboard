@@ -37,13 +37,19 @@ app.get("/admin/projects", async (req, res) => {
             const textImages = "SELECT id, url FROM images WHERE projectId = $1";
             const valImages = [project.id];
 
+            const textTechUsed = "SELECT id, name FROM tech_used WHERE projectId = $1";
+            const valTechUsed = [project.id];
+
             const resHighlights = await promiseQuery(textHighlights, valHighlights);
             const highlights = resHighlights.rows;
             const resImages = await promiseQuery(textImages, valImages);
             const images = resImages.rows;
+            const resTechUsed = await promiseQuery(textTechUsed, valTechUsed);
+            const techUsed = resTechUsed.rows;
 
             project["highlights"] = highlights;
             project["images"] = images;
+            project["techUsed"] = techUsed;
         }
 
         // return response
@@ -160,13 +166,35 @@ app.post("/admin/projects", async (req, res) => {
 // });
 
 
-// app.get("/admin/work-experiences", (req, res) => {
-//     const text = "SELECT * FROM work_experiences";
-//     pool.query(text, (dbErr, dbRes) => {
-//         if (dbErr) res.status(500).send(dbErr);
-//         res.send(dbRes);
-//     });
-// });
+app.get("/admin/work-experiences", (req, res) => {
+    const text = "SELECT * FROM work_experiences";
+    try {
+        const resWorkExperiences = await promiseQuery(text);
+        const workExperiences = resWorkExperiences.rows;
+
+        for (workExperience of workExperiences) {
+            const textHighlights = "SELECT id, detail FROM highlights WHERE workExpId = $1";
+            const valHighlights = [workExperience.id];
+
+            const textHighlights = "SELECT id, detail FROM highlights WHERE workExpId = $1";
+            const valHighlights = [workExperience.id];
+
+            const resHighlights = await promiseQuery(textHighlights, valHighlights);
+            const highlights = resHighlights.rows;
+            const resImages = await promiseQuery(textImages, valImages);
+            const images = resImages.rows;
+
+            project["highlights"] = highlights;
+            project["images"] = images;
+        }
+
+        // return response
+        res.send(projects);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
 
 app.post("/admin/work-experiences", async (req, res) => {
     let workExperience, highlights, techUsed;
