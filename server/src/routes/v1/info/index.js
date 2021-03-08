@@ -28,115 +28,85 @@ infoRouter.get("/", async (req, res) => {
 });
 
 infoRouter.put("/", async (req, res) => {
+    let new_contacts = [];
+    let new_socials = [];
+
     try{
-        const text_project = `
-            UPDATE projects
-            SET (title, date, short_description, demo_url, source_url) = ($1, $2, $3, $4, $5)
-            WHERE id = $6 RETURNING *
+        const text_user = `
+            UPDATE user_self
+            SET (first_name, last_name, nick_name) = ($1, $2, $3)
+            WHERE id = 1 RETURNING *
         `;
 
-        const value_project = [
-            req.body.title, req.body.date,
-            req.body.short_description, req.body.demo_url,
-            req.body.source_url, req.params.id
+        const value_user = [
+            req.body.first_name, req.body.last_name,
+            req.body.nick_name
         ];
 
-        const res_project = await promise_query(text_project, value_project);
-        let project = res_project.rows[0];
+        const res_user = await promise_query(text_user, value_user);
+        let user = res_user.rows[0];
 
-        if (req.body.highlights && Array.isArray(req.body.highlights)) {
-            for (let highlight of req.body.highlights) {
-                if (highlight.id) {
-                    const text_highlight = `
-                        UPDATE highlights
-                        SET (detail) = ROW($1)
-                        WHERE id = $2 RETURNING *
+        if (req.body.contacts && Array.isArray(req.body.contacts)) {
+            for (let contact of req.body.contacts) {
+                if (contact.id) {
+                    const text_contact = `
+                        UPDATE contacts
+                        SET (name, value) = ROW($1, $2)
+                        WHERE id = $3 RETURNING *
                     `;
 
-                    let value_highlight = [highlight.detail, highlight.id];
+                    let value_contact = [contact.name, contact.value, contact.id];
 
-                    const res_highlight = await promise_query(text_highlight, value_highlight);
-                    highlight = res_highlight.rows[0];
+                    const res_contact = await promise_query(text_contact, value_contact);
+                    contact = res_contact.rows[0];
 
                 } else {
-                    const text_highlight = `
-                        INSERT INTO highlights(detail, project_id)
+                    const text_contact = `
+                        INSERT INTO contacts(name, value, user_id)
+                        VALUES ($1, $2, $3)
+                        RETURNING *
+                    `;
+
+                    let value_contact = [contact.name, contact.value, 1];
+
+                    const res_contact = await promise_query(text_contact, value_contact);
+                    contact = res_contact.rows[0];
+                }
+                new_contacts.push(contact);
+            }
+        }
+
+        if (req.body.socials && Array.isArray(req.body.socials)) {
+            for (let social of req.body.socials) {
+                if (social.id) {
+                    const text_social = `
+                        UPDATE socials
+                        SET (name, value) = ROW($1, $2)
+                        WHERE id = $3 RETURNING *
+                    `;
+
+                    let value_social = [social.name, social.value, social.id];
+
+                    const res_social = await promise_query(text_social, value_social);
+                    social = res_social.rows[0];
+                } else {
+                    const text_social = `
+                        INSERT INTO socials(name, project_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let value_highlight = [highlight.detail, req.params.id];
+                    let value_social = [social.name, social.value, 1];
 
-                    const res_highlight = await promise_query(text_highlight, value_highlight);
-                    highlight = res_highlight.rows[0];
+                    const res_social = await promise_query(text_social, value_social);
+                    social = res_social.rows[0];
                 }
-                new_highlights.push(highlight);
+                new_socials.push(social);
             }
         }
 
-        if (req.body.images && Array.isArray(req.body.images)) {
-            for (let image of req.body.images) {
-                if (image.id) {
-                    const text_image = `
-                        UPDATE images
-                        SET (url) = ROW($1)
-                        WHERE id = $2 RETURNING *
-                    `;
-
-                    let value_image = [image.url, image.id];
-
-                    const res_image = await promise_query(text_image, value_image);
-                    image = res_image.rows[0];
-                } else {
-                    const text_image = `
-                        INSERT INTO images(url, project_id)
-                        VALUES ($1, $2)
-                        RETURNING *
-                    `;
-
-                    let value_image = [image.url, req.params.id];
-
-                    const res_image = await promise_query(text_image, value_image);
-                    image = res_image.rows[0];
-                }
-                new_images.push(image);
-            }
-        }
-
-        if (req.body.tech_used && Array.isArray(req.body.tech_used)) {
-            for (let tech of req.body.tech_used) {
-                if (tech.id) {
-                    // update
-                    const text_tech = `
-                        UPDATE tech_used
-                        SET (name) = ROW($1)
-                        WHERE id = $2 RETURNING *
-                    `;
-
-                    let value_tech = [tech.name, tech.id];
-
-                    const res_tech = await promise_query(text_tech, value_tech);
-                    tech = res_tech.rows[0];
-                } else {
-                    // post
-                    const text_tech = `
-                        INSERT INTO tech_used(name, project_id)
-                        VALUES ($1, $2)
-                        RETURNING *
-                    `;
-
-                    let value_tech = [tech.name, req.params.id];
-
-                    const res_tech = await promise_query(text_tech, value_tech);
-                    tech = res_tech.rows[0];
-                }
-                new_tech_used.push(tech);
-            }
-        }
-
-        project["highlights"] = new_highlights;
-        project["tech_used"] = new_tech_used;
-        project["images"] = new_images;
+        user["contacts"] = new_contacts;
+        user["socials"] = new_socials;
 
         res.status(200).send(project);
     } catch(e) {
