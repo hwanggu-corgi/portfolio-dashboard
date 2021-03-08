@@ -145,9 +145,9 @@ app.post("/admin/projects", async (req, res) => {
     }
 });
 
-app.put("/admin/projects", (req, res) => {
+app.put("/admin/projects/:id", async (req, res) => {
     let newHighlights = [];
-    let newImage = [];
+    let newImages = [];
     let newTechUsed = [];
 
     try{
@@ -159,7 +159,7 @@ app.put("/admin/projects", (req, res) => {
         const valueProject = [
             req.body.title, req.body.date,
             req.body.shortDescription, req.body.demoURL,
-            req.body.sourceURL
+            req.body.sourceURL, req.params.id
         ];
 
         const resProject = await promiseQuery(textProject, valueProject);
@@ -171,7 +171,7 @@ app.put("/admin/projects", (req, res) => {
                     // update
                     const textHighlight = `
                         UPDATE highlights
-                        SET (detail) VALUES ($1)
+                        SET (detail) = ($1)
                         WHERE id = $2 RETURNING *
                     `;
 
@@ -201,27 +201,27 @@ app.put("/admin/projects", (req, res) => {
             for (let image of req.body.images) {
                 if (image.id) {
                     // update
-                    const textImages = `
+                    const textImage = `
                         UPDATE images
-                        SET (url) VALUES ($1)
+                        SET (url) = ($1)
                         WHERE id = $2 RETURNING *
                     `;
 
-                    let valueImages = [image.url, image.id];
+                    let valueImage = [image.url, image.id];
 
-                    const resImage = await promiseQuery(textImages, valueImages);
+                    const resImage = await promiseQuery(textImage, valueImage);
                     image = resImage.rows[0];
                 } else {
                     // post
-                    const textImages = `
+                    const textImage = `
                         INSERT INTO images(url, projectId)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let valueImages = [image.url, req.body.id];
+                    let valueImage = [image.url, req.body.id];
 
-                    const resHighlight = await promiseQuery(textImages, valueImages);
+                    const resImage = await promiseQuery(textImage, valueImage);
                     image = resImage.rows[0];
                 }
                 newImages.push(image);
@@ -234,7 +234,7 @@ app.put("/admin/projects", (req, res) => {
                     // update
                     const textTech = `
                         UPDATE tech_used
-                        SET (name) VALUES ($1)
+                        SET (name) = ($1)
                         WHERE id = $2 RETURNING *
                     `;
 
