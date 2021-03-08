@@ -156,6 +156,7 @@ app.put("/admin/projects/:id", async (req, res) => {
             SET (title, date, shortDescription, demoURL, sourceURL) = ($1, $2, $3, $4, $5)
             WHERE id = $6 RETURNING *
         `;
+        console.log(req.body);
         const valueProject = [
             req.body.title, req.body.date,
             req.body.shortDescription, req.body.demoURL,
