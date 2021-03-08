@@ -168,7 +168,6 @@ app.put("/admin/projects/:id", async (req, res) => {
         if (req.body.highlights && Array.isArray(req.body.highlights)) {
             for (let highlight of req.body.highlights) {
                 if (highlight.id) {
-                    // update
                     const text_highlight = `
                         UPDATE highlights
                         SET (detail) = ROW($1)
@@ -181,14 +180,13 @@ app.put("/admin/projects/:id", async (req, res) => {
                     highlight = res_highlight.rows[0];
 
                 } else {
-                    // post
                     const text_highlight = `
                         INSERT INTO highlights(detail, project_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let value_highlight = [highlight.detail, req.body.id];
+                    let value_highlight = [highlight.detail, req.params.id];
 
                     const res_highlight = await promise_query(text_highlight, value_highlight);
                     highlight = res_highlight.rows[0];
@@ -200,7 +198,6 @@ app.put("/admin/projects/:id", async (req, res) => {
         if (req.body.images && Array.isArray(req.body.images)) {
             for (let image of req.body.images) {
                 if (image.id) {
-                    // update
                     const text_image = `
                         UPDATE images
                         SET (url) = ROW($1)
@@ -212,14 +209,13 @@ app.put("/admin/projects/:id", async (req, res) => {
                     const res_image = await promise_query(text_image, value_image);
                     image = res_image.rows[0];
                 } else {
-                    // post
                     const text_image = `
                         INSERT INTO images(url, project_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let value_image = [image.url, req.body.id];
+                    let value_image = [image.url, req.params.id];
 
                     const res_image = await promise_query(text_image, value_image);
                     image = res_image.rows[0];
@@ -250,7 +246,7 @@ app.put("/admin/projects/:id", async (req, res) => {
                         RETURNING *
                     `;
 
-                    let value_tech = [tech.name, req.body.id];
+                    let value_tech = [tech.name, req.params.id];
 
                     const res_tech = await promise_query(text_tech, value_tech);
                     tech = res_tech.rows[0];
@@ -290,10 +286,10 @@ app.get("/admin/work-experiences", async (req, res) => {
         const work_experiences = res_work_experiences.rows;
 
         for (work_experience of work_experiences) {
-            const text_highlights = "SELECT id, detail FROM highlights WHERE workExpId = $1";
+            const text_highlights = "SELECT id, detail FROM highlights WHERE work_exp_id = $1";
             const value_highlights = [work_experience.id];
 
-            const text_tech_used = "SELECT id, name FROM tech_used WHERE workExpId = $1";
+            const text_tech_used = "SELECT id, name FROM tech_used WHERE work_exp_id = $1";
             const value_tech_used = [work_experience.id];
 
             const res_highlights = await promise_query(text_highlights, value_highlights);
@@ -317,13 +313,13 @@ app.post("/admin/work-experiences", async (req, res) => {
     try {
 
         const text_work_experience = `
-            INSERT INTO work_experiences(company, dateStart, dateEnd, location, user_id)
+            INSERT INTO work_experiences(company, date_start, date_end, location, user_id)
             VALUES($1, $2, $3, $4, $5)
             RETURNING *
         `;
         const value_work_experience = [
-            req.body.company, req.body.dateStart,
-            req.body.dateEnd, req.body.location,
+            req.body.company, req.body.date_start,
+            req.body.date_end, req.body.location,
             1
         ];
         const res_work_experience = await promise_query(text_work_experience, value_work_experience);
@@ -331,7 +327,7 @@ app.post("/admin/work-experiences", async (req, res) => {
 
         if (req.body.highlights.length > 0) {
             const text_highlights = `
-                INSERT INTO highlights(detail, workExpId)
+                INSERT INTO highlights(detail, work_exp_id)
                 VALUES ${getValueEntries(req.body.highlights.length)}
                 RETURNING *
             `;
@@ -347,7 +343,7 @@ app.post("/admin/work-experiences", async (req, res) => {
 
         if (req.body.tech_used.length > 0) {
             const text_tech_used = `
-                INSERT INTO tech_used(name, workExpId)
+                INSERT INTO tech_used(name, work_exp_id)
                 VALUES ${getValueEntries(req.body.tech_used.length)}
                 RETURNING *
             `;
@@ -373,7 +369,7 @@ app.post("/admin/work-experiences", async (req, res) => {
 });
 
 
-app.put("/admin/work-experiences/:id", (req, res) => {
+app.put("/admin/work-experiences/:id", async (req, res) => {
     let new_highlights = [];
     let new_tech_used = [];
 
@@ -396,7 +392,6 @@ app.put("/admin/work-experiences/:id", (req, res) => {
         if (req.body.highlights && Array.isArray(req.body.highlights)) {
             for (let highlight of req.body.highlights) {
                 if (highlight.id) {
-                    // update
                     const text_highlight = `
                         UPDATE highlights
                         SET (detail) = ROW($1)
@@ -409,14 +404,13 @@ app.put("/admin/work-experiences/:id", (req, res) => {
                     highlight = res_highlight.rows[0];
 
                 } else {
-                    // post
                     const text_highlight = `
-                        INSERT INTO highlights(detail, project_id)
+                        INSERT INTO highlights(detail, work_exp_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let value_highlight = [highlight.detail, req.body.id];
+                    let value_highlight = [highlight.detail, req.params.id];
 
                     const res_highlight = await promise_query(text_highlight, value_highlight);
                     highlight = res_highlight.rows[0];
@@ -428,7 +422,6 @@ app.put("/admin/work-experiences/:id", (req, res) => {
         if (req.body.tech_used && Array.isArray(req.body.tech_used)) {
             for (let tech of req.body.tech_used) {
                 if (tech.id) {
-                    // update
                     const text_tech = `
                         UPDATE tech_used
                         SET (name) = ROW($1)
@@ -440,14 +433,13 @@ app.put("/admin/work-experiences/:id", (req, res) => {
                     const res_tech = await promise_query(text_tech, value_tech);
                     tech = res_tech.rows[0];
                 } else {
-                    // post
                     const text_tech = `
-                        INSERT INTO tech_used(name, project_id)
+                        INSERT INTO tech_used(name, work_exp_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let value_tech = [tech.name, req.body.id];
+                    let value_tech = [tech.name, req.params.id];
 
                     const res_tech = await promise_query(text_tech, value_tech);
                     tech = res_tech.rows[0];
