@@ -1,8 +1,7 @@
 const express = require('express');
+const { promise_query, getValueEntries } = require('../../../helpers');
 
 const projectsRouter = express.Router();
-
-const promise_query = promisify(pool.query).bind(pool);
 
 projectsRouter.get("/", async (req, res) => {
     const text = "SELECT * FROM projects";
@@ -38,16 +37,6 @@ projectsRouter.get("/", async (req, res) => {
         res.status(500).send(e);
     }
 });
-
-const getValueEntries = (arrLength) => {
-    const size = arrLength * 2;
-    let res = new Array(arrLength).fill("");
-
-    for (let i = 0; i < size; i ++) {
-        res[Math.floor(i/2)] += (i+1) % 2 != 0 ? `($${i+1}` : `,$${i+1})`;
-    }
-    return res.join(",");
-}
 
 projectsRouter.post("/", async (req, res) => {
     let project, highlights, images, tech_used;

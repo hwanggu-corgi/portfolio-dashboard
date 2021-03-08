@@ -1,8 +1,7 @@
 const express = require('express');
+const { promise_query } = require('../../../helpers');
 
 const infoRouter = express.Router();
-
-const promise_query = promisify(pool.query).bind(pool);
 
 infoRouter.get("/", async (req, res) => {
     const text = "SELECT * FROM user_self";

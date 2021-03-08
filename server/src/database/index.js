@@ -1,6 +1,5 @@
 const { Pool } = require('pg');
-const { promisify } = require('util');
-const { user, host, database, password, port } = require('./secrets/db_configuration');
+const { user, host, database, password, port } = require('../secret');
 
 const pool = new Pool({
     user: user,
@@ -11,3 +10,4 @@ const pool = new Pool({
 });
 
 
+module.exports = pool;
