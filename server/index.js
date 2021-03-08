@@ -171,7 +171,7 @@ app.put("/admin/projects/:id", async (req, res) => {
                     // update
                     const textHighlight = `
                         UPDATE highlights
-                        SET (detail) = ($1)
+                        SET (detail) = ROW($1)
                         WHERE id = $2 RETURNING *
                     `;
 
@@ -203,7 +203,7 @@ app.put("/admin/projects/:id", async (req, res) => {
                     // update
                     const textImage = `
                         UPDATE images
-                        SET (url) = ($1)
+                        SET (url) = ROW($1)
                         WHERE id = $2 RETURNING *
                     `;
 
@@ -234,7 +234,7 @@ app.put("/admin/projects/:id", async (req, res) => {
                     // update
                     const textTech = `
                         UPDATE tech_used
-                        SET (name) = ($1)
+                        SET (name) = ROW($1)
                         WHERE id = $2 RETURNING *
                     `;
 

@@ -70,7 +70,7 @@ CREATE TABLE tech_used (
 DROP TABLE IF EXISTS images;
 CREATE TABLE images (
     id          SERIAL PRIMARY KEY,
-    url         VARCHAR(100),
+    url         VARCHAR(255),
     projectId   INT,
     FOREIGN KEY (projectId) REFERENCES projects(id) ON DELETE CASCADE
 );
