@@ -165,72 +165,98 @@ app.put("/admin/projects", (req, res) => {
         const resProject = await promiseQuery(textProject, valueProject);
         let project = resProject.rows[0];
 
-        for (let highlight of req.body.highlights) {
-            if (highlight.id) {
-                // update
-                const textHighlight = `
-                    UPDATE highlights
-                    SET (detail) VALUES ($1)
-                    WHERE id = $1 RETURNING *
-                `;
+        if (req.body.highlights && Array.isArray(req.body.highlights)) {
+            for (let highlight of req.body.highlights) {
+                if (highlight.id) {
+                    // update
+                    const textHighlight = `
+                        UPDATE highlights
+                        SET (detail) VALUES ($1)
+                        WHERE id = $2 RETURNING *
+                    `;
 
-                let valueHighlight = [highlight.detail, highlight.id];
+                    let valueHighlight = [highlight.detail, highlight.id];
 
-                const resHighlight = await promiseQuery(textHighlight, valueHighlight);
-                highlight = resHighlight.rows[0];
+                    const resHighlight = await promiseQuery(textHighlight, valueHighlight);
+                    highlight = resHighlight.rows[0];
 
-            } else {
-                // post
-                const textHighlight = `
-                    INSERT INTO highlights(detail, projectId)
-                    VALUES ($1, $2)
-                    RETURNING *
-                `;
+                } else {
+                    // post
+                    const textHighlight = `
+                        INSERT INTO highlights(detail, projectId)
+                        VALUES ($1, $2)
+                        RETURNING *
+                    `;
 
-                let valueHighlight = [highlight.detail, req.body.id];
+                    let valueHighlight = [highlight.detail, req.body.id];
 
-                const resHighlight = await promiseQuery(textHighlight, valueHighlight);
-                highlight = resHighlight.rows[0];
+                    const resHighlight = await promiseQuery(textHighlight, valueHighlight);
+                    highlight = resHighlight.rows[0];
+                }
+                newHighlights.push(highlight);
             }
-            newHighlights.push(highlight);
         }
 
-        for (let image of req.body.images) {
-            if (image.id) {
-                // update
-            } else {
-                // post
-                const textImages = `
-                    INSERT INTO images(url, projectId)
-                    VALUES ($1, $2)
-                    RETURNING *
-                `;
+        if (req.body.images && Array.isArray(req.body.images)) {
+            for (let image of req.body.images) {
+                if (image.id) {
+                    // update
+                    const textImages = `
+                        UPDATE images
+                        SET (url) VALUES ($1)
+                        WHERE id = $2 RETURNING *
+                    `;
 
-                let valueImages = [image.url, req.body.id];
+                    let valueImages = [image.url, image.id];
 
-                const resHighlight = await promiseQuery(textImages, valueImages);
-                image = resImage.rows[0];
+                    const resImage = await promiseQuery(textImages, valueImages);
+                    image = resImage.rows[0];
+                } else {
+                    // post
+                    const textImages = `
+                        INSERT INTO images(url, projectId)
+                        VALUES ($1, $2)
+                        RETURNING *
+                    `;
+
+                    let valueImages = [image.url, req.body.id];
+
+                    const resHighlight = await promiseQuery(textImages, valueImages);
+                    image = resImage.rows[0];
+                }
+                newImages.push(image);
             }
-            newImages.push(image);
         }
 
-        for (let tech of req.body.techUsed) {
-            if (tech.id) {
-                // update
-            } else {
-                // post
-                const textTech = `
-                    INSERT INTO tech_used(name, projectId)
-                    VALUES ($1, $2)
-                    RETURNING *
-                `;
+        if (req.body.techUsed && Array.isArray(req.body.techUsed)) {
+            for (let tech of req.body.techUsed) {
+                if (tech.id) {
+                    // update
+                    const textTech = `
+                        UPDATE tech_used
+                        SET (name) VALUES ($1)
+                        WHERE id = $2 RETURNING *
+                    `;
 
-                let valueTech = [tech, req.body.id];
+                    let valueTech = [tech.name, tech.id];
 
-                const resTech = await promiseQuery(textTech, valueTech);
-                tech = resTech.rows[0];
+                    const resTech = await promiseQuery(textTech, valueTech);
+                    tech = resTech.rows[0];
+                } else {
+                    // post
+                    const textTech = `
+                        INSERT INTO tech_used(name, projectId)
+                        VALUES ($1, $2)
+                        RETURNING *
+                    `;
+
+                    let valueTech = [tech, req.body.id];
+
+                    const resTech = await promiseQuery(textTech, valueTech);
+                    tech = resTech.rows[0];
+                }
+                newTechUsed.push(tech);
             }
-            newTechUsed.push(tech);
         }
 
         project["highlights"] = newHighlights;
