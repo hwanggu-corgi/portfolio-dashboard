@@ -1,4 +1,6 @@
 const { promisify } = require('util');
+const pool = require('../database');
+
 
 const promise_query = promisify(pool.query).bind(pool);
 

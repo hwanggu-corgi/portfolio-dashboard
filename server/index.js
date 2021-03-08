@@ -2,7 +2,7 @@ const express = require("express");
 const body_parser = require('body-parser');
 const projectsRouter = require("./src/routes/v1/projects");
 const workExperiencesRouter = require("./src/routes/v1/work_experiences");
-const infoRouter = require("./src/routes/v1/infoRouter");
+const infoRouter = require("./src/routes/v1/info");
 
 const app = express();
 const PORT = process.env.PORT || 4001;
