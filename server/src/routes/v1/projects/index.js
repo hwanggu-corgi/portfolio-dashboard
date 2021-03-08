@@ -2,6 +2,8 @@ const express = require('express');
 
 const projectsRouter = express.Router();
 
+const promise_query = promisify(pool.query).bind(pool);
+
 projectsRouter.get("/", async (req, res) => {
     const text = "SELECT * FROM projects";
     try {
@@ -122,7 +124,7 @@ projectsRouter.post("/", async (req, res) => {
     }
 });
 
-app.put("/admin/projects/:id", async (req, res) => {
+projectsRouter.put("/:id", async (req, res) => {
     let new_highlights = [];
     let new_images = [];
     let new_tech_used = [];
@@ -244,7 +246,7 @@ app.put("/admin/projects/:id", async (req, res) => {
     }
 });
 
-app.delete("/admin/projects/:id", async (req, res) => {
+projectsRouter.delete("/:id", async (req, res) => {
     const text_project = "DELETE FROM projects WHERE id = $1";
     const value_project = [req.params.id];
     try{
