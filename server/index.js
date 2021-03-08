@@ -1,6 +1,6 @@
 const express = require("express");
 const { Pool } = require('pg');
-const bodyParser = require('body-parser');
+const body_parser = require('body-parser');
 const { promisify } = require('util');
 const { user, host, database, password, port } = require('./secrets/db_configuration');
 
@@ -20,14 +20,14 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
-app.use(bodyParser.json());
+app.use(body_parser.json());
 
-const promiseQuery = promisify(pool.query).bind(pool);
+const promise_query = promisify(pool.query).bind(pool);
 
 app.get("/admin/projects", async (req, res) => {
     const text = "SELECT * FROM projects";
     try {
-        const res_projects = await promiseQuery(text);
+        const res_projects = await promise_query(text);
         const projects = res_projects.rows;
 
         for (project of projects) {
@@ -40,11 +40,11 @@ app.get("/admin/projects", async (req, res) => {
             const text_tech_used = "SELECT id, name FROM tech_used WHERE project_id = $1";
             const value_tech_used = [project.id];
 
-            const res_highlights = await promiseQuery(text_highlights, value_highlights);
+            const res_highlights = await promise_query(text_highlights, value_highlights);
             const highlights = res_highlights.rows;
-            const res_images = await promiseQuery(text_images, value_images);
+            const res_images = await promise_query(text_images, value_images);
             const images = res_images.rows;
-            const res_tech_used = await promiseQuery(text_tech_used, value_tech_used);
+            const res_tech_used = await promise_query(text_tech_used, value_tech_used);
             const tech_used = res_tech_used.rows;
 
             project["highlights"] = highlights;
@@ -77,12 +77,12 @@ app.post("/admin/projects", async (req, res) => {
             VALUES($1, $2, $3, $4, $5, $6)
             RETURNING *
         `;
-        const valueProject = [
+        const value_project = [
             req.body.title, req.body.date,
             req.body.short_description, req.body.demo_url,
             req.body.demo_url, 1
         ];
-        const resProject = await promiseQuery(text_project, valueProject);
+        const resProject = await promise_query(text_project, value_project);
         project = resProject.rows[0];
 
         if (req.body.highlights.length > 0) {
@@ -98,7 +98,7 @@ app.post("/admin/projects", async (req, res) => {
                 value_highlights.push(item);
                 value_highlights.push(project.id);
             };
-            const res_highlights = await promiseQuery(text_highlights, value_highlights);
+            const res_highlights = await promise_query(text_highlights, value_highlights);
             highlights = res_highlights.rows;
         }
 
@@ -113,7 +113,7 @@ app.post("/admin/projects", async (req, res) => {
                 value_tech_used.push(item);
                 value_tech_used.push(project.id);
             };
-            const res_tech_used = await promiseQuery(text_tech_used, value_tech_used);
+            const res_tech_used = await promise_query(text_tech_used, value_tech_used);
             tech_used = res_tech_used.rows;
         }
 
@@ -123,12 +123,12 @@ app.post("/admin/projects", async (req, res) => {
                 VALUES ${getValueEntries(req.body.images.length)}
                 RETURNING *
             `;
-            let valueImages = [];
+            let value_images = [];
             for (let item of req.body.images) {
-                valueImages.push(item);
-                valueImages.push(project.id);
+                value_images.push(item);
+                value_images.push(project.id);
             };
-            const res_images = await promiseQuery(text_images, valueImages);
+            const res_images = await promise_query(text_images, value_images);
             images = res_images.rows;
         }
 
@@ -146,9 +146,9 @@ app.post("/admin/projects", async (req, res) => {
 });
 
 app.put("/admin/projects/:id", async (req, res) => {
-    let newHighlights = [];
-    let newImages = [];
-    let newtech_used = [];
+    let new_highlights = [];
+    let new_images = [];
+    let new_tech_used = [];
 
     try{
         const text_project = `
@@ -157,44 +157,44 @@ app.put("/admin/projects/:id", async (req, res) => {
             WHERE id = $6 RETURNING *
         `;
         console.log(req.body);
-        const valueProject = [
+        const value_project = [
             req.body.title, req.body.date,
             req.body.short_description, req.body.demo_url,
             req.body.source_url, req.params.id
         ];
 
-        const resProject = await promiseQuery(text_project, valueProject);
+        const resProject = await promise_query(text_project, value_project);
         let project = resProject.rows[0];
 
         if (req.body.highlights && Array.isArray(req.body.highlights)) {
             for (let highlight of req.body.highlights) {
                 if (highlight.id) {
                     // update
-                    const textHighlight = `
+                    const text_highlight = `
                         UPDATE highlights
                         SET (detail) = ROW($1)
                         WHERE id = $2 RETURNING *
                     `;
 
-                    let valueHighlight = [highlight.detail, highlight.id];
+                    let value_highlight = [highlight.detail, highlight.id];
 
-                    const resHighlight = await promiseQuery(textHighlight, valueHighlight);
-                    highlight = resHighlight.rows[0];
+                    const res_highlight = await promise_query(text_highlight, value_highlight);
+                    highlight = res_highlight.rows[0];
 
                 } else {
                     // post
-                    const textHighlight = `
+                    const text_highlight = `
                         INSERT INTO highlights(detail, project_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let valueHighlight = [highlight.detail, req.body.id];
+                    let value_highlight = [highlight.detail, req.body.id];
 
-                    const resHighlight = await promiseQuery(textHighlight, valueHighlight);
-                    highlight = resHighlight.rows[0];
+                    const res_highlight = await promise_query(text_highlight, value_highlight);
+                    highlight = res_highlight.rows[0];
                 }
-                newHighlights.push(highlight);
+                new_highlights.push(highlight);
             }
         }
 
@@ -202,30 +202,30 @@ app.put("/admin/projects/:id", async (req, res) => {
             for (let image of req.body.images) {
                 if (image.id) {
                     // update
-                    const textImage = `
+                    const text_image = `
                         UPDATE images
                         SET (url) = ROW($1)
                         WHERE id = $2 RETURNING *
                     `;
 
-                    let valueImage = [image.url, image.id];
+                    let value_image = [image.url, image.id];
 
-                    const resImage = await promiseQuery(textImage, valueImage);
-                    image = resImage.rows[0];
+                    const res_image = await promise_query(text_image, value_image);
+                    image = res_image.rows[0];
                 } else {
                     // post
-                    const textImage = `
+                    const text_image = `
                         INSERT INTO images(url, project_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let valueImage = [image.url, req.body.id];
+                    let value_image = [image.url, req.body.id];
 
-                    const resImage = await promiseQuery(textImage, valueImage);
-                    image = resImage.rows[0];
+                    const res_image = await promise_query(text_image, value_image);
+                    image = res_image.rows[0];
                 }
-                newImages.push(image);
+                new_images.push(image);
             }
         }
 
@@ -233,36 +233,36 @@ app.put("/admin/projects/:id", async (req, res) => {
             for (let tech of req.body.tech_used) {
                 if (tech.id) {
                     // update
-                    const textTech = `
+                    const text_tech = `
                         UPDATE tech_used
                         SET (name) = ROW($1)
                         WHERE id = $2 RETURNING *
                     `;
 
-                    let valueTech = [tech.name, tech.id];
+                    let value_tech = [tech.name, tech.id];
 
-                    const resTech = await promiseQuery(textTech, valueTech);
-                    tech = resTech.rows[0];
+                    const res_tech = await promise_query(text_tech, value_tech);
+                    tech = res_tech.rows[0];
                 } else {
                     // post
-                    const textTech = `
+                    const text_tech = `
                         INSERT INTO tech_used(name, project_id)
                         VALUES ($1, $2)
                         RETURNING *
                     `;
 
-                    let valueTech = [tech, req.body.id];
+                    let value_tech = [tech, req.body.id];
 
-                    const resTech = await promiseQuery(textTech, valueTech);
-                    tech = resTech.rows[0];
+                    const res_tech = await promise_query(text_tech, value_tech);
+                    tech = res_tech.rows[0];
                 }
-                newtech_used.push(tech);
+                new_tech_used.push(tech);
             }
         }
 
-        project["highlights"] = newHighlights;
-        project["tech_used"] = newtech_used;
-        project["images"] = newImages;
+        project["highlights"] = new_highlights;
+        project["tech_used"] = new_tech_used;
+        project["images"] = new_images;
 
         res.status(200).send(project);
     } catch(e) {
@@ -273,9 +273,9 @@ app.put("/admin/projects/:id", async (req, res) => {
 
 app.delete("/admin/projects/:id", async (req, res) => {
     const text_project = "DELETE FROM projects WHERE id = $1";
-    const valueProject = [req.params.id];
+    const value_project = [req.params.id];
     try{
-        await promiseQuery(text_project, valueProject);
+        await promise_query(text_project, value_project);
         res.status(204).send();
     } catch(e) {
         console.log(e);
@@ -287,26 +287,26 @@ app.delete("/admin/projects/:id", async (req, res) => {
 app.get("/admin/work-experiences", async (req, res) => {
     const text = "SELECT * FROM work_experiences";
     try {
-        const resWorkExperiences = await promiseQuery(text);
-        const workExperiences = resWorkExperiences.rows;
+        const res_work_experiences = await promise_query(text);
+        const work_experiences = res_work_experiences.rows;
 
-        for (workExperience of workExperiences) {
+        for (work_experience of work_experiences) {
             const text_highlights = "SELECT id, detail FROM highlights WHERE workExpId = $1";
-            const value_highlights = [workExperience.id];
+            const value_highlights = [work_experience.id];
 
             const text_tech_used = "SELECT id, name FROM tech_used WHERE workExpId = $1";
-            const value_tech_used = [workExperience.id];
+            const value_tech_used = [work_experience.id];
 
-            const res_highlights = await promiseQuery(text_highlights, value_highlights);
+            const res_highlights = await promise_query(text_highlights, value_highlights);
             const highlights = res_highlights.rows;
-            const res_tech_used = await promiseQuery(text_tech_used, value_tech_used);
+            const res_tech_used = await promise_query(text_tech_used, value_tech_used);
             const tech_used = res_tech_used.rows;
 
-            workExperience["highlights"] = highlights;
-            workExperience["tech_used"] = tech_used;
+            work_experience["highlights"] = highlights;
+            work_experience["tech_used"] = tech_used;
         }
 
-        res.send(workExperiences);
+        res.send(work_experiences);
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
@@ -314,21 +314,21 @@ app.get("/admin/work-experiences", async (req, res) => {
 });
 
 app.post("/admin/work-experiences", async (req, res) => {
-    let workExperience, highlights, tech_used;
+    let work_experience, highlights, tech_used;
     try {
         console.log(req.body);
-        const textWorkExperience = `
+        const text_work_experience = `
             INSERT INTO work_experiences(company, dateStart, dateEnd, location, user_id)
             VALUES($1, $2, $3, $4, $5)
             RETURNING *
         `;
-        const valueWorkExperience = [
+        const value_work_experience = [
             req.body.company, req.body.dateStart,
             req.body.dateEnd, req.body.location,
             1
         ];
-        const resWorkExperience = await promiseQuery(textWorkExperience, valueWorkExperience);
-        workExperience = resWorkExperience.rows[0];
+        const res_work_experience = await promise_query(text_work_experience, value_work_experience);
+        work_experience = res_work_experience.rows[0];
 
         if (req.body.highlights.length > 0) {
             const text_highlights = `
@@ -340,9 +340,9 @@ app.post("/admin/work-experiences", async (req, res) => {
             let value_highlights = [];
             for (let item of req.body.highlights) {
                 value_highlights.push(item);
-                value_highlights.push(workExperience.id);
+                value_highlights.push(work_experience.id);
             };
-            const res_highlights = await promiseQuery(text_highlights, value_highlights);
+            const res_highlights = await promise_query(text_highlights, value_highlights);
             highlights = res_highlights.rows;
         }
 
@@ -355,13 +355,13 @@ app.post("/admin/work-experiences", async (req, res) => {
             let value_tech_used = [];
             for (let item of req.body.tech_used) {
                 value_tech_used.push(item);
-                value_tech_used.push(workExperience.id);
+                value_tech_used.push(work_experience.id);
             };
-            const res_tech_used = await promiseQuery(text_tech_used, value_tech_used);
+            const res_tech_used = await promise_query(text_tech_used, value_tech_used);
             tech_used = res_tech_used.rows;
         }
 
-        let final = Object.assign({}, workExperience);
+        let final = Object.assign({}, work_experience);
         final["highlights"] = highlights;
         final["tech_used"] = tech_used;
 
@@ -384,10 +384,10 @@ app.post("/admin/work-experiences", async (req, res) => {
 // });
 
 app.delete("/admin/work-experiences/:id", async (req, res) => {
-    const textWorkExperience = "DELETE FROM work_experiences WHERE id = $1";
-    const valueWorkExperience = [req.params.id];
+    const text_work_experience = "DELETE FROM work_experiences WHERE id = $1";
+    const value_work_experience = [req.params.id];
     try{
-        await promiseQuery(textWorkExperience, valueWorkExperience);
+        await promise_query(text_work_experience, value_work_experience);
         res.status(204).send();
     } catch(e) {
         console.log(e);
@@ -399,16 +399,16 @@ app.delete("/admin/work-experiences/:id", async (req, res) => {
 app.get("/admin/info", async (req, res) => {
     const text = "SELECT * FROM user_self";
     try {
-        const resUser = await promiseQuery(text);
-        let user = resUser.rows[0];
+        const res_user = await promise_query(text);
+        let user = res_user.rows[0];
 
-        const textContacts = "SELECT id, name, value FROM contacts WHERE user_id = 1";
-        const textSocials = "SELECT id, name, value FROM socials WHERE user_id = 1";
+        const text_contacts = "SELECT id, name, value FROM contacts WHERE user_id = 1";
+        const text_socials = "SELECT id, name, value FROM socials WHERE user_id = 1";
 
-        const resContacts = await promiseQuery(textContacts);
-        const contacts = resContacts.rows;
-        const resSocials = await promiseQuery(textSocials);
-        const socials = resSocials.rows;
+        const res_contacts = await promise_query(text_contacts);
+        const contacts = res_contacts.rows;
+        const res_socials = await promise_query(text_socials);
+        const socials = res_socials.rows;
 
         user["contacts"] = contacts;
         user["socials"] = socials;
