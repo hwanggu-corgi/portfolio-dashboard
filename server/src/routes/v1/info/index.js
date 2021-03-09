@@ -90,8 +90,8 @@ infoRouter.put("/", async (req, res) => {
                     social = res_social.rows[0];
                 } else {
                     const text_social = `
-                        INSERT INTO socials(name, project_id)
-                        VALUES ($1, $2)
+                        INSERT INTO socials(name, value, user_id)
+                        VALUES ($1, $2, $3)
                         RETURNING *
                     `;
 
