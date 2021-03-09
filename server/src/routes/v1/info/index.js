@@ -108,7 +108,7 @@ infoRouter.put("/", async (req, res) => {
         user["contacts"] = new_contacts;
         user["socials"] = new_socials;
 
-        res.status(200).send(project);
+        res.status(200).send(user);
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
