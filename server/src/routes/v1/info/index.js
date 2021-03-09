@@ -37,7 +37,6 @@ infoRouter.put("/", async (req, res) => {
             SET (first_name, last_name, nick_name) = ($1, $2, $3)
             WHERE id = 1 RETURNING *
         `;
-
         const value_user = [
             req.body.first_name, req.body.last_name,
             req.body.nick_name
