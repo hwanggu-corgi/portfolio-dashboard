@@ -11,6 +11,7 @@ app.listen(PORT, () => {
 });
 
 app.use(body_parser.json());
+app.use(cors());
 app.use('/admin/projects', projectsRouter);
 app.use('/admin/work-experiences', workExperiencesRouter);
 app.use('/admin/info', infoRouter);
