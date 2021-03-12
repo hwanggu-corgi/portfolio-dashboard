@@ -49,6 +49,10 @@ function ProjectsScreen() {
         console.log("This is temporary");
     }
 
+    const fetchProject = () => {
+
+    }
+
     return (
         <ProjectsScreenStyle.PageSection>
             <ProjectsScreenStyle.H2>Projects</ProjectsScreenStyle.H2>
