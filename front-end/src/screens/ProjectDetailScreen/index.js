@@ -28,11 +28,11 @@ const ProjectDetailScreenStyle = {
 };
 
 function ProjectDetailScreen() {
-    let [title, setTitle] = useState("");
-    let [headerImage, setHeaderImage] = useState("");
-    let [toolsUsed, setToolsUsed] = useState([""]);
-    let [highlightsList, setHighlightsList] = useState([""]);
-    let [imagesList, setImagesList] = useState([""]);
+    const [title, setTitle] = useState("");
+    const [headerImage, setHeaderImage] = useState("");
+    const [toolsUsed, setToolsUsed] = useState([""]);
+    const [highlightsList, setHighlightsList] = useState([""]);
+    const [imagesList, setImagesList] = useState([""]);
 
     const addProject =  async (e) => {
         e.preventDefault();
@@ -63,11 +63,11 @@ function ProjectDetailScreen() {
             <form onSubmit={addProject}>
                 <Form.FormGroup>
                     <label>Title</label>
-                    <Form.Input/>
+                    <Form.Input value={title} onChange={e => setTitle(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Header Image</label>
-                    <Form.Input/>
+                    <Form.Input value={headerImage} onChange={e => setHeaderImage(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Tools Used</label>
