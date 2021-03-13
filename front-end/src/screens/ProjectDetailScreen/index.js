@@ -28,8 +28,25 @@ const ProjectDetailScreenStyle = {
 };
 
 function ProjectDetailScreen() {
+    let [title, setTitle] = useState("");
+    let [title, setTitle] = useState("");
     let [highlightsList, setHighlightsList] = useState([""]);
     let [imagesList, setImagesList] = useState([""]);
+
+    const addProject =  async (e) => {
+        e.preventDefault();
+
+        fetch(`http://localhost:4001/admin/projects`, {
+            method: "POST",
+            body: JSON.stringify()
+        }).then(_ => {
+            const index = projects.findIndex(item => item.id === id);
+            projects.splice(index, 1);
+            setProject(projects);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
 
     return (
         <ProjectDetailScreenStyle.Section>
@@ -42,7 +59,7 @@ function ProjectDetailScreen() {
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>
-            <form>
+            <form onSubmit={addProject}>
                 <Form.FormGroup>
                     <label>Title</label>
                     <Form.Input/>
