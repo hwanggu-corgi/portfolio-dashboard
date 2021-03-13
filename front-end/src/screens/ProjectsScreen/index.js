@@ -37,12 +37,13 @@ function ProjectsScreen() {
     const [projects, setProject] = useState([]);
 
     const deleteProject =  async (id) => {
-        const response = fetch(`http://localhost:4001/admin/projects/${id}`, {
+        fetch(`http://localhost:4001/admin/projects/${id}`, {
             method: "DELETE"
         }).then(_ => {
             // find id
             const index = projects.findIndex(item => item.id === id);
-            console.log(projects.splice(index, 1));
+            projects.splice(index, 1);
+            setProject(projects);
             // delete
         }).catch(error => {
             console.error(error);
