@@ -63,11 +63,11 @@ function ProjectDetailScreen() {
             <form>
                 <Form.FormGroup>
                     <label>Title</label>
-                    <Form.Input value={title} onChange={e => setTitle(e.target.value)}/>
+                    <Form.Input defaultValue={title} onChange={e => setTitle(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Header Image</label>
-                    <Form.Input value={headerImage} onChange={e => setHeaderImage(e.target.value)}/>
+                    <Form.Input defaultValue={headerImage} onChange={e => setHeaderImage(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Tools Used</label>

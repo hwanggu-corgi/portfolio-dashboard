@@ -49,10 +49,10 @@ const InputStyle = {
 };
 
 
-function Input() {
+function Input(props) {
     return(
         <InputStyle.Div>
-            <InputStyle.Input/>
+            <InputStyle.Input defaultValue={props.defaultValue} onChange={props.onChange}/>
         </InputStyle.Div>
     )
 };
