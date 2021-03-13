@@ -89,8 +89,8 @@ function ProjectsScreen() {
                             <tr>
                                 <TableStyle.Td>{item.title}</TableStyle.Td>
                                 <TableStyle.Td>{item.date}</TableStyle.Td>
-                                <TableStyle.Td>{item.shortDescription}</TableStyle.Td>
-                                <TableStyle.Td>{item.techUsed.join(", ")}</TableStyle.Td>
+                                <TableStyle.Td>{item.short_description}</TableStyle.Td>
+                                <TableStyle.Td>{item.tech_used.map(item => item.name).join(", ")}</TableStyle.Td>
                                 <TableStyle.Td>
                                     <TableStyle.Button onClick={_ => history.push(`/admin/projects/${item.id}`)}>
                                         <div>
