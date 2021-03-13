@@ -32,16 +32,6 @@ const ProjectsScreenStyle = {
     `
 };
 
-const sampleData = [
-    {
-        "id": 1,
-        "title": "Chat Application",
-        "date": "February 26th, 2021",
-        "shortDescription": "A ReactJS and GraphQL based full-stack web chat application for the demonstrated learning in backend development",
-        "techUsed": ["ReactJS", "Styled Components", "ES6 JavaScript", "Prisma ORM", "Node.js", "Apollo GraphQL"]
-    },
-];
-
 function ProjectsScreen() {
     let history = useHistory();
     const [projects, setProject] = useState([]);
@@ -56,8 +46,11 @@ function ProjectsScreen() {
         .then(data => setProject(data));
     }
 
-    const editProject = async () => {
+    const strftime = (date_string) => {
+        const date = new Date(date_string);
+        let options = { year: 'numeric', month: 'long', day: 'numeric' };
 
+        return date.toLocaleString('en-US', options);
     }
 
     useEffect(() => {
@@ -88,7 +81,7 @@ function ProjectsScreen() {
                         projects.map(item => (
                             <tr>
                                 <TableStyle.Td>{item.title}</TableStyle.Td>
-                                <TableStyle.Td>{item.date}</TableStyle.Td>
+                                <TableStyle.Td>{strftime(item.date)}</TableStyle.Td>
                                 <TableStyle.Td>{item.short_description}</TableStyle.Td>
                                 <TableStyle.Td>{item.tech_used.map(item => item.name).join(", ")}</TableStyle.Td>
                                 <TableStyle.Td>
