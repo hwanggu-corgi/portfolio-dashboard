@@ -45,15 +45,16 @@ const sampleData = [
 function ProjectsScreen() {
     let history = useHistory();
 
-    const deleteProject = () => {
+    const deleteProject =  async () => {
 
     }
 
-    const getProjects = () => {
+    const getProjects = async () => {
+        const response = await fetch("http://localhost:4001/admin/projects");
 
     }
 
-    const editProject = () => {
+    const editProject = async () => {
 
     }
 

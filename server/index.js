@@ -1,5 +1,7 @@
 const express = require("express");
-const body_parser = require('body-parser');
+const body_parser = require("body-parser");
+const cors = require("cors");
+
 const projectsRouter = require("./src/routes/v1/projects");
 const workExperiencesRouter = require("./src/routes/v1/work_experiences");
 const infoRouter = require("./src/routes/v1/info");
@@ -12,6 +14,6 @@ app.listen(PORT, () => {
 
 app.use(body_parser.json());
 app.use(cors());
-app.use('/admin/projects', projectsRouter);
-app.use('/admin/work-experiences', workExperiencesRouter);
-app.use('/admin/info', infoRouter);
+app.use("/admin/projects", projectsRouter);
+app.use("/admin/work-experiences", workExperiencesRouter);
+app.use("/admin/info", infoRouter);
