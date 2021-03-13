@@ -46,10 +46,14 @@ function ProjectsScreen() {
     let history = useHistory();
 
     const deleteProject = () => {
-        console.log("This is temporary");
+
     }
 
-    const fetchProject = () => {
+    const getProjects = () => {
+
+    }
+
+    const editProject = () => {
 
     }
 
