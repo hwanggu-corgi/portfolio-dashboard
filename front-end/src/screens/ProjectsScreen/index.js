@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import Pagination from '../../components/Pagination';
@@ -44,19 +44,25 @@ const sampleData = [
 
 function ProjectsScreen() {
     let history = useHistory();
+    const [projects, setProject] = useState([]);
 
     const deleteProject =  async () => {
 
     }
 
-    const getProjects = async () => {
-        const response = await fetch("http://localhost:4001/admin/projects");
-
+    const getProjects = () => {
+        const response = fetch("http://localhost:4001/admin/projects")
+        .then(response => response.json())
+        .then(data => setProject(data));
     }
 
     const editProject = async () => {
 
     }
+
+    useEffect(() => {
+        getProjects();
+    }, []);
 
     return (
         <ProjectsScreenStyle.PageSection>
@@ -79,7 +85,7 @@ function ProjectsScreen() {
                 </thead>
                 <tbody>
                     {
-                        sampleData.map(item => (
+                        projects.map(item => (
                             <tr>
                                 <TableStyle.Td>{item.title}</TableStyle.Td>
                                 <TableStyle.Td>{item.date}</TableStyle.Td>
