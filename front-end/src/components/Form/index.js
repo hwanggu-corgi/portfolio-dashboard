@@ -119,7 +119,7 @@ const KeyValueInputStyle = {
     `
 };
 
-function KeyValueInput() {
+function KeyValueInput(props) {
     return(
         <KeyValueInputStyle.Div>
             <KeyValueInputStyle.InputKey/><KeyValueInputStyle.InputValue/>
