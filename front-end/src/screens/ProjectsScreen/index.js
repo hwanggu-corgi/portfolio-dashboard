@@ -40,11 +40,9 @@ function ProjectsScreen() {
         fetch(`http://localhost:4001/admin/projects/${id}`, {
             method: "DELETE"
         }).then(_ => {
-            // find id
             const index = projects.findIndex(item => item.id === id);
             projects.splice(index, 1);
             setProject(projects);
-            // delete
         }).catch(error => {
             console.error(error);
         });
