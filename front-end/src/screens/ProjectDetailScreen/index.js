@@ -75,11 +75,11 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} onChange={setHighlight} onAdd={_ => setHighlight(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={highlightsList} onChange={(e, index) => setHighlight(e.target.value, index)} onAdd={_ => setHighlight(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Images</label>
-                    <Form.InputList list={imagesList} onChange={setImage} onAdd={_ => setImage(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={imagesList} onChange={(e, index) => setImage(e.target.value, index)} onAdd={_ => setImage(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
