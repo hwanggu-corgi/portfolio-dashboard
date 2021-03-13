@@ -29,7 +29,8 @@ const ProjectDetailScreenStyle = {
 
 function ProjectDetailScreen() {
     let [title, setTitle] = useState("");
-    let [title, setTitle] = useState("");
+    let [headerImage, setHeaderImage] = useState("");
+    let [toolsUsed, setToolsUsed] = useState([""]);
     let [highlightsList, setHighlightsList] = useState([""]);
     let [imagesList, setImagesList] = useState([""]);
 
