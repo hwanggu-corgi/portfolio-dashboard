@@ -36,14 +36,26 @@ function ProjectsScreen() {
     let history = useHistory();
     const [projects, setProject] = useState([]);
 
-    const deleteProject =  async () => {
-
+    const deleteProject =  async (id) => {
+        const response = fetch(`http://localhost:4001/admin/projects/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            // find id
+            const index = projects.findIndex(item => item.id === id);
+            setProject(projects.splice(index, 1));
+            // delete
+        }).catch(error => {
+            console.error(error);
+        });
     }
 
     const getProjects = () => {
         const response = fetch("http://localhost:4001/admin/projects")
         .then(response => response.json())
-        .then(data => setProject(data));
+        .then(data => setProject(data))
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     const strftime = (date_string) => {
