@@ -42,7 +42,7 @@ function ProjectsScreen() {
         }).then(_ => {
             // find id
             const index = projects.findIndex(item => item.id === id);
-            setProject(projects.splice(index, 1));
+            console.log(projects.splice(index, 1));
             // delete
         }).catch(error => {
             console.error(error);
