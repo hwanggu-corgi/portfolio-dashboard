@@ -72,7 +72,7 @@ function ProjectDetailScreen() {
             // body: JSON.stringify()
         }).then(data => {
             // go to view page
-            history.push(`/admin/projects/${data.id}`)
+            history.push(`/admin/projects/${data.id}`);
         }).catch(error => {
             console.error(error);
         });
