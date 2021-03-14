@@ -71,8 +71,8 @@ function InputList(props) {
     return(
         <>
             {props.list.map((item, index) => (
-                <InputListStyle.Div key={index}>
-                    <InputStyle.Input defaultValue={item ? item : ""} onChange={e => props.onChange(e, index)}/>
+                <InputListStyle.Div key={item.id}>
+                    <InputStyle.Input defaultValue={item[props.objectKey] ? item[props.objectKey] : ""} onChange={e => props.onChange(e, index)}/>
                 </InputListStyle.Div>
             ))}
             <InputListStyle.ButtonSection>

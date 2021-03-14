@@ -30,18 +30,30 @@ const ProjectDetailScreenStyle = {
 function ProjectDetailScreen() {
     const [title, setTitle] = useState("");
     const [headerImage, setHeaderImage] = useState("");
-    const [toolsUsedList, _setToolsUsed] = useState([""]);
-    const [highlightsList, _setHighlight] = useState([""]);
-    const [imagesList, _setImage] = useState([""]);
+    const [toolsUsedList, _setToolsUsed] = useState([]);
+    const [highlightsList, _setHighlight] = useState([]);
+    const [imagesList, _setImage] = useState([]);
+
+    const addToolUsed = (list) => {
+        _setToolsUsed([...list, {"name": ""}]);
+    }
 
     const setToolsUsed = (e, index, list) => {
         list[index].name = e.target.value;
         _setToolsUsed(list);
     }
 
+    const addHighlight = (list) => {
+        _setHighlight([...list, {"detail": ""}]);
+    }
+
     const setHighlight = (e, index, list) => {
         list[index].detail = e.target.value;
         _setHighlight(list);
+    }
+
+    const addImage = (list) => {
+        _setImage([...list, {"url": ""}]);
     }
 
     const setImage = (e, index, list) => {
@@ -84,15 +96,15 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Tools Used</label>
-                    <Form.InputList list={toolsUsedList} onChange={(e, index) => setToolsUsed(e, index, toolsUsedList)} onAdd={_ => setToolsUsed(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={toolsUsedList} objectKey="name" onChange={(e, index) => setToolsUsed(e, index, toolsUsedList)} onAdd={_ => addToolUsed(toolsUsedList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} onChange={(e, index) => setHighlight(e.target.value, index, highlightsList)} onAdd={_ => setHighlight(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={highlightsList} objectKey="detail" onChange={(e, index) => setHighlight(e.target.value, index, highlightsList)} onAdd={_ => addHighlight(highlightsList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Images</label>
-                    <Form.InputList list={imagesList} onChange={(e, index) => setImage(e.target.value, index, imagesList)} onAdd={_ => setImage(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={imagesList} objectKey="url" onChange={(e, index) => setImage(e.target.value, index, imagesList)} onAdd={_ => addImage(imagesList)}/>
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
