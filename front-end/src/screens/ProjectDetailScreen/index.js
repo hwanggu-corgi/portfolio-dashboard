@@ -70,8 +70,9 @@ function ProjectDetailScreen() {
         fetch(`http://localhost:4001/admin/projects`, {
             method: "POST",
             // body: JSON.stringify()
-        }).then(_ => {
-
+        }).then(data => {
+            // go to view page
+            history.push(`/admin/projects/${data.id}`)
         }).catch(error => {
             console.error(error);
         });
@@ -83,7 +84,9 @@ function ProjectDetailScreen() {
         .then(data => {
             setTitle(data.title);
             setHeaderImage(data.header_image_url);
-            setHeaderImage(data.headerImage);
+            _setHighlight(data.highlights);
+            _setToolsUsed(data.tools_used);
+            _setImage(data.images);
         })
         .catch((error) => {
             console.error(error);
