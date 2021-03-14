@@ -42,14 +42,15 @@ projectsRouter.post("/", async (req, res) => {
     let project, highlights, images, tech_used;
     try {
         const text_project = `
-            INSERT INTO projects(title, date, short_description, demo_url, source_url, user_id)
-            VALUES($1, $2, $3, $4, $5, $6)
+            INSERT INTO projects(title, date, short_description, header_image_url,
+                                 demo_url, source_url, user_id)
+            VALUES($1, $2, $3, $4, $5, $6, $7)
             RETURNING *
         `;
         const value_project = [
             req.body.title, req.body.date,
-            req.body.short_description, req.body.demo_url,
-            req.body.demo_url, 1
+            req.body.short_description, req.body.header_image_url,
+            req.body.demo_url, req.body.demo_url, 1
         ];
         const res_project = await promise_query(text_project, value_project);
         project = res_project.rows[0];

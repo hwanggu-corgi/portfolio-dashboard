@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import Form from '../../components/Form'
 import styled from 'styled-components';
 import constants from '../../constants';
@@ -30,6 +30,7 @@ const ProjectDetailScreenStyle = {
 
 function ProjectDetailScreen() {
     const location = useLocation();
+    const history = useHistory();
 
     const [title, setTitle] = useState("");
     const [headerImage, setHeaderImage] = useState("");
@@ -64,7 +65,7 @@ function ProjectDetailScreen() {
         _setImage(list);
     }
 
-    const addProject =  async (e) => {
+    const addProject =  (history) => {
         e.preventDefault();
 
         fetch(`http://localhost:4001/admin/projects`, {
@@ -78,7 +79,8 @@ function ProjectDetailScreen() {
         });
     }
 
-    const getProject = () => {
+    const getProject = (path) => {
+        console.log(path);
         const response = fetch(`http://localhost:4001/admin/projects/${id}`)
         .then(response => response.json())
         .then(data => {
@@ -101,7 +103,7 @@ function ProjectDetailScreen() {
             addHighlight(highlightsList);
             addImage(imagesList);
         } else {
-
+            getProject(location.pathname);
         }
     }, []);
 
