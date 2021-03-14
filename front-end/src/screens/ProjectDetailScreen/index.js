@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import Form from '../../components/Form'
 import styled from 'styled-components';
 import constants from '../../constants';
@@ -28,6 +29,8 @@ const ProjectDetailScreenStyle = {
 };
 
 function ProjectDetailScreen() {
+    const location = useLocation();
+
     const [title, setTitle] = useState("");
     const [headerImage, setHeaderImage] = useState("");
     const [toolsUsedList, _setToolsUsed] = useState([]);
@@ -73,6 +76,16 @@ function ProjectDetailScreen() {
             console.error(error);
         });
     }
+
+
+    useEffect(() => {
+        // if url ends with new, then add initial list
+        if (location.pathname.includes("/new")) {
+            addToolUsed(toolsUsedList);
+            addHighlight(highlightsList);
+            addImage(imagesList);
+        }
+    }, []);
 
     return (
         <ProjectDetailScreenStyle.Section>
