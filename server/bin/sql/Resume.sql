@@ -41,6 +41,7 @@ CREATE TABLE projects (
     title               VARCHAR(100),
     date                DATE,
     short_description   VARCHAR(255),
+    header_image_url    VARCHAR(255),
     demo_url            VARCHAR(255),
     source_url          VARCHAR(255),
     user_id              INT,

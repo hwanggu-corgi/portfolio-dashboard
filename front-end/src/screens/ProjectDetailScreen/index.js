@@ -77,6 +77,19 @@ function ProjectDetailScreen() {
         });
     }
 
+    const getProject = () => {
+        const response = fetch(`http://localhost:4001/admin/projects/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            setTitle(data.title);
+            setHeaderImage(data.header_image_url);
+            setHeaderImage(data.headerImage);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
 
     useEffect(() => {
         // if url ends with new, then add initial list
@@ -84,6 +97,8 @@ function ProjectDetailScreen() {
             addToolUsed(toolsUsedList);
             addHighlight(highlightsList);
             addImage(imagesList);
+        } else {
+
         }
     }, []);
 
