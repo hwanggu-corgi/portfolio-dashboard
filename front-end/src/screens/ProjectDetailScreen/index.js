@@ -35,18 +35,18 @@ function ProjectDetailScreen() {
     const [imagesList, _setImage] = useState([""]);
 
     const setToolsUsed = (e, index, list) => {
-        console.log(e);
-        console.log(index);
+        list[index].name = e.target.value;
+        _setToolsUsed(list);
     }
 
     const setHighlight = (e, index, list) => {
-        console.log(e);
-        console.log(index);
+        list[index].detail = e.target.value;
+        _setHighlight(list);
     }
 
     const setImage = (e, index, list) => {
-        console.log(e);
-        console.log(index);
+        list[index].url = e.target.value;
+        _setImage(list);
     }
 
     const addProject =  async (e) => {
