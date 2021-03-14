@@ -40,11 +40,13 @@ function ProjectDetailScreen() {
     }
 
     const setHighlight = (e, index) => {
-
+        console.log(e);
+        console.log(index);
     }
 
     const setImage = (e, index) => {
-
+        console.log(e);
+        console.log(index);
     }
 
     const addProject =  async (e) => {
@@ -82,7 +84,7 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Tools Used</label>
-                    <Form.InputList list={toolsUsedList} onChange={(e, index) => setToolsUsed(e, index, toolsUsedList)} onAdd={_ => setHighlightsList(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={toolsUsedList} onChange={(e, index) => setToolsUsed(e, index, toolsUsedList)} onAdd={_ => setToolsUsed(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
