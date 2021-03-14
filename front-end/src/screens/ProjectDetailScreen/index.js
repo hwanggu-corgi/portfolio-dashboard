@@ -30,9 +30,13 @@ const ProjectDetailScreenStyle = {
 function ProjectDetailScreen() {
     const [title, setTitle] = useState("");
     const [headerImage, setHeaderImage] = useState("");
-    const [toolsUsedList, setToolsUsed] = useState([""]);
-    const [highlightsList, setHighlight] = useState([""]);
-    const [imagesList, setImage] = useState([""]);
+    const [toolsUsedList, _setToolsUsed] = useState([""]);
+    const [highlightsList, _setHighlight] = useState([""]);
+    const [imagesList, _setImage] = useState([""]);
+
+    const setToolsUsed = (e, index) => {
+
+    }
 
     const addProject =  async (e) => {
         e.preventDefault();
@@ -71,15 +75,15 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Tools Used</label>
-                    <Form.InputList list={toolsUsedList} onChange={setToolsUsed} onAdd={_ => setHighlightsList(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={toolsUsedList} onChange={(e, index) => setToolsUsed(e, index, toolsUsedList)} onAdd={_ => setHighlightsList(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} onChange={(e, index) => setHighlight(e.target.value, index)} onAdd={_ => setHighlight(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={highlightsList} onChange={(e, index) => setHighlight(e.target.value, index, highlightsList)} onAdd={_ => setHighlight(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Images</label>
-                    <Form.InputList list={imagesList} onChange={(e, index) => setImage(e.target.value, index)} onAdd={_ => setImage(oldArray => [...oldArray, ""])}/>
+                    <Form.InputList list={imagesList} onChange={(e, index) => setImage(e.target.value, index, imagesList)} onAdd={_ => setImage(oldArray => [...oldArray, ""])}/>
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
