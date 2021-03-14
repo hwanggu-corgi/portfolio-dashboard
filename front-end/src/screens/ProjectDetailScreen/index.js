@@ -34,17 +34,17 @@ function ProjectDetailScreen() {
     const [highlightsList, _setHighlight] = useState([""]);
     const [imagesList, _setImage] = useState([""]);
 
-    const setToolsUsed = (e, index) => {
+    const setToolsUsed = (e, index, list) => {
         console.log(e);
         console.log(index);
     }
 
-    const setHighlight = (e, index) => {
+    const setHighlight = (e, index, list) => {
         console.log(e);
         console.log(index);
     }
 
-    const setImage = (e, index) => {
+    const setImage = (e, index, list) => {
         console.log(e);
         console.log(index);
     }
