@@ -152,7 +152,8 @@ projectsRouter.get("/", async (req, res) => {
 
 projectsRouter.get("/:id", async (req, res) => {
     const text = "SELECT * FROM projects WHERE id = $1";
-    const value = [req.query.id];
+    const value = [req.params.id];
+
     try {
         const res_projects = await promise_query(text, value);
         let project = res_projects.rows[0];
@@ -177,7 +178,7 @@ projectsRouter.get("/:id", async (req, res) => {
         project["images"] = images;
         project["tech_used"] = tech_used;
 
-        res.send(projects);
+        res.send(project);
     } catch(e) {
         console.log(e);
         res.status(500).send(e);

@@ -34,17 +34,17 @@ function ProjectDetailScreen() {
 
     const [title, setTitle] = useState("");
     const [headerImage, setHeaderImage] = useState("");
-    const [toolsUsedList, _setToolsUsed] = useState([]);
+    const [techsUsedList, _setTechsUsed] = useState([]);
     const [highlightsList, _setHighlight] = useState([]);
     const [imagesList, _setImage] = useState([]);
 
     const addToolUsed = (list) => {
-        _setToolsUsed([...list, {"name": ""}]);
+        _setTechsUsed([...list, {"name": ""}]);
     }
 
-    const setToolsUsed = (e, index, list) => {
+    const setTechsUsed = (e, index, list) => {
         list[index].name = e.target.value;
-        _setToolsUsed(list);
+        _setTechsUsed(list);
     }
 
     const addHighlight = (list) => {
@@ -84,10 +84,11 @@ function ProjectDetailScreen() {
         const response = fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setTitle(data.title);
             setHeaderImage(data.header_image_url);
             _setHighlight(data.highlights);
-            _setToolsUsed(data.tools_used);
+            _setTechsUsed(data.tech_used);
             _setImage(data.images);
         })
         .catch((error) => {
@@ -98,7 +99,7 @@ function ProjectDetailScreen() {
 
     useEffect(() => {
         if (location.pathname.includes("/new")) {
-            addToolUsed(toolsUsedList);
+            addToolUsed(techsUsedList);
             addHighlight(highlightsList);
             addImage(imagesList);
         } else {
@@ -128,7 +129,7 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Tools Used</label>
-                    <Form.InputList list={toolsUsedList} objectKey="name" onChange={(e, index) => setToolsUsed(e, index, toolsUsedList)} onAdd={_ => addToolUsed(toolsUsedList)}/>
+                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addToolUsed(techsUsedList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
