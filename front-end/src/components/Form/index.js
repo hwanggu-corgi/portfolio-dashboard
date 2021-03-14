@@ -72,7 +72,7 @@ function InputList(props) {
         <>
             {props.list.map((item, index) => (
                 <InputListStyle.Div key={index}>
-                    <InputStyle.Input defaultValue={item ? item : ""}/>
+                    <InputStyle.Input defaultValue={item ? item : ""} onChange={e => props.onChange(e, index)}/>
                 </InputListStyle.Div>
             ))}
             <InputListStyle.ButtonSection>

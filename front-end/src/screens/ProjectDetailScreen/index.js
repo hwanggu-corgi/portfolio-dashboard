@@ -35,6 +35,15 @@ function ProjectDetailScreen() {
     const [imagesList, _setImage] = useState([""]);
 
     const setToolsUsed = (e, index) => {
+        console.log(e);
+        console.log(index);
+    }
+
+    const setHighlight = (e, index) => {
+
+    }
+
+    const setImage = (e, index) => {
 
     }
 
@@ -43,11 +52,9 @@ function ProjectDetailScreen() {
 
         fetch(`http://localhost:4001/admin/projects`, {
             method: "POST",
-            body: JSON.stringify()
+            // body: JSON.stringify()
         }).then(_ => {
-            const index = projects.findIndex(item => item.id === id);
-            projects.splice(index, 1);
-            setProject(projects);
+
         }).catch(error => {
             console.error(error);
         });
