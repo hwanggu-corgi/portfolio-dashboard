@@ -65,7 +65,7 @@ function ProjectDetailScreen() {
         _setImage(list);
     }
 
-    const addProject =  (history) => {
+    const addProject =  (e, history) => {
         e.preventDefault();
 
         fetch(`http://localhost:4001/admin/projects`, {
@@ -80,7 +80,7 @@ function ProjectDetailScreen() {
     }
 
     const getProject = (path) => {
-        const domain = "https://localhost:4001";
+        const domain = "http://localhost:4001";
         const response = fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
@@ -113,7 +113,7 @@ function ProjectDetailScreen() {
                 <Button secondary>
                     Delete
                 </Button>
-                <Button primary onSubmit={addProject}>
+                <Button primary onSubmit={e => addProject(e, history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>
@@ -140,7 +140,7 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
-                <Button primary onClick={addProject}>
+                <Button primary onSubmit={e => addProject(e, history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>

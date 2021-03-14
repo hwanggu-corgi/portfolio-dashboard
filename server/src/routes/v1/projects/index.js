@@ -114,6 +114,76 @@ projectsRouter.post("/", async (req, res) => {
     }
 });
 
+projectsRouter.get("/", async (req, res) => {
+    const text = "SELECT * FROM projects";
+    try {
+        const res_projects = await promise_query(text);
+        const projects = res_projects.rows;
+
+        for (project of projects) {
+            const text_highlights = "SELECT id, detail FROM highlights WHERE project_id = $1";
+            const value_highlights = [project.id];
+
+            const text_images = "SELECT id, url FROM images WHERE project_id = $1";
+            const value_images = [project.id];
+
+            const text_tech_used = "SELECT id, name FROM tech_used WHERE project_id = $1";
+            const value_tech_used = [project.id];
+
+            const res_highlights = await promise_query(text_highlights, value_highlights);
+            const highlights = res_highlights.rows;
+            const res_images = await promise_query(text_images, value_images);
+            const images = res_images.rows;
+            const res_tech_used = await promise_query(text_tech_used, value_tech_used);
+            const tech_used = res_tech_used.rows;
+
+            project["highlights"] = highlights;
+            project["images"] = images;
+            project["tech_used"] = tech_used;
+        }
+
+        res.send(projects);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
+
+
+projectsRouter.get("/:id", async (req, res) => {
+    const text = "SELECT * FROM projects WHERE id = $1";
+    const value = [req.query.id];
+    try {
+        const res_projects = await promise_query(text, value);
+        let project = res_projects.rows[0];
+
+        const text_highlights = "SELECT id, detail FROM highlights WHERE project_id = $1";
+        const value_highlights = [project.id];
+
+        const text_images = "SELECT id, url FROM images WHERE project_id = $1";
+        const value_images = [project.id];
+
+        const text_tech_used = "SELECT id, name FROM tech_used WHERE project_id = $1";
+        const value_tech_used = [project.id];
+
+        const res_highlights = await promise_query(text_highlights, value_highlights);
+        const highlights = res_highlights.rows;
+        const res_images = await promise_query(text_images, value_images);
+        const images = res_images.rows;
+        const res_tech_used = await promise_query(text_tech_used, value_tech_used);
+        const tech_used = res_tech_used.rows;
+
+        project["highlights"] = highlights;
+        project["images"] = images;
+        project["tech_used"] = tech_used;
+
+        res.send(projects);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
+
 projectsRouter.put("/:id", async (req, res) => {
     let new_highlights = [];
     let new_images = [];
