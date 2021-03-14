@@ -80,8 +80,8 @@ function ProjectDetailScreen() {
     }
 
     const getProject = (path) => {
-        console.log(path);
-        const response = fetch(`http://localhost:4001/admin/projects/${id}`)
+        const domain = "https://localhost:4001";
+        const response = fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
             setTitle(data.title);
@@ -97,7 +97,6 @@ function ProjectDetailScreen() {
 
 
     useEffect(() => {
-        // if url ends with new, then add initial list
         if (location.pathname.includes("/new")) {
             addToolUsed(toolsUsedList);
             addHighlight(highlightsList);
