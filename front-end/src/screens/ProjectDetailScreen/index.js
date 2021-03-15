@@ -45,6 +45,8 @@ function ProjectDetailScreen() {
     }
 
     const setTechsUsed = (e, index, list) => {
+        console.log(e);
+        console.log(index);
         list[index].name = e.target.value;
         _setTechsUsed(list);
     }
@@ -54,7 +56,9 @@ function ProjectDetailScreen() {
     }
 
     const setHighlight = (e, index, list) => {
-        list[index].detail = e.target.value;
+        console.log(e);
+        console.log(index);
+        list[index].detail = e.target.val;
         _setHighlight(list);
     }
 
@@ -68,8 +72,7 @@ function ProjectDetailScreen() {
     }
 
     const addProject =  (e, history) => {
-        e.preventDefault();
-
+        console.log("I am here");
         const project = {
             title: title,
             header_image_url: headerImage,
@@ -85,6 +88,7 @@ function ProjectDetailScreen() {
             body: JSON.stringify(project)
         }).then(data => {
             // go to view page
+            console.log(data);
             history.push(`/admin/projects/${data.id}`);
         }).catch(error => {
             console.error(error);
@@ -127,7 +131,7 @@ function ProjectDetailScreen() {
                 <Button secondary>
                     Delete
                 </Button>
-                <Button primary onSubmit={e => addProject(e, history)}>
+                <Button primary onClick={e => addProject(e, history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>
@@ -154,15 +158,15 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} objectKey="detail" onChange={(e, index) => setHighlight(e.target.value, index, highlightsList)} onAdd={_ => addHighlight(highlightsList)}/>
+                    <Form.InputList list={highlightsList} objectKey="detail" onChange={(e, index) => setHighlight(e, index, highlightsList)} onAdd={_ => addHighlight(highlightsList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Images</label>
-                    <Form.InputList list={imagesList} objectKey="url" onChange={(e, index) => setImage(e.target.value, index, imagesList)} onAdd={_ => addImage(imagesList)}/>
+                    <Form.InputList list={imagesList} objectKey="url" onChange={(e, index) => setImage(e, index, imagesList)} onAdd={_ => addImage(imagesList)}/>
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
-                <Button primary onSubmit={e => addProject(e, history)}>
+                <Button primary onClick={e => addProject(e, history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>
