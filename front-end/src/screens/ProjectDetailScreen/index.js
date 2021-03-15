@@ -142,6 +142,10 @@ function ProjectDetailScreen() {
         });
     }
 
+    const editProject = (e, history) => {
+
+    }
+
 
     useEffect(() => {
         if (location.pathname.includes("/new")) {
