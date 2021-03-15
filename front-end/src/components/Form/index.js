@@ -36,6 +36,28 @@ function AddMoreButton(props) {
     );
 }
 
+const DateStyle = {
+    Div: styled.div`
+        display: flex;
+    `,
+    Input: styled.input`
+        border: 1px solid ${constants.colorGrey};
+        background-color: ${constants.colorLightGrey};
+        padding: 0.56rem;
+        flex-grow: 1;
+    `
+};
+
+
+function DateInput(props) {
+    return(
+        <DateStyle.Div>
+            <DateStyle.DateInput defaultValue={props.defaultValue} onChange={props.onChange}/>
+        </DateStyle.Div>
+    )
+};
+
+
 const InputStyle = {
     Div: styled.div`
         display: flex;
