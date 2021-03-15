@@ -36,7 +36,7 @@ function AddMoreButton(props) {
     );
 }
 
-const DateStyle = {
+const DateInputStyle = {
     Div: styled.div`
         display: flex;
     `,
@@ -51,9 +51,9 @@ const DateStyle = {
 
 function DateInput(props) {
     return(
-        <DateStyle.Div>
-            <DateStyle.DateInput defaultValue={props.defaultValue} onChange={props.onChange}/>
-        </DateStyle.Div>
+        <DateInputStyle.Div>
+            <DateInputStyle.Input defaultValue={props.defaultValue} onChange={props.onChange} type="date"/>
+        </DateInputStyle.Div>
     )
 };
 
@@ -177,6 +177,7 @@ function KeyValueInputList(props) {
 
 
 export default {
+    DateInput,
     Input,
     InputList,
     FormGroup,

@@ -34,6 +34,7 @@ function ProjectDetailScreen() {
 
     const [id, setId] = useState(0);
     const [title, setTitle] = useState("");
+    const [date, setDate] = useState("");
     const [headerImage, setHeaderImage] = useState("");
     const [demoURL, setDemoURL] = useState("");
     const [sourceURL, setSourceURL] = useState("");
@@ -132,6 +133,7 @@ function ProjectDetailScreen() {
         .then(data => {
             setId(data.id);
             setTitle(data.title);
+            setDate(data.date);
             setHeaderImage(data.header_image_url);
             setDemoURL(data.demo_url);
             setSourceURL(data.source_url);
@@ -173,6 +175,10 @@ function ProjectDetailScreen() {
                 <Form.FormGroup>
                     <label>Title</label>
                     <Form.Input defaultValue={title} onChange={e => setTitle(e.target.value)}/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Date</label>
+                    <Form.DateInput defaultValue={date} onChange={e => setDate(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Header Image</label>
