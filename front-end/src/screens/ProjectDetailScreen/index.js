@@ -143,7 +143,30 @@ function ProjectDetailScreen() {
     }
 
     const editProject = (e, history) => {
+        const project = {
+            id: id,
+            title: title,
+            header_image_url: headerImage,
+            demo_url: demoURL,
+            source_url: sourceURL,
+            tech_used: techsUsedList,
+            highlights: highlightsList,
+            images: imagesList
+        };
 
+        fetch(`http://localhost:4001/admin/projects`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(project)
+        })
+        .then(response => response.json())
+        .then(data => {
+            history.push(`/admin/projects/${data.id}`);
+        }).catch(error => {
+            console.error(error);
+        });
     }
 
 
