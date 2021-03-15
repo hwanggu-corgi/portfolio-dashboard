@@ -7,8 +7,11 @@ import Button from '../../components/Button';
 
 
 const getYYYYMMDD = (date) => {
-    console.log(date);
-    return new Date(date).toISOString().slice(0, 10);
+    date = new Date(date);
+    const year = date.getFullYear();
+    const month = date.getMonth()+1;
+    const day = date.getDate();
+    return `${year}-${month}-${day}`;
 }
 
 const ProjectDetailScreenStyle = {
@@ -78,6 +81,7 @@ function ProjectDetailScreen() {
     const addProject =  (e, history) => {
         const project = {
             title: title,
+            date: new Date(date),
             header_image_url: headerImage,
             demo_url: demoURL,
             source_url: sourceURL,
@@ -105,6 +109,7 @@ function ProjectDetailScreen() {
         const project = {
             id: id,
             title: title,
+            date: new Date(date),
             header_image_url: headerImage,
             demo_url: demoURL,
             source_url: sourceURL,
