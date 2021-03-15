@@ -72,7 +72,6 @@ function ProjectDetailScreen() {
     }
 
     const addProject =  (e, history) => {
-        console.log("I am here");
         const project = {
             title: title,
             header_image_url: headerImage,
@@ -85,15 +84,45 @@ function ProjectDetailScreen() {
 
         fetch(`http://localhost:4001/admin/projects`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(project)
-        }).then(data => {
-            // go to view page
-            console.log(data);
+        })
+        .then(response => response.json())
+        .then(data => {
             history.push(`/admin/projects/${data.id}`);
         }).catch(error => {
             console.error(error);
         });
     }
+
+    const editProject =  (e, history) => {
+        const project = {
+            title: title,
+            header_image_url: headerImage,
+            demo_url: demoURL,
+            source_url: sourceURL,
+            tech_used: techsUsedList,
+            highlights: highlightsList,
+            images: imagesList
+        };
+
+        fetch(`http://localhost:4001/admin/projects`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(project)
+        })
+        .then(response => response.json())
+        .then(data => {
+            history.push(`/admin/projects/${data.id}`);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
 
     const getProject = (path) => {
         const domain = "http://localhost:4001";
@@ -128,10 +157,14 @@ function ProjectDetailScreen() {
         <ProjectDetailScreenStyle.Section>
             <ProjectDetailScreenStyle.H2>Portfolio Dashboard</ProjectDetailScreenStyle.H2>
             <ProjectDetailScreenStyle.ButtonSection>
-                <Button secondary>
-                    Delete
-                </Button>
-                <Button primary onClick={e => addProject(e, history)}>
+                {
+                    !location.pathname.includes("/new") ?
+                        <Button secondary>
+                            Delete
+                        </Button>
+                    : null
+                }
+                <Button primary onClick={e => location.pathname.includes("/new") ? addProject(e, history) : editProject(e, history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>
@@ -166,7 +199,7 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
-                <Button primary onClick={e => addProject(e, history)}>
+                <Button primary onClick={e => location.pathname.includes("/new") ? addProject(e, history) : editProject(e, history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>

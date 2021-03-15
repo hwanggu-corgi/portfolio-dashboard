@@ -53,7 +53,6 @@ projectsRouter.post("/", async (req, res) => {
             req.body.demo_url, req.body.source_url, 1
         ];
 
-        console.log(req.body);
         const res_project = await promise_query(text_project, value_project);
         project = res_project.rows[0];
 
@@ -66,10 +65,6 @@ projectsRouter.post("/", async (req, res) => {
 
             let value_highlights = [];
             for (let item of req.body.highlights) {
-                if (!item.detail) {
-                    continue;
-                }
-
                 value_highlights.push(item.detail);
                 value_highlights.push(project.id);
             };
@@ -85,10 +80,6 @@ projectsRouter.post("/", async (req, res) => {
             `;
             let value_tech_used = [];
             for (let item of req.body.tech_used) {
-                if (!item.name) {
-                    continue;
-                }
-
                 value_tech_used.push(item.name);
                 value_tech_used.push(project.id);
             };
@@ -104,10 +95,6 @@ projectsRouter.post("/", async (req, res) => {
             `;
             let value_images = [];
             for (let item of req.body.images) {
-                if (!item.url) {
-                    continue;
-                }
-
                 value_images.push(item.url);
                 value_images.push(project.id);
             };
