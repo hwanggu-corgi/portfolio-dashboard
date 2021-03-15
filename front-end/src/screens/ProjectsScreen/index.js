@@ -42,7 +42,7 @@ function ProjectsScreen() {
         }).then(_ => {
             const index = projects.findIndex(item => item.id === id);
             projects.splice(index, 1);
-            setProject(projects);
+            setProject([...projects]);
         }).catch(error => {
             console.error(error);
         });

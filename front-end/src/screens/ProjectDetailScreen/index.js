@@ -32,6 +32,7 @@ function ProjectDetailScreen() {
     const location = useLocation();
     const history = useHistory();
 
+    const [id, setId] = useState(0);
     const [title, setTitle] = useState("");
     const [headerImage, setHeaderImage] = useState("");
     const [demoURL, setDemoURL] = useState("");
@@ -97,51 +98,6 @@ function ProjectDetailScreen() {
         });
     }
 
-    const editProject =  (e, history) => {
-        const project = {
-            title: title,
-            header_image_url: headerImage,
-            demo_url: demoURL,
-            source_url: sourceURL,
-            tech_used: techsUsedList,
-            highlights: highlightsList,
-            images: imagesList
-        };
-
-        fetch(`http://localhost:4001/admin/projects`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(project)
-        })
-        .then(response => response.json())
-        .then(data => {
-            history.push(`/admin/projects/${data.id}`);
-        }).catch(error => {
-            console.error(error);
-        });
-    }
-
-
-    const getProject = (path) => {
-        const domain = "http://localhost:4001";
-        const response = fetch(`${domain}${path}`)
-        .then(response => response.json())
-        .then(data => {
-            setTitle(data.title);
-            setHeaderImage(data.header_image_url);
-            setDemoURL(data.demo_url);
-            setSourceURL(data.source_url);
-            _setHighlight(data.highlights);
-            _setTechsUsed(data.tech_used);
-            _setImage(data.images);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
-
     const editProject = (e, history) => {
         const project = {
             id: id,
@@ -169,6 +125,24 @@ function ProjectDetailScreen() {
         });
     }
 
+    const getProject = (path) => {
+        const domain = "http://localhost:4001";
+        const response = fetch(`${domain}${path}`)
+        .then(response => response.json())
+        .then(data => {
+            setId(data.id);
+            setTitle(data.title);
+            setHeaderImage(data.header_image_url);
+            setDemoURL(data.demo_url);
+            setSourceURL(data.source_url);
+            _setHighlight(data.highlights);
+            _setTechsUsed(data.tech_used);
+            _setImage(data.images);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
 
     useEffect(() => {
         if (location.pathname.includes("/new")) {
