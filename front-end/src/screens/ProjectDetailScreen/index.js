@@ -5,6 +5,11 @@ import styled from 'styled-components';
 import constants from '../../constants';
 import Button from '../../components/Button';
 
+
+const getYYYYMMDD = (date) => {
+    return new Date(date).toISOString().slice(0, 10);
+}
+
 const ProjectDetailScreenStyle = {
     Section: styled.section`
         border: 1px solid ${constants.colorGrey};
@@ -133,7 +138,7 @@ function ProjectDetailScreen() {
         .then(data => {
             setId(data.id);
             setTitle(data.title);
-            setDate(data.date);
+            setDate(getYYYYMMDD(data.date));
             setHeaderImage(data.header_image_url);
             setDemoURL(data.demo_url);
             setSourceURL(data.source_url);
