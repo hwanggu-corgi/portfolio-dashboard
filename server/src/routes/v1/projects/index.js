@@ -52,6 +52,8 @@ projectsRouter.post("/", async (req, res) => {
             req.body.short_description, req.body.header_image_url,
             req.body.demo_url, req.body.source_url, 1
         ];
+
+        console.log(req.body);
         const res_project = await promise_query(text_project, value_project);
         project = res_project.rows[0];
 
@@ -64,7 +66,11 @@ projectsRouter.post("/", async (req, res) => {
 
             let value_highlights = [];
             for (let item of req.body.highlights) {
-                value_highlights.push(item);
+                if (!item.detail) {
+                    continue;
+                }
+
+                value_highlights.push(item.detail);
                 value_highlights.push(project.id);
             };
             const res_highlights = await promise_query(text_highlights, value_highlights);
@@ -79,7 +85,11 @@ projectsRouter.post("/", async (req, res) => {
             `;
             let value_tech_used = [];
             for (let item of req.body.tech_used) {
-                value_tech_used.push(item);
+                if (!item.name) {
+                    continue;
+                }
+
+                value_tech_used.push(item.name);
                 value_tech_used.push(project.id);
             };
             const res_tech_used = await promise_query(text_tech_used, value_tech_used);
@@ -94,7 +104,11 @@ projectsRouter.post("/", async (req, res) => {
             `;
             let value_images = [];
             for (let item of req.body.images) {
-                value_images.push(item);
+                if (!item.url) {
+                    continue;
+                }
+
+                value_images.push(item.url);
                 value_images.push(project.id);
             };
             const res_images = await promise_query(text_images, value_images);
