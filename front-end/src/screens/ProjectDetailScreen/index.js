@@ -11,6 +11,7 @@ const getYYYYMMDD = (date) => {
     const year = date.getFullYear();
     const month = date.getMonth()+1;
     const day = date.getDate();
+    console.log(`${year}-${month}-${day}`);
     return `${year}-${month}-${day}`;
 }
 
@@ -81,7 +82,7 @@ function ProjectDetailScreen() {
     const addProject =  (e, history) => {
         const project = {
             title: title,
-            date: new Date(date),
+            date: date,
             header_image_url: headerImage,
             demo_url: demoURL,
             source_url: sourceURL,
@@ -109,7 +110,7 @@ function ProjectDetailScreen() {
         const project = {
             id: id,
             title: title,
-            date: new Date(date),
+            date: date,
             header_image_url: headerImage,
             demo_url: demoURL,
             source_url: sourceURL,
