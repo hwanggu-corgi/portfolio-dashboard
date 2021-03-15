@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 
 
 const getYYYYMMDD = (date) => {
+    console.log(date);
     return new Date(date).toISOString().slice(0, 10);
 }
 
@@ -52,8 +53,6 @@ function ProjectDetailScreen() {
     }
 
     const setTechsUsed = (e, index, list) => {
-        console.log(e);
-        console.log(index);
         list[index].name = e.target.value;
         _setTechsUsed(list);
     }
