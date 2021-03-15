@@ -84,7 +84,6 @@ function ProjectDetailScreen() {
         const response = fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setTitle(data.title);
             setHeaderImage(data.header_image_url);
             _setHighlight(data.highlights);
