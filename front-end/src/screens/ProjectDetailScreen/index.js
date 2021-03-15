@@ -34,6 +34,8 @@ function ProjectDetailScreen() {
 
     const [title, setTitle] = useState("");
     const [headerImage, setHeaderImage] = useState("");
+    const [demoURL, setDemoURL] = useState("");
+    const [sourceURL, setSourceURL] = useState("");
     const [techsUsedList, _setTechsUsed] = useState([]);
     const [highlightsList, _setHighlight] = useState([]);
     const [imagesList, _setImage] = useState([]);
@@ -68,9 +70,19 @@ function ProjectDetailScreen() {
     const addProject =  (e, history) => {
         e.preventDefault();
 
+        const project = {
+            title: title,
+            header_image_url: headerImage,
+            demo_url: demoURL,
+            source_url: sourceURL,
+            tech_used: techsUsedList,
+            highlights: highlightsList,
+            images: imagesList
+        };
+
         fetch(`http://localhost:4001/admin/projects`, {
             method: "POST",
-            // body: JSON.stringify()
+            body: JSON.stringify(project)
         }).then(data => {
             // go to view page
             history.push(`/admin/projects/${data.id}`);
@@ -86,6 +98,8 @@ function ProjectDetailScreen() {
         .then(data => {
             setTitle(data.title);
             setHeaderImage(data.header_image_url);
+            setDemoURL(data.demo_url);
+            setSourceURL(data.source_url);
             _setHighlight(data.highlights);
             _setTechsUsed(data.tech_used);
             _setImage(data.images);
@@ -125,6 +139,14 @@ function ProjectDetailScreen() {
                 <Form.FormGroup>
                     <label>Header Image</label>
                     <Form.Input defaultValue={headerImage} onChange={e => setHeaderImage(e.target.value)}/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Demo URL</label>
+                    <Form.Input defaultValue={demoURL} onChange={e => setDemoURL(e.target.value)}/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Source URL</label>
+                    <Form.Input defaultValue={sourceURL} onChange={e => setSourceURL(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Tools Used</label>
