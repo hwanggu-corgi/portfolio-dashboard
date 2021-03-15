@@ -49,7 +49,7 @@ function ProjectsScreen() {
     }
 
     const getProjects = () => {
-        const response = fetch("http://localhost:4001/admin/projects")
+        fetch("http://localhost:4001/admin/projects")
         .then(response => response.json())
         .then(data => setProject(data))
         .catch((error) => {

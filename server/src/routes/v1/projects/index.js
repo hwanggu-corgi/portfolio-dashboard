@@ -194,14 +194,14 @@ projectsRouter.put("/:id", async (req, res) => {
     try{
         const text_project = `
             UPDATE projects
-            SET (title, date, short_description, demo_url, source_url) = ($1, $2, $3, $4, $5)
-            WHERE id = $6 RETURNING *
+            SET (title, date, short_description, header_image_url, demo_url, source_url) = ($1, $2, $3, $4, $5, $6)
+            WHERE id = $7 RETURNING *
         `;
 
         const value_project = [
             req.body.title, req.body.date,
-            req.body.short_description, req.body.demo_url,
-            req.body.source_url, req.params.id
+            req.body.short_description, req.body.header_image_url,
+            req.body.demo_url, req.body.source_url, req.params.id
         ];
 
         const res_project = await promise_query(text_project, value_project);
