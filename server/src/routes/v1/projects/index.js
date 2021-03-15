@@ -50,7 +50,7 @@ projectsRouter.post("/", async (req, res) => {
         const value_project = [
             req.body.title, req.body.date,
             req.body.short_description, req.body.header_image_url,
-            req.body.demo_url, req.body.demo_url, 1
+            req.body.demo_url, req.body.source_url, 1
         ];
         const res_project = await promise_query(text_project, value_project);
         project = res_project.rows[0];

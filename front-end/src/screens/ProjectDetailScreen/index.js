@@ -58,7 +58,7 @@ function ProjectDetailScreen() {
     const setHighlight = (e, index, list) => {
         console.log(e);
         console.log(index);
-        list[index].detail = e.target.val;
+        list[index].detail = e.target.value;
         _setHighlight(list);
     }
 
