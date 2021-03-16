@@ -88,7 +88,7 @@ function WorkExperienceDetailScreen() {
         })
         .then(response => response.json())
         .then(data => {
-            history.push(`/admin/projects/${data.id}`);
+            history.push(`/admin/work-experiences/${data.id}`);
         }).catch(error => {
             console.error(error);
         });
