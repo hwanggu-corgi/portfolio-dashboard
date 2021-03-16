@@ -69,6 +69,8 @@ function WorkExperiencesScreen() {
         getWorkExperiences();
     }, []);
 
+    console.log(workExperiences);
+
     return (
         <WorkExperiencesScreenStyle.PageSection>
             <WorkExperiencesScreenStyle.H2>Work Experiences</WorkExperiencesScreenStyle.H2>
