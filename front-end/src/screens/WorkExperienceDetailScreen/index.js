@@ -72,6 +72,7 @@ function WorkExperienceDetailScreen() {
         const workExp = {
             company: company,
             position: position,
+            location: companyLocation,
             date_start: dateStart,
             date_end: dateEnd,
             tech_used: techsUsedList,
@@ -98,6 +99,7 @@ function WorkExperienceDetailScreen() {
             id: id,
             company: company,
             position: position,
+            location: companyLocation,
             date_start: dateStart,
             date_end: dateEnd,
             tech_used: techsUsedList,
