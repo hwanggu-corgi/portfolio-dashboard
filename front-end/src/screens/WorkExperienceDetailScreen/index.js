@@ -43,6 +43,8 @@ function WorkExperienceDetailScreen() {
 
     const [id, setId] = useState(0);
     const [title, setTitle] = useState("");
+    const [position, setPosition] = useState("");
+    const [companyLocation, setCompanyLocation] = useState("");
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
     const [techsUsedList, _setTechsUsed] = useState([]);
@@ -64,16 +66,13 @@ function WorkExperienceDetailScreen() {
     const addWorkExperience =  (e, history) => {
         const project = {
             title: title,
-            date: date,
-            header_image_url: headerImage,
-            demo_url: demoURL,
-            source_url: sourceURL,
+            date_start: dateStart,
+            date_end: dateEnd,
             tech_used: techsUsedList,
             highlights: highlightsList,
-            images: imagesList
         };
 
-        fetch(`http://localhost:4001/admin/projects`, {
+        fetch(`http://localhost:4001/admin/work-experiences`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -98,7 +97,7 @@ function WorkExperienceDetailScreen() {
             highlights: highlightsList,
         };
 
-        fetch(`http://localhost:4001/admin/projects/${id}`, {
+        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -114,7 +113,7 @@ function WorkExperienceDetailScreen() {
     }
 
     const deleteWorkExperience = (e, history) => {
-        fetch(`http://localhost:4001/admin/projects/${id}`, {
+        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
             method: "DELETE"
         })
         .then(_ => {
@@ -131,8 +130,8 @@ function WorkExperienceDetailScreen() {
         .then(data => {
             setId(data.id);
             setTitle(data.title);
-            setStartDate(getYYYYMMDD(data.date_start));
-            setEndDate(getYYYYMMDD(data.date_end));
+            setDateStart(getYYYYMMDD(data.date_start));
+            setDateEnd(getYYYYMMDD(data.date_end));
             _setHighlights(data.highlights);
             _setTechsUsed(data.tech_used);
         })
@@ -170,31 +169,31 @@ function WorkExperienceDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date Start</label>
-                    <Form.DateInput defaultValue={dateStart} onChange={e => setStartDate(e.target.value)}/>
+                    <Form.DateInput defaultValue={dateStart} onChange={e => setDateStart(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date End</label>
-                    <Form.DateInput defaultValue={dateEnd} onChange={e => setEndDate(e.target.value)}/>
+                    <Form.DateInput defaultValue={dateEnd} onChange={e => setDateEnd(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Position</label>
-                    <Form.Input/>
+                    <Form.Input defaultValue={position} onChange={e => setPosition(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Location</label>
-                    <Form.Input/>
+                    <Form.Input defaultValue={companyLocation} onChange={e => setCompanyLocation(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date Start</label>
-                    <Form.Input/>
+                    <Form.Input defaultValue={dateStart} onChange={e => setDateStart(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date End</label>
-                    <Form.Input/>
+                    <Form.Input defaultValue={dateEnd} onChange={e => setDateEnd(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
-                    <label>Tech Stacks</label>
-                    <Form.Input/>
+                    <label>Techs Used</label>
+                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addToolUsed(techsUsedList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>

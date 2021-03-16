@@ -211,7 +211,7 @@ function ProjectDetailScreen() {
                     <Form.Input defaultValue={sourceURL} onChange={e => setSourceURL(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
-                    <label>Tools Used</label>
+                    <label>Techs Used</label>
                     <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addToolUsed(techsUsedList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
