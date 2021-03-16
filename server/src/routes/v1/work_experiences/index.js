@@ -58,7 +58,7 @@ workExperiencesRouter.post("/", async (req, res) => {
 
             let value_highlights = [];
             for (let item of req.body.highlights) {
-                value_highlights.push(item);
+                value_highlights.push(item.detail);
                 value_highlights.push(work_experience.id);
             };
             const res_highlights = await promise_query(text_highlights, value_highlights);
@@ -73,7 +73,7 @@ workExperiencesRouter.post("/", async (req, res) => {
             `;
             let value_tech_used = [];
             for (let item of req.body.tech_used) {
-                value_tech_used.push(item);
+                value_tech_used.push(item.name);
                 value_tech_used.push(work_experience.id);
             };
             const res_tech_used = await promise_query(text_tech_used, value_tech_used);
