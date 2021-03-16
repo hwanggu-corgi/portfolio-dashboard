@@ -25,8 +25,128 @@ const InfoScreenStyle = {
 };
 
 function InfoScreen() {
-    let [contactsList, setContactsList] = useState([["",""]]);
-    let [socialsList, setSocialsList] = useState([["",""]]);
+    const location = useLocation();
+    const history = useHistory();
+
+    const [id, setId] = useState(0);
+    const [company, setCompany] = useState("");
+    const [position, setPosition] = useState("");
+    const [companyLocation, setCompanyLocation] = useState("");
+    const [dateStart, setDateStart] = useState("");
+    const [dateEnd, setDateEnd] = useState("");
+    const [techsUsedList, _setTechsUsed] = useState([]);
+    const [highlightsList, _setHighlights] = useState([]);
+
+    const addTechUsed = (list) => {
+        _setTechsUsed([...list, {"name": ""}]);
+    }
+
+    const setTechsUsed = (e, index, list) => {
+        list[index].name = e.target.value;
+        _setTechsUsed(list);
+    }
+
+    const addHighlight = (list) => {
+        _setHighlights([...list, {"detail": ""}]);
+    }
+
+    const setHighlight = (e, index, list) => {
+        list[index].detail = e.target.value;
+        _setHighlights(list);
+    }
+
+    const addWorkExperience =  (e, history) => {
+        const workExp = {
+            company: company,
+            position: position,
+            location: companyLocation,
+            date_start: dateStart,
+            date_end: dateEnd,
+            tech_used: techsUsedList,
+            highlights: highlightsList,
+        };
+
+        fetch(`http://localhost:4001/admin/work-experiences`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(workExp)
+        })
+        .then(response => response.json())
+        .then(data => {
+            history.push(`/admin/work-experiences/${data.id}`);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
+    const editWorkExperience = (e, history) => {
+        const workExp = {
+            id: id,
+            company: company,
+            position: position,
+            location: companyLocation,
+            date_start: dateStart,
+            date_end: dateEnd,
+            tech_used: techsUsedList,
+            highlights: highlightsList,
+        };
+
+        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(workExp)
+        })
+        .then(response => response.json())
+        .then(data => {
+            history.push(`/admin/work-experiences/${id}`);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
+    const deleteWorkExperience = (e, history) => {
+        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
+            method: "DELETE"
+        })
+        .then(_ => {
+            history.push(`/admin/work-experiences`);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
+    const getWorkExperience = (path) => {
+        const domain = "http://localhost:4001";
+        fetch(`${domain}${path}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            setId(data.id);
+            setCompany(data.company);
+            setPosition(data.position);
+            setCompanyLocation(data.location);
+            setDateStart(getYYYYMMDD(data.date_start));
+            setDateEnd(getYYYYMMDD(data.date_end));
+            _setHighlights(data.highlights);
+            _setTechsUsed(data.tech_used);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
+    useEffect(() => {
+        if (location.pathname.includes("/new")) {
+            addTechUsed(techsUsedList);
+            addHighlight(highlightsList);
+        } else {
+            getWorkExperience(location.pathname);
+        }
+    }, []);
 
     return (
         <InfoScreenStyle.Section>
