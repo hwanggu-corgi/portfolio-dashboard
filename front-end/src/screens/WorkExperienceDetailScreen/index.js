@@ -64,7 +64,7 @@ function WorkExperienceDetailScreen() {
     }
 
     const addWorkExperience =  (e, history) => {
-        const project = {
+        const workExp = {
             title: title,
             date_start: dateStart,
             date_end: dateEnd,
@@ -77,7 +77,7 @@ function WorkExperienceDetailScreen() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(project)
+            body: JSON.stringify(workExp)
         })
         .then(response => response.json())
         .then(data => {
@@ -88,7 +88,7 @@ function WorkExperienceDetailScreen() {
     }
 
     const editWorkExperience = (e, history) => {
-        const project = {
+        const workExp = {
             id: id,
             title: title,
             date_start: dateStart,
@@ -102,11 +102,11 @@ function WorkExperienceDetailScreen() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(project)
+            body: JSON.stringify(workExp)
         })
         .then(response => response.json())
         .then(data => {
-            history.push(`/admin/projects/${id}`);
+            history.push(`/admin/work-experiences/${id}`);
         }).catch(error => {
             console.error(error);
         });
@@ -117,7 +117,7 @@ function WorkExperienceDetailScreen() {
             method: "DELETE"
         })
         .then(_ => {
-            history.push(`/admin/projects`);
+            history.push(`/admin/work-experiences`);
         }).catch(error => {
             console.error(error);
         });
@@ -146,7 +146,7 @@ function WorkExperienceDetailScreen() {
             addHighlight(highlightsList);
             addImage(imagesList);
         } else {
-            getProject(location.pathname);
+            getWorkExperience(location.pathname);
         }
     }, []);
 
