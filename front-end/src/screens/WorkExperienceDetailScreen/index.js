@@ -42,7 +42,7 @@ function WorkExperienceDetailScreen() {
     const history = useHistory();
 
     const [id, setId] = useState(0);
-    const [title, setTitle] = useState("");
+    const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
     const [companyLocation, setCompanyLocation] = useState("");
     const [dateStart, setDateStart] = useState("");
@@ -70,7 +70,8 @@ function WorkExperienceDetailScreen() {
 
     const addWorkExperience =  (e, history) => {
         const workExp = {
-            title: title,
+            company: company,
+            position: position,
             date_start: dateStart,
             date_end: dateEnd,
             tech_used: techsUsedList,
@@ -95,7 +96,8 @@ function WorkExperienceDetailScreen() {
     const editWorkExperience = (e, history) => {
         const workExp = {
             id: id,
-            title: title,
+            company: company,
+            position: position,
             date_start: dateStart,
             date_end: dateEnd,
             tech_used: techsUsedList,
@@ -133,8 +135,10 @@ function WorkExperienceDetailScreen() {
         fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setId(data.id);
-            setTitle(data.title);
+            setCompany(data.company);
+            setPosition(data.position);
             setDateStart(getYYYYMMDD(data.date_start));
             setDateEnd(getYYYYMMDD(data.date_end));
             _setHighlights(data.highlights);
@@ -157,7 +161,7 @@ function WorkExperienceDetailScreen() {
 
     return (
         <WorkExperienceDetailScreenStyle.Section>
-            <WorkExperienceDetailScreenStyle.H2>SiteMax Systems Inc. - Junior Developer</WorkExperienceDetailScreenStyle.H2>
+            <WorkExperienceDetailScreenStyle.H2>{id ? `${company} - ${position}` : "New Work Experience"}</WorkExperienceDetailScreenStyle.H2>
             <WorkExperienceDetailScreenStyle.ButtonSection>
                 {
                     !location.pathname.includes("/new") ?
@@ -173,7 +177,11 @@ function WorkExperienceDetailScreen() {
             <form>
                 <Form.FormGroup>
                     <label>Company Name</label>
-                    <Form.Input/>
+                    <Form.Input defaultValue={company} onChange={e => setCompany(e.target.value)}/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Position</label>
+                    <Form.Input defaultValue={position} onChange={e => setPosition(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date Start</label>
@@ -184,20 +192,8 @@ function WorkExperienceDetailScreen() {
                     <Form.DateInput defaultValue={dateEnd} onChange={e => setDateEnd(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
-                    <label>Position</label>
-                    <Form.Input defaultValue={position} onChange={e => setPosition(e.target.value)}/>
-                </Form.FormGroup>
-                <Form.FormGroup>
                     <label>Location</label>
                     <Form.Input defaultValue={companyLocation} onChange={e => setCompanyLocation(e.target.value)}/>
-                </Form.FormGroup>
-                <Form.FormGroup>
-                    <label>Date Start</label>
-                    <Form.Input defaultValue={dateStart} onChange={e => setDateStart(e.target.value)}/>
-                </Form.FormGroup>
-                <Form.FormGroup>
-                    <label>Date End</label>
-                    <Form.Input defaultValue={dateEnd} onChange={e => setDateEnd(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Techs Used</label>

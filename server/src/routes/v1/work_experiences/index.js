@@ -37,14 +37,14 @@ workExperiencesRouter.post("/", async (req, res) => {
     try {
 
         const text_work_experience = `
-            INSERT INTO work_experiences(company, date_start, date_end, location, user_id)
-            VALUES($1, $2, $3, $4, $5)
+            INSERT INTO work_experiences(company, date_start, date_end, location, position, user_id)
+            VALUES($1, $2, $3, $4, $5, $6)
             RETURNING *
         `;
         const value_work_experience = [
             req.body.company, req.body.date_start,
             req.body.date_end, req.body.location,
-            1
+            req.body.position, 1
         ];
         const res_work_experience = await promise_query(text_work_experience, value_work_experience);
         work_experience = res_work_experience.rows[0];

@@ -13,6 +13,7 @@ CREATE TABLE work_experiences (
     date_start   DATE,
     date_end     DATE,
     location     VARCHAR(255),
+    position     VARCHAR(255),
     user_id      INT,
     FOREIGN KEY (user_id) REFERENCES user_self(id)
 );

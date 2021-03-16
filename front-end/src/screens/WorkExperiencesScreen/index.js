@@ -10,6 +10,7 @@ import { useHistory } from 'react-router';
 
 
 const strftime = (date_string) => {
+    console.log(date_string);
     const date = new Date(date_string);
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -92,8 +93,8 @@ function WorkExperiencesScreen() {
                     {workExperiences.map(item => (
                         <tr key={item.id}>
                             <TableStyle.Td>{item.company}</TableStyle.Td>
-                            <TableStyle.Td>{strftime(item.dateStart)}</TableStyle.Td>
-                            <TableStyle.Td>{strftime(item.dateEnd)}</TableStyle.Td>
+                            <TableStyle.Td>{strftime(item.date_start)}</TableStyle.Td>
+                            <TableStyle.Td>{strftime(item.date_end)}</TableStyle.Td>
                             <TableStyle.Td>{item.position}</TableStyle.Td>
                             <TableStyle.Td>{item.location}</TableStyle.Td>
                             <TableStyle.Td>
