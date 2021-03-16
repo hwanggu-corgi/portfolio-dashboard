@@ -48,8 +48,8 @@ function ProjectDetailScreen() {
     const [demoURL, setDemoURL] = useState("");
     const [sourceURL, setSourceURL] = useState("");
     const [techsUsedList, _setTechsUsed] = useState([]);
-    const [highlightsList, _setHighlight] = useState([]);
-    const [imagesList, _setImage] = useState([]);
+    const [highlightsList, _setHighlights] = useState([]);
+    const [imagesList, _setImages] = useState([]);
 
     const addToolUsed = (list) => {
         _setTechsUsed([...list, {"name": ""}]);
@@ -61,21 +61,21 @@ function ProjectDetailScreen() {
     }
 
     const addHighlight = (list) => {
-        _setHighlight([...list, {"detail": ""}]);
+        _setHighlights([...list, {"detail": ""}]);
     }
 
     const setHighlight = (e, index, list) => {
         list[index].detail = e.target.value;
-        _setHighlight(list);
+        _setHighlights(list);
     }
 
     const addImage = (list) => {
-        _setImage([...list, {"url": ""}]);
+        _setImages([...list, {"url": ""}]);
     }
 
     const setImage = (e, index, list) => {
         list[index].url = e.target.value;
-        _setImage(list);
+        _setImages(list);
     }
 
     const addProject =  (e, history) => {
@@ -155,9 +155,9 @@ function ProjectDetailScreen() {
             setHeaderImage(data.header_image_url);
             setDemoURL(data.demo_url);
             setSourceURL(data.source_url);
-            _setHighlight(data.highlights);
+            _setHighlights(data.highlights);
             _setTechsUsed(data.tech_used);
-            _setImage(data.images);
+            _setImages(data.images);
         })
         .catch((error) => {
             console.error(error);

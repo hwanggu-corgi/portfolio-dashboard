@@ -46,22 +46,22 @@ function WorkExperienceDetailScreen() {
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
     const [techsUsedList, _setTechsUsed] = useState([]);
-    const [highlightsList, _setHighlight] = useState([]);
+    const [highlightsList, _setHighlights] = useState([]);
 
     const addToolUsed = (list) => {
         _setTechsUsed([...list, {"name": ""}]);
     }
 
     const addHighlight = (list) => {
-        _setHighlight([...list, {"detail": ""}]);
+        _setHighlights([...list, {"detail": ""}]);
     }
 
     const setHighlight = (e, index, list) => {
         list[index].detail = e.target.value;
-        _setHighlight(list);
+        _setHighlights(list);
     }
 
-    const addProject =  (e, history) => {
+    const addWorkExperience =  (e, history) => {
         const project = {
             title: title,
             date: date,
@@ -88,17 +88,14 @@ function WorkExperienceDetailScreen() {
         });
     }
 
-    const editProject = (e, history) => {
+    const editWorkExperience = (e, history) => {
         const project = {
             id: id,
             title: title,
-            date: date,
-            header_image_url: headerImage,
-            demo_url: demoURL,
-            source_url: sourceURL,
+            date_start: dateStart,
+            date_end: dateEnd,
             tech_used: techsUsedList,
             highlights: highlightsList,
-            images: imagesList
         };
 
         fetch(`http://localhost:4001/admin/projects/${id}`, {
@@ -116,7 +113,7 @@ function WorkExperienceDetailScreen() {
         });
     }
 
-    const deleteProject = (e, history) => {
+    const deleteWorkExperience = (e, history) => {
         fetch(`http://localhost:4001/admin/projects/${id}`, {
             method: "DELETE"
         })
@@ -127,20 +124,17 @@ function WorkExperienceDetailScreen() {
         });
     }
 
-    const getProject = (path) => {
+    const getWorkExperience = (path) => {
         const domain = "http://localhost:4001";
         fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
             setId(data.id);
             setTitle(data.title);
-            setDate(getYYYYMMDD(data.date));
-            setHeaderImage(data.header_image_url);
-            setDemoURL(data.demo_url);
-            setSourceURL(data.source_url);
-            _setHighlight(data.highlights);
+            setStartDate(getYYYYMMDD(data.date_start));
+            setEndDate(getYYYYMMDD(data.date_end));
+            _setHighlights(data.highlights);
             _setTechsUsed(data.tech_used);
-            _setImage(data.images);
         })
         .catch((error) => {
             console.error(error);
