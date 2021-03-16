@@ -133,9 +133,20 @@ function ProjectDetailScreen() {
         });
     }
 
+    const deleteProject = (e, history) => {
+        fetch(`http://localhost:4001/admin/projects/${id}`, {
+            method: "DELETE"
+        })
+        .then(_ => {
+            history.push(`/admin/projects`);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
     const getProject = (path) => {
         const domain = "http://localhost:4001";
-        const response = fetch(`${domain}${path}`)
+        fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
             setId(data.id);
@@ -169,7 +180,7 @@ function ProjectDetailScreen() {
             <ProjectDetailScreenStyle.ButtonSection>
                 {
                     !location.pathname.includes("/new") ?
-                        <Button secondary>
+                        <Button secondary onClick={e => deleteProject(e, history)}>
                             Delete
                         </Button>
                     : null
