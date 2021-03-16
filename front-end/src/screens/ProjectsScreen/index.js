@@ -40,7 +40,7 @@ const ProjectsScreenStyle = {
 
 function ProjectsScreen() {
     let history = useHistory();
-    const [projects, setProject] = useState([]);
+    const [projects, setProjects] = useState([]);
 
     const deleteProject =  async (id) => {
         fetch(`http://localhost:4001/admin/projects/${id}`, {
@@ -48,7 +48,7 @@ function ProjectsScreen() {
         }).then(_ => {
             const index = projects.findIndex(item => item.id === id);
             projects.splice(index, 1);
-            setProject([...projects]);
+            setProjects([...projects]);
         }).catch(error => {
             console.error(error);
         });
@@ -57,7 +57,7 @@ function ProjectsScreen() {
     const getProjects = () => {
         fetch("http://localhost:4001/admin/projects")
         .then(response => response.json())
-        .then(data => setProject(data))
+        .then(data => setProjects(data))
         .catch((error) => {
             console.error(error);
         });

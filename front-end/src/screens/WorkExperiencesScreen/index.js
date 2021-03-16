@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import Pagination from '../../components/Pagination';
@@ -39,17 +39,6 @@ const WorkExperiencesScreenStyle = {
     `
 };
 
-const sampleData = [
-    {
-        "id": 1,
-        "company": "SiteMax Systems Inc.",
-        "location": "Vancouver, BC, Canada",
-        "position": "Junior Developer",
-        "dateStart": "January 2018",
-        "dateEnd": "December 2019"
-    }
-];
-
 function WorkExperiencesScreen() {
     let history = useHistory();
     const [workExperiences, setWorkExperiences] = useState([]);
@@ -60,7 +49,7 @@ function WorkExperiencesScreen() {
         }).then(_ => {
             const index = workExperiences.findIndex(item => item.id === id);
             workExperiences.splice(index, 1);
-            setProject([...workExperiences]);
+            setWorkExperiences([...workExperiences]);
         }).catch(error => {
             console.error(error);
         });
@@ -100,11 +89,11 @@ function WorkExperiencesScreen() {
                     </tr>
                 </thead>
                 <tbody>
-                    {sampleData.map(item => (
-                        <tr>
+                    {workExperiences.map(item => (
+                        <tr key={item.id}>
                             <TableStyle.Td>{item.company}</TableStyle.Td>
-                            <TableStyle.Td>{item.dateStart}</TableStyle.Td>
-                            <TableStyle.Td>{item.dateEnd}</TableStyle.Td>
+                            <TableStyle.Td>{strftime(item.dateStart)}</TableStyle.Td>
+                            <TableStyle.Td>{strftime(item.dateEnd)}</TableStyle.Td>
                             <TableStyle.Td>{item.position}</TableStyle.Td>
                             <TableStyle.Td>{item.location}</TableStyle.Td>
                             <TableStyle.Td>
