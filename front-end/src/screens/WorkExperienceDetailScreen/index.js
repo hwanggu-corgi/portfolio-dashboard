@@ -50,8 +50,13 @@ function WorkExperienceDetailScreen() {
     const [techsUsedList, _setTechsUsed] = useState([]);
     const [highlightsList, _setHighlights] = useState([]);
 
-    const addToolUsed = (list) => {
+    const addTechUsed = (list) => {
         _setTechsUsed([...list, {"name": ""}]);
+    }
+
+    const setTechsUsed = (e, index, list) => {
+        list[index].name = e.target.value;
+        _setTechsUsed(list);
     }
 
     const addHighlight = (list) => {
@@ -142,9 +147,8 @@ function WorkExperienceDetailScreen() {
 
     useEffect(() => {
         if (location.pathname.includes("/new")) {
-            addToolUsed(techsUsedList);
+            addTechUsed(techsUsedList);
             addHighlight(highlightsList);
-            addImage(imagesList);
         } else {
             getWorkExperience(location.pathname);
         }
@@ -155,10 +159,14 @@ function WorkExperienceDetailScreen() {
         <WorkExperienceDetailScreenStyle.Section>
             <WorkExperienceDetailScreenStyle.H2>SiteMax Systems Inc. - Junior Developer</WorkExperienceDetailScreenStyle.H2>
             <WorkExperienceDetailScreenStyle.ButtonSection>
-                <Button secondary>
-                    Delete
-                </Button>
-                <Button primary>
+                {
+                    !location.pathname.includes("/new") ?
+                        <Button secondary onClick={e => deleteWorkExperience(e, history)}>
+                            Delete
+                        </Button>
+                    : null
+                }
+                <Button primary onClick={e => location.pathname.includes("/new") ? addWorkExperience(e, history) : editWorkExperience(e, history)}>
                     Save
                 </Button>
             </WorkExperienceDetailScreenStyle.ButtonSection>
@@ -193,7 +201,7 @@ function WorkExperienceDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Techs Used</label>
-                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addToolUsed(techsUsedList)}/>
+                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addTechUsed(techsUsedList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
@@ -201,7 +209,7 @@ function WorkExperienceDetailScreen() {
                 </Form.FormGroup>
             </form>
             <WorkExperienceDetailScreenStyle.ButtonSection>
-                <Button primary>
+                <Button primary onClick={e => location.pathname.includes("/new") ? addWorkExperience(e, history) : editWorkExperience(e, history)}>
                     Save
                 </Button>
             </WorkExperienceDetailScreenStyle.ButtonSection>

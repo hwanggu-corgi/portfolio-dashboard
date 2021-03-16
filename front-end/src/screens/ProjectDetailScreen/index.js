@@ -51,7 +51,7 @@ function ProjectDetailScreen() {
     const [highlightsList, _setHighlights] = useState([]);
     const [imagesList, _setImages] = useState([]);
 
-    const addToolUsed = (list) => {
+    const addTechUsed = (list) => {
         _setTechsUsed([...list, {"name": ""}]);
     }
 
@@ -166,7 +166,7 @@ function ProjectDetailScreen() {
 
     useEffect(() => {
         if (location.pathname.includes("/new")) {
-            addToolUsed(techsUsedList);
+            addTechUsed(techsUsedList);
             addHighlight(highlightsList);
             addImage(imagesList);
         } else {
@@ -212,7 +212,7 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Techs Used</label>
-                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addToolUsed(techsUsedList)}/>
+                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addTechUsed(techsUsedList)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
