@@ -8,10 +8,9 @@ import Button from '../../components/Button';
 
 const getYYYYMMDD = (date) => {
     date = new Date(date);
-    const year = date.getFullYear();
-    const month = date.getMonth()+1;
-    const day = date.getDate();
-    console.log(`${year}-${month}-${day}`);
+    const year = `${date.getFullYear()}`.padStart(4,"0");
+    const month = `${date.getMonth()+1}`.padStart(2, "0");
+    const day = `${date.getDate()}`.padStart(2, "0");
     return `${year}-${month}-${day}`;
 }
 
