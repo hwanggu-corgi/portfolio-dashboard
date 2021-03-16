@@ -118,8 +118,8 @@ function ProjectDetailScreen() {
             images: imagesList
         };
 
-        fetch(`http://localhost:4001/admin/projects`, {
-            method: "POST",
+        fetch(`http://localhost:4001/admin/projects/${id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -127,7 +127,7 @@ function ProjectDetailScreen() {
         })
         .then(response => response.json())
         .then(data => {
-            history.push(`/admin/projects/${data.id}`);
+            history.push(`/admin/projects/${id}`);
         }).catch(error => {
             console.error(error);
         });
