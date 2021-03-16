@@ -135,9 +135,11 @@ function WorkExperienceDetailScreen() {
         fetch(`${domain}${path}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setId(data.id);
             setCompany(data.company);
             setPosition(data.position);
+            setCompanyLocation(data.location);
             setDateStart(getYYYYMMDD(data.date_start));
             setDateEnd(getYYYYMMDD(data.date_end));
             _setHighlights(data.highlights);

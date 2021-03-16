@@ -93,6 +93,35 @@ workExperiencesRouter.post("/", async (req, res) => {
 });
 
 
+workExperiencesRouter.get("/:id", async (req, res) => {
+    const text = "SELECT * FROM work_experiences WHERE id = $1";
+    const value = [req.params.id];
+
+    try {
+        const res_work_exp = await promise_query(text, value);
+        let work_exp = res_work_exp.rows[0];
+
+        const text_highlights = "SELECT id, detail FROM highlights WHERE work_exp_id = $1";
+        const value_highlights = [work_exp.id];
+
+        const text_tech_used = "SELECT id, name FROM tech_used WHERE work_exp_id = $1";
+        const value_tech_used = [work_exp.id];
+
+        const res_highlights = await promise_query(text_highlights, value_highlights);
+        const highlights = res_highlights.rows;
+        const res_tech_used = await promise_query(text_tech_used, value_tech_used);
+        const tech_used = res_tech_used.rows;
+
+        work_exp["highlights"] = highlights;
+        work_exp["tech_used"] = tech_used;
+
+        res.send(work_exp);
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
+
 workExperiencesRouter.put("/:id", async (req, res) => {
     let new_highlights = [];
     let new_tech_used = [];
