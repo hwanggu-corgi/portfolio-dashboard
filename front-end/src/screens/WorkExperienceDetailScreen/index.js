@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import Form from '../../components/Form'
 import styled from 'styled-components';
 import constants from '../../constants';
@@ -12,7 +13,6 @@ const getYYYYMMDD = (date) => {
     const day = `${date.getDate()}`.padStart(2, "0");
     return `${year}-${month}-${day}`;
 }
-
 
 const WorkExperienceDetailScreenStyle = {
     Section: styled.section`
@@ -43,21 +43,13 @@ function WorkExperienceDetailScreen() {
 
     const [id, setId] = useState(0);
     const [title, setTitle] = useState("");
-    const [date, setDate] = useState("");
-    const [headerImage, setHeaderImage] = useState("");
-    const [demoURL, setDemoURL] = useState("");
-    const [sourceURL, setSourceURL] = useState("");
+    const [dateStart, setDateStart] = useState("");
+    const [dateEnd, setDateEnd] = useState("");
     const [techsUsedList, _setTechsUsed] = useState([]);
     const [highlightsList, _setHighlight] = useState([]);
-    const [imagesList, _setImage] = useState([]);
 
     const addToolUsed = (list) => {
         _setTechsUsed([...list, {"name": ""}]);
-    }
-
-    const setTechsUsed = (e, index, list) => {
-        list[index].name = e.target.value;
-        _setTechsUsed(list);
     }
 
     const addHighlight = (list) => {
@@ -67,15 +59,6 @@ function WorkExperienceDetailScreen() {
     const setHighlight = (e, index, list) => {
         list[index].detail = e.target.value;
         _setHighlight(list);
-    }
-
-    const addImage = (list) => {
-        _setImage([...list, {"url": ""}]);
-    }
-
-    const setImage = (e, index, list) => {
-        list[index].url = e.target.value;
-        _setImage(list);
     }
 
     const addProject =  (e, history) => {
