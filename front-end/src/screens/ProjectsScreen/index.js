@@ -8,6 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router';
 
+const strftime = (date_string) => {
+    const date = new Date(date_string);
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    return date.toLocaleString('en-US', options);
+}
 
 const ProjectsScreenStyle = {
     PageSection: styled.section`
@@ -55,13 +61,6 @@ function ProjectsScreen() {
         .catch((error) => {
             console.error(error);
         });
-    }
-
-    const strftime = (date_string) => {
-        const date = new Date(date_string);
-        let options = { year: 'numeric', month: 'long', day: 'numeric' };
-
-        return date.toLocaleString('en-US', options);
     }
 
     useEffect(() => {

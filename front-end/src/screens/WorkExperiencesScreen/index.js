@@ -8,6 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router';
 
+
+const strftime = (date_string) => {
+    const date = new Date(date_string);
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    return date.toLocaleString('en-US', options);
+}
+
 const WorkExperiencesScreenStyle = {
     PageSection: styled.section`
         border: 1px solid ${constants.colorGrey};
@@ -43,10 +51,33 @@ const sampleData = [
 ];
 
 function WorkExperiencesScreen() {
-    const history = useHistory();
-    const deleteWorkExperience = () => {
-        console.log("This is temporary");
+    let history = useHistory();
+    const [workExperiences, setWorkExperiences] = useState([]);
+
+    const deleteWorkExperience =  async (id) => {
+        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            const index = workExperiences.findIndex(item => item.id === id);
+            workExperiences.splice(index, 1);
+            setProject([...workExperiences]);
+        }).catch(error => {
+            console.error(error);
+        });
     }
+
+    const getWorkExperiences = () => {
+        fetch("http://localhost:4001/admin/work-experiences")
+        .then(response => response.json())
+        .then(data => setWorkExperiences(data))
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
+    useEffect(() => {
+        getWorkExperiences();
+    }, []);
 
     return (
         <WorkExperiencesScreenStyle.PageSection>
