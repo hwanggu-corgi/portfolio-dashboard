@@ -28,14 +28,13 @@ function InfoScreen() {
     const location = useLocation();
     const history = useHistory();
 
-    const [id, setId] = useState(0);
-    const [company, setCompany] = useState("");
-    const [position, setPosition] = useState("");
-    const [companyLocation, setCompanyLocation] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [nickName, setNickName] = useState("");
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
-    const [techsUsedList, _setTechsUsed] = useState([]);
-    const [highlightsList, _setHighlights] = useState([]);
+    const [socials, _setSocials] = useState([]);
+    const [contacts, _setContacts] = useState([]);
 
     const addTechUsed = (list) => {
         _setTechsUsed([...list, {"name": ""}]);

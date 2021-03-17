@@ -3,19 +3,8 @@ CREATE TABLE user_self (
     id           SERIAL PRIMARY KEY,
     first_name   VARCHAR(255),
     last_name    VARCHAR(255),
-    nick_name    VARCHAR(255)
-);
-
-DROP TABLE IF EXISTS work_experiences;
-CREATE TABLE work_experiences (
-    id           SERIAL PRIMARY KEY,
-    company      VARCHAR(100),
-    date_start   DATE,
-    date_end     DATE,
-    location     VARCHAR(255),
-    position     VARCHAR(255),
-    user_id      INT,
-    FOREIGN KEY (user_id) REFERENCES user_self(id)
+    nick_name    VARCHAR(255),
+    website      VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS contacts;
@@ -33,6 +22,18 @@ CREATE TABLE socials (
     name        VARCHAR(100),
     value       VARCHAR(100),
     user_id     INT,
+    FOREIGN KEY (user_id) REFERENCES user_self(id)
+);
+
+DROP TABLE IF EXISTS work_experiences;
+CREATE TABLE work_experiences (
+    id           SERIAL PRIMARY KEY,
+    company      VARCHAR(100),
+    date_start   DATE,
+    date_end     DATE,
+    location     VARCHAR(255),
+    position     VARCHAR(255),
+    user_id      INT,
     FOREIGN KEY (user_id) REFERENCES user_self(id)
 );
 
