@@ -38,24 +38,24 @@ function InfoScreen() {
 
     const setSocial = (e, index, list) => {
         list[index].name = e.target.value;
-        _setTechsUsed(list);
+        _setSocials(list);
     }
 
     const addSocial = (list) => {
-        _setHighlights([...list, {"detail": ""}]);
+        _setSocials([...list, {"name": "", "value": ""}]);
     }
 
     const setContact = (e, index, list) => {
         list[index].detail = e.target.value;
-        _setHighlights(list);
+        _setContacts(list);
     }
 
     const addContact = (e, index, list) => {
-        _setHighlights([...list, {"detail": ""}]);
+        _setContacts([...list, {"name": "", "value": ""}]);
     }
 
     const editInfo = (e, history) => {
-        const workExp = {
+        const info = {
             first_name: firstName,
             last_name: lastName,
             nick_name: nickName,
@@ -69,11 +69,11 @@ function InfoScreen() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(workExp)
+            body: JSON.stringify(info)
         })
         .then(response => response.json())
         .then(data => {
-            history.push(`/admin/work-experiences/${id}`);
+            history.push(`/admin/info`);
         }).catch(error => {
             console.error(error);
         });
@@ -96,19 +96,14 @@ function InfoScreen() {
     }
 
     useEffect(() => {
-        if (location.pathname.includes("/new")) {
-            addContact(contacts);
-            addSocial(socials);
-        } else {
-            getInfo();
-        }
+        getInfo();
     }, []);
 
     return (
         <InfoScreenStyle.Section>
             <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
             <InfoScreenStyle.ButtonSection>
-                <Button primary>
+                <Button primary onClick={e => editProject(e, history)}>
                     Save
                 </Button>
             </InfoScreenStyle.ButtonSection>
@@ -139,7 +134,7 @@ function InfoScreen() {
                 </Form.FormGroup>
             </form>
             <InfoScreenStyle.ButtonSection>
-                <Button primary>
+                <Button primary onClick={e => editProject(e, history)}>
                     Save
                 </Button>
             </InfoScreenStyle.ButtonSection>
