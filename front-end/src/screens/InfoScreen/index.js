@@ -114,8 +114,16 @@ function InfoScreen() {
             </InfoScreenStyle.ButtonSection>
             <form>
                 <Form.FormGroup>
-                    <label>Name</label>
-                    <Form.Input/>
+                    <label>First Name</label>
+                    <Form.Input defaultValue={firstName} onChange={e => setFirstName(e.target.value)}/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Last Name</label>
+                    <Form.Input defaultValue={lastName} onChange={e => setLastName(e.target.value)}/>
+                </Form.FormGroup>
+                <Form.FormGroup>
+                    <label>Nick Name</label>
+                    <Form.Input defaultValue={nickName} onChange={e => setNickName(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Website</label>
