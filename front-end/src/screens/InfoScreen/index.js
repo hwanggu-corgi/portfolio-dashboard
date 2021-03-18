@@ -56,17 +56,15 @@ function InfoScreen() {
 
     const editInfo = (e, history) => {
         const workExp = {
-            id: id,
-            company: company,
-            position: position,
-            location: companyLocation,
-            date_start: dateStart,
-            date_end: dateEnd,
-            tech_used: techsUsedList,
-            highlights: highlightsList,
+            first_name: firstName,
+            last_name: lastName,
+            nick_name: nickName,
+            website: website,
+            contacts: contacts,
+            socials: socials
         };
 
-        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
+        fetch(`http://localhost:4001/admin/info`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -81,20 +79,16 @@ function InfoScreen() {
         });
     }
 
-    const getInfo = (path) => {
-        const domain = "http://localhost:4001";
-        fetch(`${domain}${path}`)
+    const getInfo = () => {
+        fetch("http://localhost:4001/admin/info")
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            setId(data.id);
-            setCompany(data.company);
-            setPosition(data.position);
-            setCompanyLocation(data.location);
-            setDateStart(getYYYYMMDD(data.date_start));
-            setDateEnd(getYYYYMMDD(data.date_end));
-            _setHighlights(data.highlights);
-            _setTechsUsed(data.tech_used);
+            setFirstName(data.first_name);
+            setLastName(data.last_name);
+            setNickName(data.nick_name);
+            setWebsite(data.website);
+            _setContacts(data.contacts);
+            _setSocials(data.socials);
         })
         .catch((error) => {
             console.error(error);
@@ -103,10 +97,10 @@ function InfoScreen() {
 
     useEffect(() => {
         if (location.pathname.includes("/new")) {
-            addTechUsed(techsUsedList);
-            addHighlight(highlightsList);
+            addContact(contacts);
+            addSocial(socials);
         } else {
-            getWorkExperience(location.pathname);
+            getInfo();
         }
     }, []);
 
