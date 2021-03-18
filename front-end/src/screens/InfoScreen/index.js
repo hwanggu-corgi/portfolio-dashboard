@@ -127,15 +127,15 @@ function InfoScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Website</label>
-                    <Form.Input/>
+                    <Form.Input defaultValue={website} onChange={e => setWebsite(e.target.value)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Contact</label>
-                    <Form.KeyValueInputList list={contactsList} onAdd={_ => setContactsList(oldArray => [...oldArray, ["",""]])}/>
+                    <Form.KeyValueInputList list={contacts} onChange={(e, index) => setContact(e, index, contacts)} onAdd={_ => addContact(contacts)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Socials</label>
-                    <Form.KeyValueInputList list={socialsList} onAdd={_ => setSocialsList(oldArray => [...oldArray, ["",""]])}/>
+                    <Form.KeyValueInputList list={socials} onChange={(e, index) => setSocial(e, index, socials)} onAdd={_ => addSocial(socials)}/>
                 </Form.FormGroup>
             </form>
             <InfoScreenStyle.ButtonSection>
