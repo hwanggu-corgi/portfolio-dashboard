@@ -31,8 +31,7 @@ function InfoScreen() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [nickName, setNickName] = useState("");
-    const [dateStart, setDateStart] = useState("");
-    const [dateEnd, setDateEnd] = useState("");
+    const [website, setWebsite] = useState("");
     const [socials, _setSocials] = useState([]);
     const [contacts, _setContacts] = useState([]);
 
