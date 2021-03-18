@@ -164,8 +164,9 @@ function KeyValueInputList(props) {
     return(
         <>
             {props.list.map((item, index) => (
-                <KeyValueInputListStyle.Div key={index}>
-                    <KeyValueInputStyle.InputKey defaultValue={item[0] ? item[0] : ""}/><KeyValueInputStyle.InputValue defaultValue={item[1] ? item[1] : ""}/>
+                <KeyValueInputListStyle.Div key={item.id}>
+                    <KeyValueInputStyle.InputKey defaultValue={item && item.key ? item.key : ""}/>
+                    <KeyValueInputStyle.InputValue defaultValue={item && item.value ? item.value : ""}/>
                 </KeyValueInputListStyle.Div>
             ))}
             <KeyValueInputListStyle.ButtonSection>
