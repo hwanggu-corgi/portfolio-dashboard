@@ -166,8 +166,8 @@ function KeyValueInputList(props) {
         <>
             {props.list.map((item, index) => (
                 <KeyValueInputListStyle.Div key={item.id}>
-                    <KeyValueInputStyle.InputKey defaultValue={item && item.key ? item.key : ""} onChange={e => props.onChange(e, index)}/>
-                    <KeyValueInputStyle.InputValue defaultValue={item && item.value ? item.value : ""} onChange={e => props.onChange(e, index)}/>
+                    <KeyValueInputStyle.InputKey defaultValue={item && item.key ? item.key : ""} onChange={e => props.onChangeKey(e, index)}/>
+                    <KeyValueInputStyle.InputValue defaultValue={item && item.value ? item.value : ""} onChange={e => props.onChangeVal(e, index)}/>
                 </KeyValueInputListStyle.Div>
             ))}
             <KeyValueInputListStyle.ButtonSection>
