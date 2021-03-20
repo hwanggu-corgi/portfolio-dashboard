@@ -54,16 +54,12 @@ function InfoScreen() {
         _setContacts(list);
     }
 
-    const addContact = (e, index, list) => {
-        console.log(list);
-        console.log(Array.isArray(list))
+    const addContact = (list) => {
         if (!Array.isArray(list) || list.length === 0) {
-            console.log("I am here");
             _setContacts([{"name": "", "value": ""}]);
             return;
         }
 
-        console.log("I am here 2");
         _setContacts([...list, {"name": "", "value": ""}]);
     }
 
@@ -101,8 +97,16 @@ function InfoScreen() {
             setLastName(data.last_name);
             setNickName(data.nick_name);
             setWebsite(data.website);
-            _setContacts(data.contacts);
-            _setSocials(data.socials);
+            if (data.contacts.length === 0) {
+                addContact(contacts);
+            } else {
+                _setContacts(data.contacts);
+            }
+            if (data.socials.length === 0) {
+                addSocial(socials);
+            } else {
+                _setSocials(data.socials);
+            }
         })
         .catch((error) => {
             console.error(error);
