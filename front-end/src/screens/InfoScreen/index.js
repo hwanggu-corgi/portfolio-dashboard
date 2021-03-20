@@ -73,6 +73,8 @@ function InfoScreen() {
             socials: socials
         };
 
+        console.log(info);
+
         fetch(`http://localhost:4001/admin/info`, {
             method: "PUT",
             headers: {
