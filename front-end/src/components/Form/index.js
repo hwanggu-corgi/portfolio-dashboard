@@ -168,6 +168,11 @@ function KeyValueInputList(props) {
                 <KeyValueInputListStyle.Div key={item.id}>
                     <KeyValueInputStyle.InputKey defaultValue={item && item.name ? item.name : ""} onChange={e => props.onChange(e, null, index)}/>
                     <KeyValueInputStyle.InputValue defaultValue={item && item.value ? item.value : ""} onChange={e => props.onChange(null, e, index)}/>
+                    <TableStyle.Button onClick={e => props.onDelete(e, item.id)}>
+                        <div>
+                            <FontAwesomeIcon icon={faTrashAlt}/>
+                        </div>
+                    </TableStyle.Button>
                 </KeyValueInputListStyle.Div>
             ))}
             <KeyValueInputListStyle.ButtonSection>
