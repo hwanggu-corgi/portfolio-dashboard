@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Button from '../../components/Button';
+import { Button, IconButton } from '../../components/Button';
 import Pagination from '../../components/Pagination';
 import constants from '../../constants';
 import { TableStyle } from '../../components/Table';
