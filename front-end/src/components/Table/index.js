@@ -26,5 +26,16 @@ export const TableStyle = {
     `,
     Td: styled.td`
         padding: 0.75rem;
+    `,
+    Button: styled.button`
+        background-color: transparent;
+        border: none;
+        padding: 0.16rem;
+        cursor: pointer;
+
+        div {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
     `
 }

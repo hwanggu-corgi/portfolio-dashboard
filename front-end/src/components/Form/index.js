@@ -1,6 +1,30 @@
 import styled from 'styled-components';
 import constants from '../../constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
+
+const IconButtonStyle = {
+    Button : styled.button`
+        background-color: transparent;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+
+        div {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+    `
+};
+
+function IconButton(props) {
+    return (
+        <IconButtonStyle.Button onClick={props.onClick}>
+            {props.children}
+        </IconButtonStyle.Button>
+    )
+}
 
 const AddMoreButtonStyle = {
     Button: styled.button`
@@ -95,6 +119,11 @@ function InputList(props) {
             {props.list.map((item, index) => (
                 <InputListStyle.Div key={item.id}>
                     <InputStyle.Input defaultValue={item[props.objectKey] ? item[props.objectKey] : ""} onChange={e => props.onChange(e, index)}/>
+                    <IconButton onClick={e => props.onDelete(e, item.id)}>
+                        <div>
+                            <FontAwesomeIcon icon={faTrashAlt}/>
+                        </div>
+                    </IconButton>
                 </InputListStyle.Div>
             ))}
             <InputListStyle.ButtonSection>
@@ -168,11 +197,11 @@ function KeyValueInputList(props) {
                 <KeyValueInputListStyle.Div key={item.id}>
                     <KeyValueInputStyle.InputKey defaultValue={item && item.name ? item.name : ""} onChange={e => props.onChange(e, null, index)}/>
                     <KeyValueInputStyle.InputValue defaultValue={item && item.value ? item.value : ""} onChange={e => props.onChange(null, e, index)}/>
-                    <TableStyle.Button onClick={e => props.onDelete(e, item.id)}>
+                    <IconButton onClick={e => props.onDelete(e, item.id)}>
                         <div>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </div>
-                    </TableStyle.Button>
+                    </IconButton>
                 </KeyValueInputListStyle.Div>
             ))}
             <KeyValueInputListStyle.ButtonSection>

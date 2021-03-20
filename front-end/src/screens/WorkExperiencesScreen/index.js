@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Pagination from '../../components/Pagination';
 import { TableStyle } from '../../components/Table';
 import constants from '../../constants';
-import { Button, IconButton } from '../../components/Button';
+import { Button } from '../../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router';
