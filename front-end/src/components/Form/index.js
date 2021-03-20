@@ -144,8 +144,8 @@ const KeyValueInputStyle = {
 function KeyValueInput(props) {
     return(
         <KeyValueInputStyle.Div>
-            <KeyValueInputStyle.InputKey defaultValue={props.key ? props.key : ""} onChange={props.onChange}/>
-            <KeyValueInputStyle.InputValue defaultValue={props.value ? props.value : ""} onChange={props.onChange}/>
+            <KeyValueInputStyle.InputKey defaultValue={props.name ? props.name : ""} onChange={e => props.onChange(e, null)}/>
+            <KeyValueInputStyle.InputValue defaultValue={props.value ? props.value : ""} onChange={e => props.onChange(null, e)}/>
         </KeyValueInputStyle.Div>
     )
 };
@@ -166,7 +166,7 @@ function KeyValueInputList(props) {
         <>
             {props.list.map((item, index) => (
                 <KeyValueInputListStyle.Div key={item.id}>
-                    <KeyValueInputStyle.InputKey defaultValue={item && item.key ? item.key : ""} onChange={e => props.onChange(e, null, index)}/>
+                    <KeyValueInputStyle.InputKey defaultValue={item && item.name ? item.name : ""} onChange={e => props.onChange(e, null, index)}/>
                     <KeyValueInputStyle.InputValue defaultValue={item && item.value ? item.value : ""} onChange={e => props.onChange(null, e, index)}/>
                 </KeyValueInputListStyle.Div>
             ))}
