@@ -113,9 +113,9 @@ function ProjectsScreen() {
                     }
                 </tbody>
             </TableStyle.Table>
-            <ProjectsScreenStyle.PaginationSection>
+            {/* <ProjectsScreenStyle.PaginationSection>
                 <Pagination/>
-            </ProjectsScreenStyle.PaginationSection>
+            </ProjectsScreenStyle.PaginationSection> */}
         </ProjectsScreenStyle.PageSection>
     );
 }

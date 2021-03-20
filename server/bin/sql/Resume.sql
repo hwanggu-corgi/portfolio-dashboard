@@ -79,4 +79,4 @@ CREATE TABLE images (
 );
 
 
-INSERT INTO user_self(first_name, last_name, nick_name) VALUES ('Hyungmo', 'Gu', 'Moe');
+INSERT INTO user_self(first_name, last_name, nick_name, website) VALUES ('Hyungmo', 'Gu', 'Moe', 'http://www.hyungmogu.com');

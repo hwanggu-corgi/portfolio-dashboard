@@ -117,9 +117,9 @@ function WorkExperiencesScreen() {
                     ))}
                 </tbody>
             </TableStyle.Table>
-            <WorkExperiencesScreenStyle.PaginationSection>
+            {/* <WorkExperiencesScreenStyle.PaginationSection>
                 <Pagination/>
-            </WorkExperiencesScreenStyle.PaginationSection>
+            </WorkExperiencesScreenStyle.PaginationSection> */}
         </WorkExperiencesScreenStyle.PageSection>
     );
 }
