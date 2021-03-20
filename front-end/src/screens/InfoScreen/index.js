@@ -56,9 +56,12 @@ function InfoScreen() {
 
     const addContact = (e, index, list) => {
         if (!Array.isArray(list) || list.length === 0) {
+            console.log("I am here");
             _setContacts([{"name": "", "value": ""}]);
             return;
         }
+
+        console.log("I am here 2");
         _setContacts([...list, {"name": "", "value": ""}]);
     }
 
