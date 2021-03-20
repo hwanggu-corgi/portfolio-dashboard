@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button, IconButton } from '../../components/Button';
 import Pagination from '../../components/Pagination';
 import constants from '../../constants';
+import { Button, IconButton } from '../../components/Button';
 import { TableStyle } from '../../components/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
