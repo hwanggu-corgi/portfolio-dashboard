@@ -42,6 +42,10 @@ function InfoScreen() {
     }
 
     const addSocial = (list) => {
+        if (!Array.isArray(list) || list.length === 0) {
+            _setSocials([{"name": "", "value": ""}]);
+            return;
+        }
         _setSocials([...list, {"name": "", "value": ""}]);
     }
 
@@ -51,6 +55,10 @@ function InfoScreen() {
     }
 
     const addContact = (e, index, list) => {
+        if (!Array.isArray(list) || list.length === 0) {
+            _setContacts([{"name": "", "value": ""}]);
+            return;
+        }
         _setContacts([...list, {"name": "", "value": ""}]);
     }
 
