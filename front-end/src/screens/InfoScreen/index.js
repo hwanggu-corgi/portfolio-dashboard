@@ -36,8 +36,9 @@ function InfoScreen() {
     const [socials, _setSocials] = useState([]);
     const [contacts, _setContacts] = useState([]);
 
-    const setSocial = (e, index, list) => {
-        list[index].name = e.target.value;
+    const setSocial = (eKey, eVal, index, list) => {
+        list[index].name = eKey && eKey.target && eKey.target.value ? eKey.target.value : list[index].name;
+        list[index].value = eVal && eVal.target && eVal.target.value ? eVal.target.value : list[index].value;
         _setSocials(list);
     }
 
@@ -49,8 +50,9 @@ function InfoScreen() {
         _setSocials([...list, {"name": "", "value": ""}]);
     }
 
-    const setContact = (e, index, list) => {
-        list[index].detail = e.target.value;
+    const setContact = (eKey, eVal, index, list) => {
+        list[index].name = eKey && eKey.target && eKey.target.value ? eKey.target.value : list[index].name;
+        list[index].value = eVal && eVal.target && eVal.target.value ? eVal.target.value : list[index].value;
         _setContacts(list);
     }
 
@@ -72,8 +74,6 @@ function InfoScreen() {
             contacts: contacts,
             socials: socials
         };
-
-        console.log(info);
 
         fetch(`http://localhost:4001/admin/info`, {
             method: "PUT",
@@ -146,11 +146,11 @@ function InfoScreen() {
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Contact</label>
-                    <Form.KeyValueInputList list={contacts} onChangeKey={(e, index) => setContactKey(e, index, contacts)} onChangeValue={(e, index) => setContactValue(e, index, contacts)} onAdd={_ => addContact(contacts)}/>
+                    <Form.KeyValueInputList list={contacts} onChange={(eKey, eVal, index) => setContact(eKey, eVal, index, contacts)} onAdd={_ => addContact(contacts)}/>
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Socials</label>
-                    <Form.KeyValueInputList list={socials} onChangeKey={(e, index) => setSocialKey(e, index, socials)} onChangeValue={(e, index) => setSocialValue(e, index, contacts)} onAdd={_ => addSocial(socials)}/>
+                    <Form.KeyValueInputList list={socials} onChange={(eKey, eVal, index) => setSocial(eKey, eVal, index, socials)} onAdd={_ => addSocial(socials)}/>
                 </Form.FormGroup>
             </form>
             <InfoScreenStyle.ButtonSection>
