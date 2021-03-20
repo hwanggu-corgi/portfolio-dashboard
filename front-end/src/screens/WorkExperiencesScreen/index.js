@@ -10,10 +10,8 @@ import { useHistory } from 'react-router';
 
 
 const strftime = (date_string) => {
-    console.log(date_string);
     const date = new Date(date_string);
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
-
     return date.toLocaleString('en-US', options);
 }
 
@@ -68,8 +66,6 @@ function WorkExperiencesScreen() {
     useEffect(() => {
         getWorkExperiences();
     }, []);
-
-    console.log(workExperiences);
 
     return (
         <WorkExperiencesScreenStyle.PageSection>
