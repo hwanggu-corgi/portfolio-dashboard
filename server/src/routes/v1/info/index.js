@@ -34,12 +34,12 @@ infoRouter.put("/", async (req, res) => {
     try{
         const text_user = `
             UPDATE user_self
-            SET (first_name, last_name, nick_name) = ($1, $2, $3)
+            SET (first_name, last_name, nick_name, website) = ($1, $2, $3, $4)
             WHERE id = 1 RETURNING *
         `;
         const value_user = [
             req.body.first_name, req.body.last_name,
-            req.body.nick_name
+            req.body.nick_name, req.body.website
         ];
 
         const res_user = await promise_query(text_user, value_user);

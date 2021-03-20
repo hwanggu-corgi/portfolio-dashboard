@@ -61,7 +61,6 @@ function InfoScreen() {
             _setContacts([{"name": "", "value": ""}]);
             return;
         }
-
         _setContacts([...list, {"name": "", "value": ""}]);
     }
 
