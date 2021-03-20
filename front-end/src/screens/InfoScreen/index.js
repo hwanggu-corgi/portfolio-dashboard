@@ -35,7 +35,6 @@ function InfoScreen() {
     const [socials, _setSocials] = useState([]);
     const [contacts, _setContacts] = useState([]);
 
-
     const setSocial = (e, index, list) => {
         list[index].name = e.target.value;
         _setSocials(list);
