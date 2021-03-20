@@ -55,6 +55,8 @@ function InfoScreen() {
     }
 
     const addContact = (e, index, list) => {
+        console.log(list);
+        console.log(Array.isArray(list))
         if (!Array.isArray(list) || list.length === 0) {
             console.log("I am here");
             _setContacts([{"name": "", "value": ""}]);
@@ -94,6 +96,7 @@ function InfoScreen() {
         fetch("http://localhost:4001/admin/info")
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setFirstName(data.first_name);
             setLastName(data.last_name);
             setNickName(data.nick_name);
