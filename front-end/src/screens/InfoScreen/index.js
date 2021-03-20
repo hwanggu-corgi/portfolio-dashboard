@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import Form from '../../components/Form'
 import styled from 'styled-components';
 import constants from '../../constants';
@@ -102,7 +103,7 @@ function InfoScreen() {
         <InfoScreenStyle.Section>
             <InfoScreenStyle.H2>Personal Information</InfoScreenStyle.H2>
             <InfoScreenStyle.ButtonSection>
-                <Button primary onClick={e => editProject(e, history)}>
+                <Button primary onClick={e => editInfo(e, history)}>
                     Save
                 </Button>
             </InfoScreenStyle.ButtonSection>
@@ -133,7 +134,7 @@ function InfoScreen() {
                 </Form.FormGroup>
             </form>
             <InfoScreenStyle.ButtonSection>
-                <Button primary onClick={e => editProject(e, history)}>
+                <Button primary onClick={e => editInfo(e, history)}>
                     Save
                 </Button>
             </InfoScreenStyle.ButtonSection>
