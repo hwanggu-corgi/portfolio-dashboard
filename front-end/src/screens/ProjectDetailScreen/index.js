@@ -60,6 +60,24 @@ function ProjectDetailScreen() {
         _setTechsUsed(list);
     }
 
+    const deleteTechUsed = (index, list) => {
+        if (!list[index].id) {
+            list.splice(index, 1);
+            _setTechsUsed([...list]);
+            return;
+        }
+
+        const id = list[index].id;
+        fetch(`http://localhost:4001/admin/projects/techs-used/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            list.splice(index, 1);
+            _setTechsUsed([...list]);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
     const addHighlight = (list) => {
         _setHighlights([...list, {"detail": ""}]);
     }
@@ -69,6 +87,24 @@ function ProjectDetailScreen() {
         _setHighlights(list);
     }
 
+    const deleteHighlight = (index, list) => {
+        if (!list[index].id) {
+            list.splice(index, 1);
+            _setHighlights([...list]);
+            return;
+        }
+
+        const id = list[index].id;
+        fetch(`http://localhost:4001/admin/projects/highlights/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            list.splice(index, 1);
+            _setHighlights([...list]);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
     const addImage = (list) => {
         _setImages([...list, {"url": ""}]);
     }
@@ -76,6 +112,24 @@ function ProjectDetailScreen() {
     const setImage = (e, index, list) => {
         list[index].url = e.target.value;
         _setImages(list);
+    }
+
+    const deleteImage = (index, list) => {
+        if (!list[index].id) {
+            list.splice(index, 1);
+            _setImages([...list]);
+            return;
+        }
+
+        const id = list[index].id;
+        fetch(`http://localhost:4001/admin/projects/images/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            list.splice(index, 1);
+            _setImages([...list]);
+        }).catch(error => {
+            console.error(error);
+        });
     }
 
     const addProject =  (e, history) => {
