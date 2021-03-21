@@ -8,7 +8,7 @@ const colorPurple = '#8A8DCC';
 const borderRadius = "0.94rem";
 const sectionPadding = "1.31rem";
 
-const serverURL = "";
+const serverURL = "https://portfolio-dashboard-1234.com";
 
 export default {
     colorNavyBlue,
