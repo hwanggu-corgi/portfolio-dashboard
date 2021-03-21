@@ -241,6 +241,7 @@ function ProjectDetailScreen() {
                         objectKey="detail"
                         onChange={(e, index) => setHighlight(e, index, highlightsList)}
                         onAdd={_ => addHighlight(highlightsList)}
+                        onDelete={(e, index) => deleteHighlight(index, highlightsList)}
                     />
                 </Form.FormGroup>
                 <Form.FormGroup>
@@ -249,7 +250,9 @@ function ProjectDetailScreen() {
                         list={imagesList}
                         objectKey="url"
                         onChange={(e, index) => setImage(e, index, imagesList)}
-                        onAdd={_ => addImage(imagesList)}/>
+                        onAdd={_ => addImage(imagesList)}
+                        onDelete={(e, index) => deleteImage(index, imagesList)}
+                    />
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
