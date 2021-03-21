@@ -50,6 +50,24 @@ function InfoScreen() {
         _setSocials([...list, {"name": "", "value": ""}]);
     }
 
+    const deleteSocial = (index, list) => {
+        if (!list[index].id) {
+            list.splice(index, 1);
+            _setContacts([...list]);
+            return;
+        }
+
+        const id = list[index].id;
+        fetch(`http://localhost:4001/admin/info/socials/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            list.splice(index, 1);
+            _setSocials([...list]);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
     const setContact = (eKey, eVal, index, list) => {
         list[index].name = eKey && eKey.target && eKey.target.value ? eKey.target.value : list[index].name;
         list[index].value = eVal && eVal.target && eVal.target.value ? eVal.target.value : list[index].value;
@@ -65,15 +83,14 @@ function InfoScreen() {
     }
 
     const deleteContact = (index, list) => {
-        // if list[index] doesn't have id, remove item from list
         if (!list[index].id) {
             list.splice(index, 1);
             _setContacts([...list]);
             return;
         }
 
-        // if list[index] has id, then make api call, remove it from server then remove item from list
-        fetch(`http://localhost:4001/admin/projects/${id}`, {
+        const id = list[index].id;
+        fetch(`http://localhost:4001/admin/info/contacts/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
