@@ -64,6 +64,25 @@ function InfoScreen() {
         _setContacts([...list, {"name": "", "value": ""}]);
     }
 
+    const deleteContact = (index, list) => {
+        // if list[index] doesn't have id, remove item from list
+        if (!list[index].id) {
+            list.splice(index, 1);
+            _setContacts([...list]);
+            return;
+        }
+
+        // if list[index] has id, then make api call, remove it from server then remove item from list
+        fetch(`http://localhost:4001/admin/projects/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            list.splice(index, 1);
+            _setContacts([...list]);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
     const editInfo = (e, history) => {
         const info = {
             first_name: firstName,
@@ -93,7 +112,6 @@ function InfoScreen() {
         fetch("http://localhost:4001/admin/info")
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setFirstName(data.first_name);
             setLastName(data.last_name);
             setNickName(data.nick_name);
@@ -129,27 +147,49 @@ function InfoScreen() {
             <form>
                 <Form.FormGroup>
                     <label>First Name</label>
-                    <Form.Input defaultValue={firstName} onChange={e => setFirstName(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={firstName}
+                        onChange={e => setFirstName(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Last Name</label>
-                    <Form.Input defaultValue={lastName} onChange={e => setLastName(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={lastName}
+                        onChange={e => setLastName(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Nick Name</label>
-                    <Form.Input defaultValue={nickName} onChange={e => setNickName(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={nickName}
+                        onChange={e => setNickName(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Website</label>
-                    <Form.Input defaultValue={website} onChange={e => setWebsite(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={website}
+                        onChange={e => setWebsite(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Contact</label>
-                    <Form.KeyValueInputList list={contacts} onChange={(eKey, eVal, index) => setContact(eKey, eVal, index, contacts)} onAdd={_ => addContact(contacts)}/>
+                    <Form.KeyValueInputList
+                        list={contacts}
+                        onChange={(eKey, eVal, index) => setContact(eKey, eVal, index, contacts)}
+                        onAdd={_ => addContact(contacts)}
+                        onDelete={(e, index) => deleteContact(index, contacts)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Socials</label>
-                    <Form.KeyValueInputList list={socials} onChange={(eKey, eVal, index) => setSocial(eKey, eVal, index, socials)} onAdd={_ => addSocial(socials)}/>
+                    <Form.KeyValueInputList
+                        list={socials}
+                        onChange={(eKey, eVal, index) => setSocial(eKey, eVal, index, socials)}
+                        onAdd={_ => addSocial(socials)}
+                        onDelete={(e, index) => deleteSocial(index, socials)}
+                    />
                 </Form.FormGroup>
             </form>
             <InfoScreenStyle.ButtonSection>

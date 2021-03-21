@@ -76,7 +76,11 @@ const DateInputStyle = {
 function DateInput(props) {
     return(
         <DateInputStyle.Div>
-            <DateInputStyle.Input defaultValue={props.defaultValue} onChange={props.onChange} type="date"/>
+            <DateInputStyle.Input
+                defaultValue={props.defaultValue}
+                onChange={props.onChange}
+                type="date"
+            />
         </DateInputStyle.Div>
     )
 };
@@ -98,7 +102,10 @@ const InputStyle = {
 function Input(props) {
     return(
         <InputStyle.Div>
-            <InputStyle.Input defaultValue={props.defaultValue} onChange={props.onChange}/>
+            <InputStyle.Input
+                defaultValue={props.defaultValue}
+                onChange={props.onChange}
+            />
         </InputStyle.Div>
     )
 };
@@ -118,8 +125,11 @@ function InputList(props) {
         <>
             {props.list.map((item, index) => (
                 <InputListStyle.Div key={item.id}>
-                    <InputStyle.Input defaultValue={item[props.objectKey] ? item[props.objectKey] : ""} onChange={e => props.onChange(e, index)}/>
-                    <IconButton onClick={e => props.onDelete(e, item.id)}>
+                    <InputStyle.Input
+                        defaultValue={item[props.objectKey] ? item[props.objectKey] : ""}
+                        onChange={e => props.onChange(e, index)}
+                    />
+                    <IconButton onClick={e => props.onDelete(e, index)}>
                         <div>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </div>
@@ -173,8 +183,14 @@ const KeyValueInputStyle = {
 function KeyValueInput(props) {
     return(
         <KeyValueInputStyle.Div>
-            <KeyValueInputStyle.InputKey defaultValue={props.name ? props.name : ""} onChange={e => props.onChange(e, null)}/>
-            <KeyValueInputStyle.InputValue defaultValue={props.value ? props.value : ""} onChange={e => props.onChange(null, e)}/>
+            <KeyValueInputStyle.InputKey
+                defaultValue={props.name ? props.name : ""}
+                onChange={e => props.onChange(e, null)}
+            />
+            <KeyValueInputStyle.InputValue
+                defaultValue={props.value ? props.value : ""}
+                onChange={e => props.onChange(null, e)}
+            />
         </KeyValueInputStyle.Div>
     )
 };
@@ -195,9 +211,15 @@ function KeyValueInputList(props) {
         <>
             {props.list.map((item, index) => (
                 <KeyValueInputListStyle.Div key={item.id}>
-                    <KeyValueInputStyle.InputKey defaultValue={item && item.name ? item.name : ""} onChange={e => props.onChange(e, null, index)}/>
-                    <KeyValueInputStyle.InputValue defaultValue={item && item.value ? item.value : ""} onChange={e => props.onChange(null, e, index)}/>
-                    <IconButton onClick={e => props.onDelete(e, item.id)}>
+                    <KeyValueInputStyle.InputKey
+                        defaultValue={item && item.name ? item.name : ""}
+                        onChange={e => props.onChange(e, null, index)}
+                    />
+                    <KeyValueInputStyle.InputValue
+                        defaultValue={item && item.value ? item.value : ""}
+                        onChange={e => props.onChange(null, e, index)}
+                    />
+                    <IconButton onClick={e => props.onDelete(e, index)}>
                         <div>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </div>

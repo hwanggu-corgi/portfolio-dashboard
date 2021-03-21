@@ -192,35 +192,64 @@ function ProjectDetailScreen() {
             <form>
                 <Form.FormGroup>
                     <label>Title</label>
-                    <Form.Input defaultValue={title} onChange={e => setTitle(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date</label>
-                    <Form.DateInput defaultValue={date} onChange={e => setDate(e.target.value)}/>
+                    <Form.DateInput
+                        defaultValue={date}
+                        onChange={e => setDate(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Header Image</label>
-                    <Form.Input defaultValue={headerImage} onChange={e => setHeaderImage(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={headerImage}
+                        onChange={e => setHeaderImage(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Demo URL</label>
-                    <Form.Input defaultValue={demoURL} onChange={e => setDemoURL(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={demoURL}
+                        onChange={e => setDemoURL(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Source URL</label>
-                    <Form.Input defaultValue={sourceURL} onChange={e => setSourceURL(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={sourceURL}
+                        onChange={e => setSourceURL(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Techs Used</label>
-                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addTechUsed(techsUsedList)}/>
+                    <Form.InputList
+                        list={techsUsedList}
+                        objectKey="name"
+                        onChange={(e, index) => setTechsUsed(e, index, techsUsedList)}
+                        onAdd={_ => addTechUsed(techsUsedList)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} objectKey="detail" onChange={(e, index) => setHighlight(e, index, highlightsList)} onAdd={_ => addHighlight(highlightsList)}/>
+                    <Form.InputList
+                        list={highlightsList}
+                        objectKey="detail"
+                        onChange={(e, index) => setHighlight(e, index, highlightsList)}
+                        onAdd={_ => addHighlight(highlightsList)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Images</label>
-                    <Form.InputList list={imagesList} objectKey="url" onChange={(e, index) => setImage(e, index, imagesList)} onAdd={_ => addImage(imagesList)}/>
+                    <Form.InputList
+                        list={imagesList}
+                        objectKey="url"
+                        onChange={(e, index) => setImage(e, index, imagesList)}
+                        onAdd={_ => addImage(imagesList)}/>
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
