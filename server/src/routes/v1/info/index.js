@@ -114,34 +114,12 @@ infoRouter.put("/", async (req, res) => {
     }
 });
 
-
 infoRouter.delete("/contacts/:id", async (req, res) => {
-    const text = "SELECT * FROM user_self";
+    const text_contact= "DELETE FROM contacts WHERE id = $1";
+    const value_contact = [req.params.id];
     try {
-        const res_user = await promise_query(text);
-        let user = res_user.rows[0];
-
-        const text_contacts = "SELECT id, name, value FROM contacts WHERE user_id = 1";
-        const text_socials = "SELECT id, name, value FROM socials WHERE user_id = 1";
-
-        const res_contacts = await promise_query(text_contacts);
-        const contacts = res_contacts.rows;
-        const res_socials = await promise_query(text_socials);
-        const socials = res_socials.rows;
-
-        user["contacts"] = contacts;
-        user["socials"] = socials;
-
-        res.send(user);
-    } catch(e) {
-        console.log(e);
-        res.status(500).send(e);
-    }
-});
-
-infoRouter.delete("/contacts/:id", async (req, res) => {
-    try {
-
+        await promise_query(text_contact, value_contact);
+        res.status(204).send();
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
@@ -149,8 +127,11 @@ infoRouter.delete("/contacts/:id", async (req, res) => {
 });
 
 infoRouter.delete("/socials/:id", async (req, res) => {
+    const text_social= "DELETE FROM socials WHERE id = $1";
+    const value_social = [req.params.id];
     try {
-
+        await promise_query(text_social, value_social);
+        res.status(204).send();
     } catch(e) {
         console.log(e);
         res.status(500).send(e);
