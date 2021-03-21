@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const AppStyle = {
   Main: styled.main`
-    margin: 2.39rem 1.5rem;
+    margin: 2.39rem 1.5rem 2.39rem 17.34rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
