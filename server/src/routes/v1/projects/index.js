@@ -320,4 +320,42 @@ projectsRouter.delete("/:id", async (req, res) => {
     }
 });
 
+projectsRouter.delete("/highlights/:id", async (req, res) => {
+    const text_highlight = "DELETE FROM highlights WHERE id = $1";
+    const value_highlight = [req.params.id];
+    try{
+        await promise_query(text_highlight, value_highlight);
+        res.status(204).send();
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
+
+projectsRouter.delete("/images/:id", async (req, res) => {
+    const text_images = "DELETE FROM images WHERE id = $1";
+    const value_images = [req.params.id];
+    try{
+        await promise_query(text_images, value_images);
+        res.status(204).send();
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
+
+
+projectsRouter.delete("/techs-used/:id", async (req, res) => {
+    const text_tech_used = "DELETE FROM tech_used WHERE id = $1";
+    const value_tech_used = [req.params.id];
+    try{
+        await promise_query(text_tech_used, value_tech_used);
+        res.status(204).send();
+    } catch(e) {
+        console.log(e);
+        res.status(500).send(e);
+    }
+});
+
+
 module.exports = projectsRouter;

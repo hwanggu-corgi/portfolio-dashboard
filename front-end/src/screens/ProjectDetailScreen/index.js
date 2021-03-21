@@ -286,6 +286,7 @@ function ProjectDetailScreen() {
                         objectKey="name"
                         onChange={(e, index) => setTechsUsed(e, index, techsUsedList)}
                         onAdd={_ => addTechUsed(techsUsedList)}
+                        onDelete={(e, index) => deleteTechUsed(index, techsUsedList)}
                     />
                 </Form.FormGroup>
                 <Form.FormGroup>
