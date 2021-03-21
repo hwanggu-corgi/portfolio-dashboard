@@ -7,7 +7,8 @@ import constants from '../../constants';
 
 const PrimaryNavMenuStyle = {
     Nav: styled.nav`
-        max-width: 15rem;
+        width: 15rem;
+        position: fixed;
         border-radius: 0.94rem;
         background-color: ${constants.colorNavyBlue};
         color: ${constants.colorWhite};
