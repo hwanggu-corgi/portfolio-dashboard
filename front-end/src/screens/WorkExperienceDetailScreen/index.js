@@ -59,6 +59,24 @@ function WorkExperienceDetailScreen() {
         _setTechsUsed(list);
     }
 
+    const deleteTechUsed = (index, list) => {
+        if (!list[index].id) {
+            list.splice(index, 1);
+            _setTechsUsed([...list]);
+            return;
+        }
+
+        const id = list[index].id;
+        fetch(`http://localhost:4001/admin/work-experiences/techs-used/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            list.splice(index, 1);
+            _setTechsUsed([...list]);
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
     const addHighlight = (list) => {
         _setHighlights([...list, {"detail": ""}]);
     }
@@ -66,6 +84,24 @@ function WorkExperienceDetailScreen() {
     const setHighlight = (e, index, list) => {
         list[index].detail = e.target.value;
         _setHighlights(list);
+    }
+
+    const deleteHighlight = (index, list) => {
+        if (!list[index].id) {
+            list.splice(index, 1);
+            _setHighlights([...list]);
+            return;
+        }
+
+        const id = list[index].id;
+        fetch(`http://localhost:4001/admin/work-experiences/highlights/${id}`, {
+            method: "DELETE"
+        }).then(_ => {
+            list.splice(index, 1);
+            _setHighlights([...list]);
+        }).catch(error => {
+            console.error(error);
+        });
     }
 
     const addWorkExperience =  (e, history) => {
@@ -180,31 +216,58 @@ function WorkExperienceDetailScreen() {
             <form>
                 <Form.FormGroup>
                     <label>Company Name</label>
-                    <Form.Input defaultValue={company} onChange={e => setCompany(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={company}
+                        onChange={e => setCompany(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Position</label>
-                    <Form.Input defaultValue={position} onChange={e => setPosition(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={position}
+                        onChange={e => setPosition(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date Start</label>
-                    <Form.DateInput defaultValue={dateStart} onChange={e => setDateStart(e.target.value)}/>
+                    <Form.DateInput
+                        defaultValue={dateStart}
+                        onChange={e => setDateStart(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Date End</label>
-                    <Form.DateInput defaultValue={dateEnd} onChange={e => setDateEnd(e.target.value)}/>
+                    <Form.DateInput
+                        defaultValue={dateEnd}
+                        onChange={e => setDateEnd(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Location</label>
-                    <Form.Input defaultValue={companyLocation} onChange={e => setCompanyLocation(e.target.value)}/>
+                    <Form.Input
+                        defaultValue={companyLocation}
+                        onChange={e => setCompanyLocation(e.target.value)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Techs Used</label>
-                    <Form.InputList list={techsUsedList} objectKey="name" onChange={(e, index) => setTechsUsed(e, index, techsUsedList)} onAdd={_ => addTechUsed(techsUsedList)}/>
+                    <Form.InputList
+                        list={techsUsedList}
+                        objectKey="name"
+                        onChange={(e, index) => setTechsUsed(e, index, techsUsedList)}
+                        onAdd={_ => addTechUsed(techsUsedList)}
+                        onDelete={(e, index) => deleteTechUsed(index, techsUsedList)}
+                    />
                 </Form.FormGroup>
                 <Form.FormGroup>
                     <label>Highlights</label>
-                    <Form.InputList list={highlightsList} objectKey="detail" onChange={(e, index) => setHighlight(e, index, highlightsList)} onAdd={_ => addHighlight(highlightsList)}/>
+                    <Form.InputList
+                        list={highlightsList}
+                        objectKey="detail"
+                        onChange={(e, index) => setHighlight(e, index, highlightsList)}
+                        onAdd={_ => addHighlight(highlightsList)}
+                        onDelete={(e, index) => deleteHighlight(index, highlightsList)}
+                    />
                 </Form.FormGroup>
             </form>
             <WorkExperienceDetailScreenStyle.ButtonSection>
