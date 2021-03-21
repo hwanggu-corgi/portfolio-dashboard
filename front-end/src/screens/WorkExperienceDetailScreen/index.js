@@ -67,7 +67,7 @@ function WorkExperienceDetailScreen() {
         }
 
         const id = list[index].id;
-        fetch(`http://localhost:4001/admin/work-experiences/techs-used/${id}`, {
+        fetch(`${constants.serverURL}/admin/work-experiences/techs-used/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
@@ -94,7 +94,7 @@ function WorkExperienceDetailScreen() {
         }
 
         const id = list[index].id;
-        fetch(`http://localhost:4001/admin/work-experiences/highlights/${id}`, {
+        fetch(`${constants.serverURL}/admin/work-experiences/highlights/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
@@ -115,7 +115,7 @@ function WorkExperienceDetailScreen() {
             highlights: highlightsList,
         };
 
-        fetch(`http://localhost:4001/admin/work-experiences`, {
+        fetch(`${constants.serverURL}/admin/work-experiences`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -142,7 +142,7 @@ function WorkExperienceDetailScreen() {
             highlights: highlightsList,
         };
 
-        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
+        fetch(`${constants.serverURL}/admin/work-experiences/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -158,7 +158,7 @@ function WorkExperienceDetailScreen() {
     }
 
     const deleteWorkExperience = (e, history) => {
-        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
+        fetch(`${constants.serverURL}/admin/work-experiences/${id}`, {
             method: "DELETE"
         })
         .then(_ => {
@@ -169,8 +169,7 @@ function WorkExperienceDetailScreen() {
     }
 
     const getWorkExperience = (path) => {
-        const domain = "http://localhost:4001";
-        fetch(`${domain}${path}`)
+        fetch(`${constants.serverURL}${path}`)
         .then(response => response.json())
         .then(data => {
             setId(data.id);

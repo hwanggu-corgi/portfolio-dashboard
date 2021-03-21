@@ -43,7 +43,7 @@ function ProjectsScreen() {
     const [projects, setProjects] = useState([]);
 
     const deleteProject =  async (id) => {
-        fetch(`http://localhost:4001/admin/projects/${id}`, {
+        fetch(`${constants.serverURL}/admin/projects/${id}`, {
             method: "DELETE"
         }).then(_ => {
             const index = projects.findIndex(item => item.id === id);
@@ -55,7 +55,7 @@ function ProjectsScreen() {
     }
 
     const getProjects = () => {
-        fetch("http://localhost:4001/admin/projects")
+        fetch(`${constants.serverURL}/admin/projects`)
         .then(response => response.json())
         .then(data => setProjects(data))
         .catch((error) => {

@@ -68,7 +68,7 @@ function ProjectDetailScreen() {
         }
 
         const id = list[index].id;
-        fetch(`http://localhost:4001/admin/projects/techs-used/${id}`, {
+        fetch(`${constants.serverURL}/admin/projects/techs-used/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
@@ -95,7 +95,7 @@ function ProjectDetailScreen() {
         }
 
         const id = list[index].id;
-        fetch(`http://localhost:4001/admin/projects/highlights/${id}`, {
+        fetch(`${constants.serverURL}/admin/projects/highlights/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
@@ -122,7 +122,7 @@ function ProjectDetailScreen() {
         }
 
         const id = list[index].id;
-        fetch(`http://localhost:4001/admin/projects/images/${id}`, {
+        fetch(`${constants.serverURL}/admin/projects/images/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
@@ -144,7 +144,7 @@ function ProjectDetailScreen() {
             images: imagesList
         };
 
-        fetch(`http://localhost:4001/admin/projects`, {
+        fetch(`${constants.serverURL}/admin/projects`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -172,7 +172,7 @@ function ProjectDetailScreen() {
             images: imagesList
         };
 
-        fetch(`http://localhost:4001/admin/projects/${id}`, {
+        fetch(`${constants.serverURL}/admin/projects/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -188,7 +188,7 @@ function ProjectDetailScreen() {
     }
 
     const deleteProject = (e, history) => {
-        fetch(`http://localhost:4001/admin/projects/${id}`, {
+        fetch(`${constants.serverURL}/admin/projects/${id}`, {
             method: "DELETE"
         })
         .then(_ => {
@@ -199,8 +199,7 @@ function ProjectDetailScreen() {
     }
 
     const getProject = (path) => {
-        const domain = "http://localhost:4001";
-        fetch(`${domain}${path}`)
+        fetch(`${constants.serverURL}${path}`)
         .then(response => response.json())
         .then(data => {
             setId(data.id);

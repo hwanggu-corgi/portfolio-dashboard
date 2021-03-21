@@ -58,7 +58,7 @@ function InfoScreen() {
         }
 
         const id = list[index].id;
-        fetch(`http://localhost:4001/admin/info/socials/${id}`, {
+        fetch(`${constants.serverURL}/admin/info/socials/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
@@ -90,7 +90,7 @@ function InfoScreen() {
         }
 
         const id = list[index].id;
-        fetch(`http://localhost:4001/admin/info/contacts/${id}`, {
+        fetch(`${constants.serverURL}/admin/info/contacts/${id}`, {
             method: "DELETE"
         }).then(_ => {
             list.splice(index, 1);
@@ -110,7 +110,7 @@ function InfoScreen() {
             socials: socials
         };
 
-        fetch(`http://localhost:4001/admin/info`, {
+        fetch(`${constants.serverURL}/admin/info`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -126,7 +126,7 @@ function InfoScreen() {
     }
 
     const getInfo = () => {
-        fetch("http://localhost:4001/admin/info")
+        fetch(`${constants.serverURL}/admin/info`)
         .then(response => response.json())
         .then(data => {
             setFirstName(data.first_name);

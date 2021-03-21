@@ -43,7 +43,7 @@ function WorkExperiencesScreen() {
     const [workExperiences, setWorkExperiences] = useState([]);
 
     const deleteWorkExperience =  async (id) => {
-        fetch(`http://localhost:4001/admin/work-experiences/${id}`, {
+        fetch(`${constants.serverURL}/admin/work-experiences/${id}`, {
             method: "DELETE"
         }).then(_ => {
             const index = workExperiences.findIndex(item => item.id === id);
@@ -55,7 +55,7 @@ function WorkExperiencesScreen() {
     }
 
     const getWorkExperiences = () => {
-        fetch("http://localhost:4001/admin/work-experiences")
+        fetch(`${constants.serverURL}/admin/work-experiences`)
         .then(response => response.json())
         .then(data => setWorkExperiences(data))
         .catch((error) => {

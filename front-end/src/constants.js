@@ -8,7 +8,7 @@ const colorPurple = '#8A8DCC';
 const borderRadius = "0.94rem";
 const sectionPadding = "1.31rem";
 
-const serverURL = "https://portfolio-dashboard-1234.com";
+const serverURL = "https://portfolio-dashboard-1234.herokuapp.com/";
 
 export default {
     colorNavyBlue,
@@ -18,5 +18,6 @@ export default {
     colorPurple,
     colorLightGrey,
     borderRadius,
-    sectionPadding
+    sectionPadding,
+    serverURL
 };
