@@ -8,6 +8,8 @@ const colorPurple = '#8A8DCC';
 const borderRadius = "0.94rem";
 const sectionPadding = "1.31rem";
 
+const serverURL = "";
+
 export default {
     colorNavyBlue,
     colorWhite,
