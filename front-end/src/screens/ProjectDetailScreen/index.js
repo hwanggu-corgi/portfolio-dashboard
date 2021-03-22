@@ -132,7 +132,7 @@ function ProjectDetailScreen() {
         });
     }
 
-    const addProject =  (e, history) => {
+    const addProject =  (history) => {
         const project = {
             title: title,
             date: date,
@@ -159,7 +159,7 @@ function ProjectDetailScreen() {
         });
     }
 
-    const editProject = (e, history) => {
+    const editProject = (history) => {
         const project = {
             id: id,
             title: title,
@@ -187,7 +187,7 @@ function ProjectDetailScreen() {
         });
     }
 
-    const deleteProject = (e, history) => {
+    const deleteProject = (history) => {
         fetch(`${constants.serverURL}/admin/projects/${id}`, {
             method: "DELETE"
         })
@@ -233,12 +233,12 @@ function ProjectDetailScreen() {
             <ProjectDetailScreenStyle.ButtonSection>
                 {
                     !location.pathname.includes("/new") ?
-                        <Button secondary onClick={e => deleteProject(e, history)}>
+                        <Button secondary onClick={e => deleteProject(history)}>
                             Delete
                         </Button>
                     : null
                 }
-                <Button primary onClick={e => location.pathname.includes("/new") ? addProject(e, history) : editProject(e, history)}>
+                <Button primary onClick={e => location.pathname.includes("/new") ? addProject(history) : editProject(history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>
@@ -310,7 +310,7 @@ function ProjectDetailScreen() {
                 </Form.FormGroup>
             </form>
             <ProjectDetailScreenStyle.ButtonSection>
-                <Button primary onClick={e => location.pathname.includes("/new") ? addProject(e, history) : editProject(e, history)}>
+                <Button primary onClick={e => location.pathname.includes("/new") ? addProject(history) : editProject(history)}>
                     Save
                 </Button>
             </ProjectDetailScreenStyle.ButtonSection>
