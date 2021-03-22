@@ -4,6 +4,7 @@
   "description": "server for hyungmogu.com",
   "main": "index.js",
   "scripts": {
+    "start": "index.js",
     "test": "jest",
     "configure": "./bin/configuredb.sh"
   },

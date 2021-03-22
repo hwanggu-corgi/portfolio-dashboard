@@ -104,7 +104,7 @@ function WorkExperienceDetailScreen() {
         });
     }
 
-    const addWorkExperience =  (e, history) => {
+    const addWorkExperience =  (history) => {
         const workExp = {
             company: company,
             position: position,
@@ -130,7 +130,7 @@ function WorkExperienceDetailScreen() {
         });
     }
 
-    const editWorkExperience = (e, history) => {
+    const editWorkExperience = (history) => {
         const workExp = {
             id: id,
             company: company,
@@ -157,7 +157,7 @@ function WorkExperienceDetailScreen() {
         });
     }
 
-    const deleteWorkExperience = (e, history) => {
+    const deleteWorkExperience = (history) => {
         fetch(`${constants.serverURL}/admin/work-experiences/${id}`, {
             method: "DELETE"
         })
@@ -207,7 +207,7 @@ function WorkExperienceDetailScreen() {
                         </Button>
                     : null
                 }
-                <Button primary onClick={e => location.pathname.includes("/new") ? addWorkExperience(e, history) : editWorkExperience(e, history)}>
+                <Button primary onClick={e => location.pathname.includes("/new") ? addWorkExperience(history) : editWorkExperience(history)}>
                     Save
                 </Button>
             </WorkExperienceDetailScreenStyle.ButtonSection>
@@ -269,7 +269,7 @@ function WorkExperienceDetailScreen() {
                 </Form.FormGroup>
             </form>
             <WorkExperienceDetailScreenStyle.ButtonSection>
-                <Button primary onClick={e => location.pathname.includes("/new") ? addWorkExperience(e, history) : editWorkExperience(e, history)}>
+                <Button primary onClick={e => location.pathname.includes("/new") ? addWorkExperience(history) : editWorkExperience(history)}>
                     Save
                 </Button>
             </WorkExperienceDetailScreenStyle.ButtonSection>
